@@ -1,0 +1,18 @@
+package com.besosn.app.data.local.db.dao
+
+import androidx.room.*
+import com.besosn.app.data.model.MatchEntity
+import kotlinx.coroutines.flow.Flow
+
+@Dao
+interface MatchDao {
+    @Query("SELECT * FROM matches")
+    fun getMatches(): Flow<List<MatchEntity>>
+
+    @Insert
+    suspend fun insertMatch(match: MatchEntity)
+
+    @Delete
+    suspend fun deleteMatch(match: MatchEntity)
+}
+
