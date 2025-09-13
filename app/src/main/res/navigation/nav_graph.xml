@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.besosn.app.presentation.ui.splash.SplashFragment"
+        android:label="Splash" />
+
+    <fragment
+        android:id="@+id/onboardingFragment"
+        android:name="com.besosn.app.presentation.ui.onboarding.OnboardingFragment"
+        android:label="Onboarding" />
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.besosn.app.presentation.ui.home.HomeFragment"
+        android:label="Home" />
+
+    <fragment
+        android:id="@+id/teamsFragment"
+        android:name="com.besosn.app.presentation.ui.teams.TeamsFragment"
+        android:label="Teams" />
+
+    <fragment
+        android:id="@+id/teamsDetailFragment"
+        android:name="com.besosn.app.presentation.ui.teams.TeamsDetailFragment"
+        android:label="Teams Detail" />
+
+    <fragment
+        android:id="@+id/teamsEditFragment"
+        android:name="com.besosn.app.presentation.ui.teams.TeamsEditFragment"
+        android:label="Teams Edit" />
+
+    <fragment
+        android:id="@+id/matchesFragment"
+        android:name="com.besosn.app.presentation.ui.matches.MatchesFragment"
+        android:label="Matches" />
+
+    <fragment
+        android:id="@+id/matchDetailFragment"
+        android:name="com.besosn.app.presentation.ui.matches.MatchDetailFragment"
+        android:label="Match Detail" />
+
+    <fragment
+        android:id="@+id/matchEditFragment"
+        android:name="com.besosn.app.presentation.ui.matches.MatchEditFragment"
+        android:label="Match Edit" />
+
+    <fragment
+        android:id="@+id/inventoryFragment"
+        android:name="com.besosn.app.presentation.ui.inventory.InventoryFragment"
+        android:label="Inventory" />
+
+    <fragment
+        android:id="@+id/inventoryEditFragment"
+        android:name="com.besosn.app.presentation.ui.inventory.InventoryEditFragment"
+        android:label="Inventory Edit" />
+
+    <fragment
+        android:id="@+id/articlesFragment"
+        android:name="com.besosn.app.presentation.ui.articles.ArticlesFragment"
+        android:label="Articles" />
+
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="com.besosn.app.presentation.ui.articles.ArticleDetailFragment"
+        android:label="Article Detail" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.besosn.app.presentation.ui.settings.SettingsFragment"
+        android:label="Settings" />
+</navigation>
