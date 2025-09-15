@@ -15,7 +15,8 @@ data class TeamModel(
     val foundedYear: Int,
     val notes: String,
     val players: List<PlayerModel>,
-    @DrawableRes val iconRes: Int,
+    @DrawableRes val iconRes: Int = 0,
+    val iconUri: String? = null,
     val isDefault: Boolean = false
 ) : Serializable {
     val playersCount: Int get() = players.size
