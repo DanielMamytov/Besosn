@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="72dp"
     android:background="@drawable/bg_team_item"
-    android:padding="12dp">
+    android:padding="12dp"
+    android:layout_marginTop="8dp">
 
     <!-- Team Logo -->
     <ImageView

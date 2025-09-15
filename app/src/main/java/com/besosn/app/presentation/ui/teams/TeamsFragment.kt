@@ -43,7 +43,6 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
         binding.rvTeams.adapter = adapter
 
         loadTeams()
-        // load default teams
 
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
