@@ -7,15 +7,18 @@
     android:background="@drawable/bg_teams_dark">
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/plus_ic"
-
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:background="@drawable/rounded_12"
+        android:clipToOutline="true"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_launcher_background"
+        android:scaleType="centerCrop"
         android:layout_marginTop="40dp"
         android:elevation="1dp"
-        android:layout_gravity="center|top"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <ImageView
         android:id="@+id/btnBack"
