@@ -17,7 +17,6 @@ import com.besosn.app.databinding.FragmentTeamsDetailBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import android.net.Uri
 
 /**
  * Screen displaying detailed information about a team.
@@ -63,13 +62,7 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
     }
 
     private fun bindTeam(team: TeamModel) {
-        if (team.iconUri != null) {
-            binding.imgTeamIcon.setImageURI(Uri.parse(team.iconUri))
-        } else {
-            binding.imgTeamIcon.setImageResource(
-                if (team.iconRes != 0) team.iconRes else R.drawable.ic_users
-            )
-        }
+        binding.imgTeamIcon.loadTeamImage(team)
 
         binding.tvTeamName.text = team.name
         binding.tvCityValue.text = team.city

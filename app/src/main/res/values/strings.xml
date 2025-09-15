@@ -5,4 +5,14 @@
     <string name="fill_all_fields">Fill all fields to save team data.</string>
     <string name="select_position">Select position</string>
 
+    <string name="match_edit_choose_team">Choose team</string>
+    <string name="match_edit_select_date">Select date</string>
+    <string name="match_edit_fill_all_fields">Fill all fields to add match</string>
+    <string name="match_edit_same_team_error">One team does not play against each other</string>
+    <string name="match_edit_score_too_high">Score value can’t be more than 99 goals</string>
+    <string name="match_edit_saved_message">Match saved</string>
+    <string name="match_edit_cancel">Cancel</string>
+    <string name="match_edit_notes_label">Notes</string>
+    <string name="match_edit_time_label">Match time</string>
+
 </resources>

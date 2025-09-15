@@ -88,11 +88,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             binding.etFoundedYear.setText(team.foundedYear.toString())
             binding.etNotes.setText(team.notes)
             selectedIconUri = team.iconUri
-            if (team.iconUri != null) {
-                binding.imageView2.setImageURI(Uri.parse(team.iconUri))
-            } else if (team.iconRes != 0) {
-                binding.imageView2.setImageResource(team.iconRes)
-            }
+            binding.imageView2.loadTeamImage(team)
             players.addAll(team.players)
             playersAdapter.notifyDataSetChanged()
         }
@@ -127,7 +123,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
                 notes = notes,
                 players = currentPlayers,
                 iconUri = iconUri,
-                iconRes = if (iconUri != null) 0 else existing.iconRes
+                iconRes = if (iconUri != null) 0 else resolveTeamIconRes(resources, existing.iconRes)
             )
             viewLifecycleOwner.lifecycleScope.launch {
                 val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
