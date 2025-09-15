@@ -9,7 +9,7 @@ interface InventoryDao {
     @Query("SELECT * FROM inventory")
     fun getItems(): Flow<List<InventoryEntity>>
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertItem(item: InventoryEntity)
 
     @Delete
