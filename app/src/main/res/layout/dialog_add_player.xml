@@ -160,13 +160,19 @@
                 android:layout_width="12dp"
                 android:layout_height="1dp" />
 
-            <ImageButton
-                android:id="@+id/btnDelete"
-                android:layout_width="56dp"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnCancel"
+                android:layout_width="0dp"
                 android:layout_height="56dp"
+                android:layout_weight="1"
                 android:background="@drawable/btn_delete_gradient"
-                android:src="@drawable/ic_delete"
-                android:scaleType="centerInside" />
+                android:text="Cancel"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:textFontWeight="700"
+                android:fontFamily="@font/unbounded"
+                android:textSize="24sp"/>
         </LinearLayout>
 
     </LinearLayout>
