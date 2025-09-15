@@ -321,6 +321,42 @@
 
                 </LinearLayout>
 
+            <!-- Match date picker -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Match date"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/datePickerContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_input_team"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="18dp">
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Select date"
+                        android:textColor="#B3FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Time picker -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -370,7 +406,6 @@
                         android:layout_height="wrap_content"
                         android:text="00"
                         android:fontFamily="@font/outfit_regular"
-
                         android:textSize="36sp"
                         android:textColor="#73FFFFFF"
                         android:padding="8dp"/>
@@ -380,7 +415,6 @@
                         android:layout_height="wrap_content"
                         android:text=":"
                         android:fontFamily="@font/inter_regular"
-
                         android:textSize="20sp"
                         android:textColor="#FFFFFF"
                         android:padding="8dp"/>
@@ -391,14 +425,43 @@
                         android:layout_height="wrap_content"
                         android:text="PM"
                         android:fontFamily="@font/outfit_regular"
-
                         android:textSize="36sp"
                         android:textColor="#FFFFFF"
                         android:padding="8dp"/>
 
                 </LinearLayout>
 
-                </LinearLayout>
+            </LinearLayout>
+
+            <!-- City input -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="City"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+                <EditText
+                    android:id="@+id/etCity"
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@drawable/bg_input_team"
+                    android:fontFamily="@font/poppins_regular"
+                    android:hint="Enter city"
+                    android:paddingHorizontal="16dp"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="#72FFFFFF"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
 
 
 
