@@ -1,5 +1,6 @@
 package com.besosn.app.presentation.ui.splash
 
+
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.besosn.app.R
+
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -38,6 +40,7 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         viewLifecycleOwner.lifecycleScope.launch {
             delay(2500)
             findNavController().navigate(R.id.action_splashFragment_to_onboardingFragment)
+
         }
     }
 }
