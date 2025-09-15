@@ -53,6 +53,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             pickImage.launch("image/*")
         }
 
+
         editingTeam?.let { team ->
             binding.etTeamName.setText(team.name)
             binding.etCity.setText(team.city)
@@ -65,6 +66,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             } else if (team.iconRes != 0) {
                 binding.imageView2.setImageResource(team.iconRes)
             }
+
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -119,6 +121,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
         val iconUri = selectedIconUri ?: editingTeam?.iconUri
 
+
         val existing = editingTeam
         if (existing != null) {
             val updatedTeam = existing.copy(
@@ -129,6 +132,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
                 players = players,
                 iconUri = iconUri,
                 iconRes = if (iconUri != null) 0 else existing.iconRes
+
             )
             viewLifecycleOwner.lifecycleScope.launch {
                 val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
@@ -155,6 +159,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
                 players = players,
                 iconUri = iconUri,
                 iconRes = if (iconUri != null) 0 else R.drawable.ic_users
+
             )
 
             viewLifecycleOwner.lifecycleScope.launch {

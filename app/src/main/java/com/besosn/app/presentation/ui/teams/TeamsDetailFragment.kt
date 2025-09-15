@@ -70,6 +70,7 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
                 if (team.iconRes != 0) team.iconRes else R.drawable.ic_users
             )
         }
+
         binding.tvTeamName.text = team.name
         binding.tvCityValue.text = team.city
         binding.tvFoundedValue.text = team.foundedYear.toString()
