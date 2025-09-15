@@ -28,7 +28,127 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.besosn.app.presentation.ui.home.HomeFragment"
-        android:label="HomeFragment" />
+        android:label="HomeFragment">
+        <action
+            android:id="@+id/action_homeFragment_to_teamsFragment"
+            app:destination="@id/teamsFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_inventoryFragment"
+            app:destination="@id/inventoryFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_matchesFragment"
+            app:destination="@id/matchesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_articlesFragment"
+            app:destination="@id/articlesFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
 
+    <fragment
+        android:id="@+id/teamsFragment"
+        android:name="com.besosn.app.presentation.ui.teams.TeamsFragment"
+        android:label="TeamsFragment">
+        <action
+            android:id="@+id/action_teamsFragment_to_teamsDetailFragment"
+            app:destination="@id/teamsDetailFragment" />
+        <action
+            android:id="@+id/action_teamsFragment_to_teamsEditFragment"
+            app:destination="@id/teamsEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teamsDetailFragment"
+        android:name="com.besosn.app.presentation.ui.teams.TeamsDetailFragment"
+        android:label="TeamsDetailFragment">
+        <action
+            android:id="@+id/action_teamsDetailFragment_to_teamsEditFragment"
+            app:destination="@id/teamsEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/teamsEditFragment"
+        android:name="com.besosn.app.presentation.ui.teams.TeamsEditFragment"
+        android:label="TeamsEditFragment" />
+
+    <fragment
+        android:id="@+id/inventoryFragment"
+        android:name="com.besosn.app.presentation.ui.inventory.InventoryFragment"
+        android:label="InventoryFragment">
+        <action
+            android:id="@+id/action_inventoryFragment_to_inventoryDetailFragment"
+            app:destination="@id/inventoryDetailFragment" />
+        <action
+            android:id="@+id/action_inventoryFragment_to_inventoryEditFragment"
+            app:destination="@id/inventoryEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inventoryDetailFragment"
+        android:name="com.besosn.app.presentation.ui.inventory.InventoryDetailFragment"
+        android:label="InventoryDetailFragment">
+        <action
+            android:id="@+id/action_inventoryDetailFragment_to_inventoryEditFragment"
+            app:destination="@id/inventoryEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/inventoryEditFragment"
+        android:name="com.besosn.app.presentation.ui.inventory.InventoryEditFragment"
+        android:label="InventoryEditFragment" />
+
+    <fragment
+        android:id="@+id/matchesFragment"
+        android:name="com.besosn.app.presentation.ui.matches.MatchesFragment"
+        android:label="MatchesFragment">
+        <action
+            android:id="@+id/action_matchesFragment_to_matchDetailFragment"
+            app:destination="@id/matchDetailFragment" />
+        <action
+            android:id="@+id/action_matchesFragment_to_matchEditFragment"
+            app:destination="@id/matchEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/matchDetailFragment"
+        android:name="com.besosn.app.presentation.ui.matches.MatchDetailFragment"
+        android:label="MatchDetailFragment">
+        <action
+            android:id="@+id/action_matchDetailFragment_to_matchEditFragment"
+            app:destination="@id/matchEditFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/matchEditFragment"
+        android:name="com.besosn.app.presentation.ui.matches.MatchEditFragment"
+        android:label="MatchEditFragment" />
+
+    <fragment
+        android:id="@+id/articlesFragment"
+        android:name="com.besosn.app.presentation.ui.articles.ArticlesFragment"
+        android:label="ArticlesFragment">
+        <action
+            android:id="@+id/action_articlesFragment_to_articleDetailFragment"
+            app:destination="@id/articleDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/articleDetailFragment"
+        android:name="com.besosn.app.presentation.ui.articles.ArticleDetailFragment"
+        android:label="ArticleDetailFragment" />
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.besosn.app.presentation.ui.settings.SettingsFragment"
+        android:label="SettingsFragment">
+        <action
+            android:id="@+id/action_settingsFragment_to_privacyPolicyFragment"
+            app:destination="@id/privacyPolicyFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/privacyPolicyFragment"
+        android:name="com.besosn.app.presentation.ui.settings.PrivacyPolicyFragment"
+        android:label="PrivacyPolicyFragment" />
 </navigation>
-
