@@ -21,10 +21,13 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
     private var _binding: FragmentTeamsEditBinding? = null
     private val binding get() = _binding!!
+    private var editingTeam: TeamModel? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTeamsEditBinding.bind(view)
+
+        editingTeam = arguments?.getSerializable("team") as? TeamModel
 
         val lettersOnly = InputFilter { source, _, _, _, _, _ ->
             if (source.matches(Regex("[a-zA-Z ]*"))) source else ""
@@ -34,7 +37,15 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener { saveTeam() }
-        binding.btnDelete.visibility = View.GONE // no deletion when creating
+        binding.btnDelete.visibility = View.GONE // no deletion from edit screen
+
+        editingTeam?.let { team ->
+            binding.etTeamName.setText(team.name)
+            binding.etCity.setText(team.city)
+            binding.etFoundedYear.setText(team.foundedYear.toString())
+            binding.etPlayersCount.setText(team.playersCount.toString())
+            binding.etNotes.setText(team.notes)
+        }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
@@ -86,26 +97,53 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             }
         } else emptyList()
 
-        val team = TeamModel(
-            name = name,
-            city = city,
-            foundedYear = founded,
-            notes = notes,
-            players = players,
-            iconRes = R.drawable.ic_users
-        )
-
-        viewLifecycleOwner.lifecycleScope.launch {
-            val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
-                .fallbackToDestructiveMigration()
-                .build()
-            val teamId = withContext(Dispatchers.IO) { db.teamDao().insertTeam(team.toEntity()).toInt() }
-            val playerEntities = players.map { it.toEntity(teamId) }
-            if (playerEntities.isNotEmpty()) {
-                withContext(Dispatchers.IO) { db.playerDao().insertPlayers(playerEntities) }
+        val existing = editingTeam
+        if (existing != null) {
+            val updatedTeam = existing.copy(
+                name = name,
+                city = city,
+                foundedYear = founded,
+                notes = notes,
+                players = players
+            )
+            viewLifecycleOwner.lifecycleScope.launch {
+                val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
+                    .fallbackToDestructiveMigration()
+                    .build()
+                withContext(Dispatchers.IO) {
+                    db.teamDao().updateTeam(updatedTeam.toEntity())
+                    db.playerDao().deletePlayersByTeam(updatedTeam.id)
+                    val playerEntities = players.map { it.toEntity(updatedTeam.id) }
+                    if (playerEntities.isNotEmpty()) {
+                        db.playerDao().insertPlayers(playerEntities)
+                    }
+                }
+                setFragmentResult("team_updated", bundleOf("team" to updatedTeam))
+                setFragmentResult("add_team_result", Bundle())
+                findNavController().popBackStack()
             }
-            setFragmentResult("add_team_result", Bundle())
-            findNavController().popBackStack()
+        } else {
+            val team = TeamModel(
+                name = name,
+                city = city,
+                foundedYear = founded,
+                notes = notes,
+                players = players,
+                iconRes = R.drawable.ic_users
+            )
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
+                    .fallbackToDestructiveMigration()
+                    .build()
+                val teamId = withContext(Dispatchers.IO) { db.teamDao().insertTeam(team.toEntity()).toInt() }
+                val playerEntities = players.map { it.toEntity(teamId) }
+                if (playerEntities.isNotEmpty()) {
+                    withContext(Dispatchers.IO) { db.playerDao().insertPlayers(playerEntities) }
+                }
+                setFragmentResult("add_team_result", Bundle())
+                findNavController().popBackStack()
+            }
         }
     }
 
