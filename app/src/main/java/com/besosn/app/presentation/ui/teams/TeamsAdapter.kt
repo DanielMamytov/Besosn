@@ -1,6 +1,5 @@
 package com.besosn.app.presentation.ui.teams
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -35,11 +34,7 @@ class TeamsAdapter(
             binding.tvTeamTitle.text = team.name
             binding.tvTeamCity.text = "${team.city} \u2022"
             binding.tvTeamPlayers.text = " ${team.playersCount} players"
-            if (team.iconUri != null) {
-                binding.imgTeamLogo.setImageURI(Uri.parse(team.iconUri))
-            } else {
-                binding.imgTeamLogo.setImageResource(team.iconRes)
-            }
+            binding.imgTeamLogo.loadTeamImage(team)
             binding.root.setOnClickListener { onItemClick(team) }
         }
     }

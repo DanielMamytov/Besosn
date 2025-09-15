@@ -33,6 +33,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 import java.util.Locale
 
@@ -45,7 +46,6 @@ class MatchEditFragment : Fragment() {
     private val teamOptions = mutableListOf("Barcelona", "Real Madrid", "Arsenal", "Chelsea")
     private val matchCalendar: Calendar = Calendar.getInstance()
     private var dateSelected = false
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,7 +87,6 @@ class MatchEditFragment : Fragment() {
         setupDropdown(binding.ddTeam, binding.tvTeam, binding.ivCategoryArrow, teamOptions)
         setupDropdown(binding.ddTeam2, binding.tvTeam2, binding.ivTeamAwayArrow, teamOptions)
 
-
         binding.btnEdit.setOnClickListener { saveMatch() }
         binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
@@ -119,6 +118,7 @@ class MatchEditFragment : Fragment() {
             }
         }
     }
+
 
     private fun showDatePicker() {
         DatePickerDialog(
