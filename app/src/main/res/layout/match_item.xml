@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_team_item"
+    android:background="@drawable/gradient_bg"
     android:padding="12dp">
 
     <LinearLayout
