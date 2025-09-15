@@ -8,8 +8,15 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+
 import com.besosn.app.R
+import com.besosn.app.data.local.db.AppDatabase
 import com.besosn.app.databinding.FragmentTeamsBinding
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Screen displaying list of teams. Allows navigating to team details
@@ -28,25 +35,26 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
         _binding = FragmentTeamsBinding.bind(view)
 
         adapter = TeamsAdapter(teams) { team ->
-            val bundle = bundleOf("team" to team)
+            val bundle = Bundle().apply { putSerializable("team", team) }
+
             findNavController().navigate(R.id.action_teamsFragment_to_teamsDetailFragment, bundle)
         }
         binding.rvTeams.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTeams.adapter = adapter
 
+        loadTeams()
         // load default teams
-        teams.addAll(defaultTeams())
-        adapter.notifyDataSetChanged()
+
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_teamsFragment_to_teamsEditFragment)
         }
 
-        // Listen for newly added team from edit screen
-        setFragmentResultListener("add_team_result") { _, bundle ->
-            val team = bundle.getSerializable("team") as? TeamModel ?: return@setFragmentResultListener
-            adapter.addTeam(team)
+        // Listen for newly added team from edit screen and reload
+        setFragmentResultListener("add_team_result") { _, _ ->
+            loadTeams()
+
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
@@ -74,6 +82,37 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
             isDefault = true
         )
         return listOf(team1, team2)
+    }
+
+    private fun loadTeams() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
+                .fallbackToDestructiveMigration()
+                .build()
+            val teamDao = db.teamDao()
+            val playerDao = db.playerDao()
+
+            val existing = withContext(Dispatchers.IO) { teamDao.getTeams() }
+            if (existing.isEmpty()) {
+                withContext(Dispatchers.IO) {
+                    defaultTeams().forEach { model ->
+                        val teamId = teamDao.insertTeam(model.toEntity()).toInt()
+                        playerDao.insertPlayers(model.players.map { it.toEntity(teamId) })
+                    }
+                }
+            }
+
+            val teamEntities = withContext(Dispatchers.IO) { teamDao.getTeams() }
+            val playerEntities = withContext(Dispatchers.IO) { playerDao.getPlayers() }
+            val playersByTeam = playerEntities.groupBy { it.teamId }
+            val models = teamEntities.map { entity ->
+                entity.toModel(playersByTeam[entity.id].orEmpty())
+            }
+
+            teams.clear()
+            teams.addAll(models)
+            adapter.notifyDataSetChanged()
+        }
     }
 
     override fun onDestroyView() {

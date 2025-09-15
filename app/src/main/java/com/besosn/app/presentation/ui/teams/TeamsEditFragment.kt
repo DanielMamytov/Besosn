@@ -8,7 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import com.besosn.app.R
+import com.besosn.app.data.local.db.AppDatabase
 import com.besosn.app.databinding.FragmentTeamsEditBinding
+import androidx.lifecycle.lifecycleScope
+import androidx.room.Room
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
@@ -50,8 +56,18 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             iconRes = R.drawable.ic_users
         )
 
-        setFragmentResult("add_team_result", bundleOf("team" to team))
-        findNavController().popBackStack()
+        viewLifecycleOwner.lifecycleScope.launch {
+            val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
+                .fallbackToDestructiveMigration()
+                .build()
+            val teamId = withContext(Dispatchers.IO) { db.teamDao().insertTeam(team.toEntity()).toInt() }
+            val playerEntities = players.map { it.toEntity(teamId) }
+            if (playerEntities.isNotEmpty()) {
+                withContext(Dispatchers.IO) { db.playerDao().insertPlayers(playerEntities) }
+            }
+            setFragmentResult("add_team_result", Bundle())
+            findNavController().popBackStack()
+        }
     }
 
     override fun onDestroyView() {

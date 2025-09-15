@@ -21,7 +21,7 @@ import com.besosn.app.data.local.db.dao.TeamDao
         InventoryEntity::class,
         ArticleEntity::class
     ],
-    version = 1
+    version = 2
 )
 abstract class AppDatabase : RoomDatabase() {
     abstract fun teamDao(): TeamDao
