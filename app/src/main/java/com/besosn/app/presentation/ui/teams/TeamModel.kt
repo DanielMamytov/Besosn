@@ -9,6 +9,7 @@ import java.io.Serializable
  */
 data class TeamModel(
     val id: Int = 0,
+
     val name: String,
     val city: String,
     val foundedYear: Int,
