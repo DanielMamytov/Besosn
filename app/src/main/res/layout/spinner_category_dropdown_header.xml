@@ -1,0 +1,12 @@
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:gravity="center_vertical"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:text="Choose category"
+    android:textColor="#B3FFFFFF"
+    android:textSize="16sp"
+    android:fontFamily="@font/poppins_regular"
+    android:drawableEnd="@drawable/ic_chevron_up"
+    android:drawablePadding="8dp"/>

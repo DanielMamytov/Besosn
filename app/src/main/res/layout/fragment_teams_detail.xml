@@ -1,12 +1,257 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
-
-    <TextView
+    android:background="@drawable/bg_teams_dark">
+    <ImageView
+        android:id="@+id/imageView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Team Detail" />
-</LinearLayout>
+        android:src="@drawable/logo"
+
+        android:layout_marginTop="40dp"
+        android:elevation="1dp"
+        android:layout_gravity="center|top"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/back"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:elevation="1dp"
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEdit"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_weight="1"
+            android:text="Edit"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:background="@drawable/btn_edit_gradient"
+            android:fontFamily="@font/unbounded"
+            android:textSize="18sp"/>
+
+        <Space
+            android:layout_width="12dp"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+
+            android:background="@drawable/btn_delete_gradient"
+            android:src="@drawable/trash_icon"
+            android:scaleType="centerInside"
+            android:contentDescription="Delete"/>
+    </LinearLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_gravity="bottom"
+
+        android:layout_height="640dp">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToOutline="true"
+
+        android:background="@drawable/rounded_top_bg">
+
+        <!-- Фон-картинка -->
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:clipToOutline="true"
+
+            android:src="@drawable/image3"/>
+
+        <!-- Контент поверх -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+
+            android:paddingHorizontal="20dp"
+            android:paddingTop="100dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="YOUNG\nTEAM"
+                android:textSize="48sp"
+                android:textColor="#FC4F08"
+                android:textStyle="bold"
+                android:fontFamily="@font/unbounded"
+                android:lineSpacingExtra="-8dp" />
+
+            <LinearLayout
+                android:id="@+id/teamInfoRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false"
+                android:paddingTop="8dp"
+                >
+
+                <!-- Column 1 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvCityValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Barcelona"
+                        android:textColor="#FEA613"
+                        android:textSize="20sp"
+                        android:textFontWeight="700"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/prompt_regular"
+                        android:maxLines="1"
+                        android:ellipsize="end"/>
+
+                    <TextView
+                        android:id="@+id/tvCityLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="City"
+                        android:textColor="#CCFFFFFF"
+                    android:textSize="18sp"
+                    android:fontFamily="@font/prompt_regular"/>
+                </LinearLayout>
+
+                <!-- Column 2 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="start">
+
+                    <TextView
+                        android:id="@+id/tvFoundedValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="1908"
+                        android:textColor="#FEA613"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/prompt_regular"/>
+
+                    <TextView
+                        android:id="@+id/tvFoundedLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Founded"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/prompt_regular"/>
+                </LinearLayout>
+
+                <!-- Column 3 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="start">
+
+                    <TextView
+                        android:id="@+id/tvPlayersValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="23"
+                        android:textColor="#FEA613"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/prompt_regular"/>
+
+                    <TextView
+                        android:id="@+id/tvPlayersLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Players"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="18sp"
+                        android:fontFamily="@font/prompt_regular"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#2FFFFFFF"
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="10dp"/>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Squad"
+                android:textColor="#FC4F08"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/unbounded"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textAllCaps="true"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#2FFFFFFF"
+                android:paddingHorizontal="20dp"
+                android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="About team"
+                android:textColor="#FC4F08"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/unbounded"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textAllCaps="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_regular"
+                android:textColor="#A2FFFFFF"
+                android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </FrameLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</FrameLayout>

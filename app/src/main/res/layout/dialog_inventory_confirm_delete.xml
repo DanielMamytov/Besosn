@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp"
+    app:cardCornerRadius="20dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="12dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_confirm_dialog"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <!-- Большой заголовок -->
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PLEASE\nCONFIRM\nDELETE ACTION\nBEFORE\nCONTINUE"
+            android:textAllCaps="true"
+            android:textColor="#FC4F08"
+            android:textSize="26sp"
+            android:fontFamily="@font/unbounded"
+            android:lineSpacingExtra="-4sp"
+            android:letterSpacing="0.02"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Низ: Confirm + маленькая Delete -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnConfirm"
+                android:layout_width="0dp"
+                android:layout_height="56dp"
+                android:layout_weight="1"
+                android:background="@drawable/btn_confirm_gradient"
+                android:text="Confirm"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
+                android:elevation="8dp"
+                android:layout_marginEnd="12dp"/>
+
+            <ImageButton
+                android:id="@+id/btnDelete"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:background="@drawable/btn_delete_red"
+                android:src="@drawable/ic_delete"
+                android:scaleType="centerInside"
+                android:contentDescription="Delete"
+                android:elevation="10dp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
