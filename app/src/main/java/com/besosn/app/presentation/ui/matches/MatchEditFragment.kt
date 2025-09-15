@@ -5,6 +5,7 @@ import android.app.TimePickerDialog
 import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -21,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.room.Room
+
 import com.besosn.app.R
 import com.besosn.app.data.local.db.AppDatabase
 import com.besosn.app.databinding.FragmentMatchEditBinding
@@ -31,6 +33,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
+
 import java.util.Locale
 
 class MatchEditFragment : Fragment() {
@@ -42,6 +45,7 @@ class MatchEditFragment : Fragment() {
     private val teamOptions = mutableListOf("Barcelona", "Real Madrid", "Arsenal", "Chelsea")
     private val matchCalendar: Calendar = Calendar.getInstance()
     private var dateSelected = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -82,6 +86,7 @@ class MatchEditFragment : Fragment() {
 
         setupDropdown(binding.ddTeam, binding.tvTeam, binding.ivCategoryArrow, teamOptions)
         setupDropdown(binding.ddTeam2, binding.tvTeam2, binding.ivTeamAwayArrow, teamOptions)
+
 
         binding.btnEdit.setOnClickListener { saveMatch() }
         binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
@@ -161,6 +166,7 @@ class MatchEditFragment : Fragment() {
     private fun saveMatch() {
         val teamPlaceholder = getString(R.string.match_edit_choose_team)
         val datePlaceholder = getString(R.string.match_edit_select_date)
+
         val homeTeam = binding.tvTeam.text.toString()
         val awayTeam = binding.tvTeam2.text.toString()
         val homeGoalsText = binding.etGoals.text.toString()
@@ -199,6 +205,7 @@ class MatchEditFragment : Fragment() {
                 getString(R.string.match_edit_score_too_high),
                 Toast.LENGTH_SHORT,
             ).show()
+
             return
         }
 
@@ -216,6 +223,7 @@ class MatchEditFragment : Fragment() {
             put("date", dateFormat.format(matchCalendar.time))
             put("time", timeFormat.format(matchCalendar.time))
             put("timestamp", matchCalendar.timeInMillis)
+
         }
         arr.put(obj)
         prefs.edit().putString("matches", arr.toString()).apply()
@@ -241,6 +249,7 @@ class MatchEditFragment : Fragment() {
                     it.dismiss()
                     return@setOnClickListener
                 }
+
             }
 
             val content = layoutInflater.inflate(R.layout.popup_dropdown, null, false)
@@ -301,6 +310,7 @@ class MatchEditFragment : Fragment() {
     }
 
     private class DropdownViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
         val txt: TextView = view.findViewById(R.id.tvText)
         val divider: View = view.findViewById(R.id.divider)
     }

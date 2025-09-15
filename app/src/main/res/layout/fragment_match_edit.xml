@@ -322,6 +322,43 @@
                 </LinearLayout>
 
             <!-- Match date picker -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:text="Match date"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+                <LinearLayout
+                    android:id="@+id/datePickerContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_input_team"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="18dp">
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Select date"
+                        android:textColor="#B3FFFFFF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- Time picker -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -534,6 +571,7 @@
                         android:textColor="@android:color/white"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+
                 </LinearLayout>
             </LinearLayout>
 
