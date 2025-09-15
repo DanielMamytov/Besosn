@@ -9,6 +9,7 @@ data class PlayerEntity(
     val teamId: Int,
     val fullName: String,
     val position: String,
-    val number: Int
+    val number: Int,
+    val photoUri: String? = null
 )
 

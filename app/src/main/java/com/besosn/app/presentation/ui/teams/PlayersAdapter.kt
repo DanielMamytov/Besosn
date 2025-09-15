@@ -2,6 +2,7 @@ package com.besosn.app.presentation.ui.teams
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.net.Uri
 import androidx.recyclerview.widget.RecyclerView
 import com.besosn.app.databinding.PlayerItemBinding
 
@@ -28,6 +29,11 @@ class PlayersAdapter(private val items: List<PlayerModel>) :
             binding.tvPlayerName.text = player.fullName
             binding.tvPlayerNumber.text = player.number.toString()
             binding.tvPlayerPosition.text = player.position
+            if (player.photoUri != null) {
+                binding.ivPlayerPhoto.setImageURI(Uri.parse(player.photoUri))
+            } else {
+                binding.ivPlayerPhoto.setImageResource(com.besosn.app.R.drawable.ic_users)
+            }
         }
     }
 }
