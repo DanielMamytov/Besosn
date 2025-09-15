@@ -461,12 +461,11 @@
                         android:layout_height="wrap_content" />
 
                     <ImageButton
-                        android:id="@+id/btnDelete"
+                        android:id="@+id/btnCancel"
                         android:layout_width="56dp"
                         android:layout_height="56dp"
-
                         android:background="@drawable/btn_delete_gradient"
-                        android:contentDescription="Delete"
+                        android:contentDescription="Cancel"
                         android:scaleType="centerInside"
                         android:src="@drawable/trash_icon" />
                 </LinearLayout>
