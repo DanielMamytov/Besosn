@@ -18,7 +18,8 @@ fun TeamEntity.toModel(players: List<PlayerEntity>): TeamModel = TeamModel(
 fun PlayerEntity.toModel(): PlayerModel = PlayerModel(
     fullName = fullName,
     position = position,
-    number = number
+    number = number,
+    photoUri = photoUri
 )
 
 fun TeamModel.toEntity(): TeamEntity = TeamEntity(
@@ -36,5 +37,6 @@ fun PlayerModel.toEntity(teamId: Int): PlayerEntity = PlayerEntity(
     teamId = teamId,
     fullName = fullName,
     position = position,
-    number = number
+    number = number,
+    photoUri = photoUri
 )

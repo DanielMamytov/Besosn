@@ -1,0 +1,8 @@
+<resources>
+    <string-array name="player_positions">
+        <item>GK</item>
+        <item>DF</item>
+        <item>MF</item>
+        <item>FW</item>
+    </string-array>
+</resources>
