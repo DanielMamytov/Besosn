@@ -3,12 +3,14 @@ package com.besosn.app.presentation.ui.inventory
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.PopupWindow
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -31,8 +33,8 @@ class InventoryEditFragment : Fragment() {
     private var currentItem: InventoryItem? = null
 
     private lateinit var popup: PopupWindow
-    private val categories = listOf("Balls", "Cones", "Bibs", "Nets", "Med")
-    private val badges = listOf("New", "Used", "Damaged")
+    private val categories = listOf("Balls", "Cones", "Bibs", "Nets", "Med", "Other")
+    private val badges = listOf("OK", "Needs", "Fix", "Lost")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,13 +60,20 @@ class InventoryEditFragment : Fragment() {
             binding.tvCategoryValue.text = currentItem!!.badge
             binding.tvCategoryValue.setTextColor(Color.WHITE)
             binding.etNotes.setText(currentItem!!.notes)
-        } else {
-            binding.btnDelete.visibility = View.GONE
         }
+
+        binding.etCity.filters = arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
+            val newValue = dest.toString().substring(0, dstart) +
+                source.subSequence(start, end) + dest.toString().substring(dend)
+            if (newValue.length > 3) {
+                Toast.makeText(requireContext(), "You can't add more than 999 to items of one type to inventory", Toast.LENGTH_SHORT).show()
+                ""
+            } else null
+        })
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener { saveItem() }
-        binding.btnDelete.setOnClickListener { confirmDelete() }
+        binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
@@ -72,11 +81,20 @@ class InventoryEditFragment : Fragment() {
     }
 
     private fun saveItem() {
-        val name = binding.etTeamName.text.toString()
-        val quantity = binding.etCity.text.toString().toIntOrNull() ?: 0
+        val name = binding.etTeamName.text.toString().trim()
+        val quantityText = binding.etCity.text.toString()
         val category = binding.tvCategory.text.toString()
         val badge = binding.tvCategoryValue.text.toString()
-        val notes = binding.etNotes.text.toString()
+        val notes = binding.etNotes.text.toString().trim()
+
+        if (name.isBlank() || quantityText.isBlank() ||
+            category == "Choose category" || badge == "Choose badge" || notes.isBlank()
+        ) {
+            Toast.makeText(requireContext(), "Fill all fields to add item", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val quantity = quantityText.toInt()
 
         val item = InventoryItem(
             id = currentItem?.id ?: 0,
@@ -88,18 +106,6 @@ class InventoryEditFragment : Fragment() {
         )
         viewModel.addItem(item)
         findNavController().popBackStack()
-    }
-
-    private fun confirmDelete() {
-        val item = currentItem ?: return
-        androidx.appcompat.app.AlertDialog.Builder(requireContext())
-            .setMessage("Please confirm delete action before continuing")
-            .setPositiveButton("Confirm") { _, _ ->
-                viewModel.deleteItem(item)
-                findNavController().popBackStack()
-            }
-            .setNegativeButton("Cancel", null)
-            .show()
     }
 
     private fun setupDropdown(anchorView: FrameLayout, tv: TextView, arrow: View, list: List<String>) {
