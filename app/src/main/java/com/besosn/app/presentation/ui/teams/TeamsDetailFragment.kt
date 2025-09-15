@@ -17,12 +17,31 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTeamsDetailBinding.bind(view)
 
+        val team = requireArguments().getSerializable("team") as? TeamModel
+
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener {
             findNavController().navigate(R.id.action_teamsDetailFragment_to_teamsEditFragment)
         }
+
+        team?.let { bindTeam(it) }
+
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
+        }
+    }
+
+    private fun bindTeam(team: TeamModel) {
+        binding.imageView2.setImageResource(team.iconRes)
+        binding.tvTeamName.text = team.name
+        binding.tvCityValue.text = team.city
+        binding.tvFoundedValue.text = team.foundedYear.toString()
+        binding.tvPlayersValue.text = team.playersCount.toString()
+
+        if (team.isDefault) {
+            binding.btnEdit.isEnabled = false
+            binding.btnDelete.isEnabled = false
+            binding.btnDelete.visibility = View.GONE
         }
     }
 
