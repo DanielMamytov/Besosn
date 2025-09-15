@@ -11,6 +11,7 @@ fun TeamEntity.toModel(players: List<PlayerEntity>): TeamModel = TeamModel(
     notes = notes,
     players = players.map { it.toModel() },
     iconRes = iconRes,
+    iconUri = iconUri,
     isDefault = isDefault
 )
 
@@ -27,6 +28,7 @@ fun TeamModel.toEntity(): TeamEntity = TeamEntity(
     foundedYear = foundedYear,
     notes = notes,
     iconRes = iconRes,
+    iconUri = iconUri,
     isDefault = isDefault
 )
 

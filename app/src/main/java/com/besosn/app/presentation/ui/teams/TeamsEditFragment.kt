@@ -1,9 +1,11 @@
 package com.besosn.app.presentation.ui.teams
 
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.View
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -21,10 +23,21 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
     private var _binding: FragmentTeamsEditBinding? = null
     private val binding get() = _binding!!
+    private var editingTeam: TeamModel? = null
+    private var selectedIconUri: String? = null
+
+    private val pickImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            selectedIconUri = it.toString()
+            binding.imageView2.setImageURI(it)
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentTeamsEditBinding.bind(view)
+
+        editingTeam = arguments?.getSerializable("team") as? TeamModel
 
         val lettersOnly = InputFilter { source, _, _, _, _, _ ->
             if (source.matches(Regex("[a-zA-Z ]*"))) source else ""
@@ -34,7 +47,25 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener { saveTeam() }
-        binding.btnDelete.visibility = View.GONE // no deletion when creating
+        binding.btnDelete.visibility = View.GONE // no deletion from edit screen
+
+        binding.imageView2.setOnClickListener {
+            pickImage.launch("image/*")
+        }
+
+        editingTeam?.let { team ->
+            binding.etTeamName.setText(team.name)
+            binding.etCity.setText(team.city)
+            binding.etFoundedYear.setText(team.foundedYear.toString())
+            binding.etPlayersCount.setText(team.playersCount.toString())
+            binding.etNotes.setText(team.notes)
+            selectedIconUri = team.iconUri
+            if (team.iconUri != null) {
+                binding.imageView2.setImageURI(Uri.parse(team.iconUri))
+            } else if (team.iconRes != 0) {
+                binding.imageView2.setImageResource(team.iconRes)
+            }
+        }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
@@ -86,26 +117,58 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             }
         } else emptyList()
 
-        val team = TeamModel(
-            name = name,
-            city = city,
-            foundedYear = founded,
-            notes = notes,
-            players = players,
-            iconRes = R.drawable.ic_users
-        )
+        val iconUri = selectedIconUri ?: editingTeam?.iconUri
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
-                .fallbackToDestructiveMigration()
-                .build()
-            val teamId = withContext(Dispatchers.IO) { db.teamDao().insertTeam(team.toEntity()).toInt() }
-            val playerEntities = players.map { it.toEntity(teamId) }
-            if (playerEntities.isNotEmpty()) {
-                withContext(Dispatchers.IO) { db.playerDao().insertPlayers(playerEntities) }
+        val existing = editingTeam
+        if (existing != null) {
+            val updatedTeam = existing.copy(
+                name = name,
+                city = city,
+                foundedYear = founded,
+                notes = notes,
+                players = players,
+                iconUri = iconUri,
+                iconRes = if (iconUri != null) 0 else existing.iconRes
+            )
+            viewLifecycleOwner.lifecycleScope.launch {
+                val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
+                    .fallbackToDestructiveMigration()
+                    .build()
+                withContext(Dispatchers.IO) {
+                    db.teamDao().updateTeam(updatedTeam.toEntity())
+                    db.playerDao().deletePlayersByTeam(updatedTeam.id)
+                    val playerEntities = players.map { it.toEntity(updatedTeam.id) }
+                    if (playerEntities.isNotEmpty()) {
+                        db.playerDao().insertPlayers(playerEntities)
+                    }
+                }
+                setFragmentResult("team_updated", bundleOf("team" to updatedTeam))
+                setFragmentResult("add_team_result", Bundle())
+                findNavController().popBackStack()
             }
-            setFragmentResult("add_team_result", Bundle())
-            findNavController().popBackStack()
+        } else {
+            val team = TeamModel(
+                name = name,
+                city = city,
+                foundedYear = founded,
+                notes = notes,
+                players = players,
+                iconUri = iconUri,
+                iconRes = if (iconUri != null) 0 else R.drawable.ic_users
+            )
+
+            viewLifecycleOwner.lifecycleScope.launch {
+                val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
+                    .fallbackToDestructiveMigration()
+                    .build()
+                val teamId = withContext(Dispatchers.IO) { db.teamDao().insertTeam(team.toEntity()).toInt() }
+                val playerEntities = players.map { it.toEntity(teamId) }
+                if (playerEntities.isNotEmpty()) {
+                    withContext(Dispatchers.IO) { db.playerDao().insertPlayers(playerEntities) }
+                }
+                setFragmentResult("add_team_result", Bundle())
+                findNavController().popBackStack()
+            }
         }
     }
 

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/tvPlayerNumber"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:text="10"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular" />
+
+    <TextView
+        android:id="@+id/tvPlayerName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Player Name"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingStart="8dp" />
+
+    <TextView
+        android:id="@+id/tvPlayerPosition"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FW"
+        android:textColor="#B3FFFFFF"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular" />
+
+</LinearLayout>

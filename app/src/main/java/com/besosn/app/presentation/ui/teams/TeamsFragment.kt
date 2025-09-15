@@ -69,6 +69,7 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
             notes = "Default team",
             players = listOf(PlayerModel("Alex Finch", "FW", 10)),
             iconRes = R.drawable.ic_users,
+            iconUri = null,
             isDefault = true
         )
         val team2 = TeamModel(
@@ -78,6 +79,7 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
             notes = "Default team",
             players = listOf(PlayerModel("Yacob Sunny", "GK", 1)),
             iconRes = R.drawable.ic_users,
+            iconUri = null,
             isDefault = true
         )
         return listOf(team1, team2)

@@ -11,6 +11,7 @@ data class TeamEntity(
     val foundedYear: Int,
     val notes: String,
     val iconRes: Int,
+    val iconUri: String?,
     val isDefault: Boolean
 )
 
