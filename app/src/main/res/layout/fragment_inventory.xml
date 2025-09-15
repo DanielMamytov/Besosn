@@ -34,9 +34,9 @@
         android:layout_marginStart="15dp"
         android:layout_marginEnd="16dp"/>
 
-    <!-- Список команд (пустой) -->
+    <!-- Inventory list -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTeams"
+        android:id="@+id/rvInventory"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:clipToPadding="false"
@@ -48,6 +48,20 @@
         app:layout_constraintBottom_toTopOf="@+id/bottomBar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tvEmpty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Inventory yet"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:fontFamily="@font/unbounded"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"/>
 
     <!-- Нижняя панель с кнопкой -->
     <LinearLayout
