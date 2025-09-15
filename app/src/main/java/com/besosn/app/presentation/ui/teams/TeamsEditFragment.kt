@@ -14,6 +14,7 @@ import android.widget.TextView
 import android.widget.Toast
 import android.widget.FrameLayout
 import android.widget.PopupWindow
+
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -24,6 +25,7 @@ import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
 import com.besosn.app.R
@@ -69,6 +71,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener { saveTeam() }
         binding.btnDelete.setOnClickListener { findNavController().popBackStack() }
+
 
         playersAdapter = PlayersAdapter(players)
         binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext())
@@ -236,6 +239,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             pickPlayerImage.launch("image/*")
         }
 
+
         val dialog = AlertDialog.Builder(requireContext()).setView(dialogView).create()
 
         btnAdd.setOnClickListener {
@@ -251,6 +255,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             }
 
             players.add(PlayerModel(name, position, number, selectedPhotoUri))
+
             playersAdapter.notifyDataSetChanged()
             dialog.dismiss()
         }
