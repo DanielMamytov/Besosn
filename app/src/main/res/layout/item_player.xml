@@ -1,93 +1,48 @@
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="160dp"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/bg_player_item"
-    android:layout_margin="8dp">
+    android:orientation="horizontal"
+    android:padding="8dp"
+    android:gravity="center_vertical">
 
-<!-- Avatar -->
     <ImageView
-        android:id="@+id/imgPlayer"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:id="@+id/ivPlayerPhoto"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"
-    android:background="@drawable/bg_avatar_ring"
-    android:clipToOutline="true"
-    app:layout_constraintTop_toTopOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+        android:src="@drawable/ic_users"
+        android:background="@drawable/bg_avatar_circle"/>
 
-    <!-- First name (line 1) -->
     <TextView
-        android:id="@+id/tvFirstName"
-        android:layout_width="0dp"
+        android:id="@+id/tvPlayerNumber"
+        android:layout_width="40dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/unbounded"
-        android:text="ALEX"
-        android:textAllCaps="true"
-        android:textColor="#FEA613"
-    android:textSize="22sp"
-    android:textStyle="bold"
-    app:layout_constraintTop_toBottomOf="@id/imgPlayer"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_marginStart="8dp"
+        android:text="10"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular" />
 
-    <!-- Last name (line 2) -->
     <TextView
-        android:id="@+id/tvLastName"
+        android:id="@+id/tvPlayerName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/unbounded"
-        android:text="FINCH"
-        android:textAllCaps="true"
-        android:textColor="#FEA613"
-        android:textSize="22sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/tvFirstName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        android:layout_weight="1"
+        android:text="Player Name"
+        android:textColor="@android:color/white"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular"
+        android:paddingStart="8dp" />
 
-    <!-- Meta row: position • number -->
-    <LinearLayout
-        android:id="@+id/metaRow"
-        android:layout_width="0dp"
+    <TextView
+        android:id="@+id/tvPlayerPosition"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toBottomOf="@id/tvLastName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:text="FW"
+        android:textColor="#B3FFFFFF"
+        android:textSize="16sp"
+        android:fontFamily="@font/poppins_regular" />
 
-        <TextView
-            android:id="@+id/tvPosition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="FW"
-            android:textColor="#B3FFFFFF"
-            android:textSize="16sp"/>
+</LinearLayout>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="6dp"
-            android:text="•"
-            android:textColor="#B3FFFFFF"
-            android:textSize="16sp"
-            android:fontFamily="@font/poppins_regular"/>
-
-        <TextView
-            android:id="@+id/tvNumber"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:text="10"
-            android:textColor="#B3FFFFFF"
-            android:textSize="16sp"/>
-    </LinearLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>

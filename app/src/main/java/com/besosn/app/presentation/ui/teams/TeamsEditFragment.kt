@@ -70,7 +70,8 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener { saveTeam() }
-        binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
+        binding.btnDelete.setOnClickListener { findNavController().popBackStack() }
+
 
         playersAdapter = PlayersAdapter(players)
         binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext())

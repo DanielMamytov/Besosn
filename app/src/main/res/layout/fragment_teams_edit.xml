@@ -57,13 +57,11 @@
             android:id="@+id/btnCancel"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:layout_weight="1"
-            android:text="Cancel"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
             android:background="@drawable/btn_delete_gradient"
-            android:fontFamily="@font/unbounded"
-            android:textSize="18sp"/>
+            android:contentDescription="Delete"
+            android:scaleType="centerInside"
+            android:src="@drawable/trash_icon" />
+
     </LinearLayout>
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
