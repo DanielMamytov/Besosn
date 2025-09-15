@@ -53,9 +53,9 @@
             android:layout_width="12dp"
             android:layout_height="wrap_content" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageButton
             android:id="@+id/btnCancel"
-            android:layout_width="0dp"
+            android:layout_width="56dp"
             android:layout_height="56dp"
             android:background="@drawable/btn_delete_gradient"
             android:contentDescription="Delete"

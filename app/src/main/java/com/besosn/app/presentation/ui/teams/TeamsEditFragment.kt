@@ -70,7 +70,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener { saveTeam() }
-        binding.btnDelete.setOnClickListener { findNavController().popBackStack() }
+        binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
 
 
         playersAdapter = PlayersAdapter(players)

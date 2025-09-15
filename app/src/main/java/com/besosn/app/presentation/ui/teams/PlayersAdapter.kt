@@ -27,12 +27,12 @@ class PlayersAdapter(private val items: List<PlayerModel>) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(player: PlayerModel) {
             binding.tvPlayerName.text = player.fullName
-            binding.tvPlayerNumber.text = player.number.toString()
-            binding.tvPlayerPosition.text = player.position
+            binding.tvNumber.text = player.number.toString()
+            binding.tvPosition.text = player.position
             if (player.photoUri != null) {
-                binding.ivPlayerPhoto.setImageURI(Uri.parse(player.photoUri))
+                binding.imgPlayer.setImageURI(Uri.parse(player.photoUri))
             } else {
-                binding.ivPlayerPhoto.setImageResource(com.besosn.app.R.drawable.ic_users)
+                binding.imgPlayer.setImageResource(com.besosn.app.R.drawable.ic_users)
             }
         }
     }
