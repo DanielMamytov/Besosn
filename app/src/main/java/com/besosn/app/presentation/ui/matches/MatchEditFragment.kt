@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.besosn.app.R
 import com.besosn.app.databinding.FragmentMatchEditBinding
 import java.util.Calendar
@@ -27,6 +29,10 @@ class MatchEditFragment : Fragment() {
         // Обработчик для нажатия на LinearLayout или Button
         binding.timePickerContainer.setOnClickListener {
             showTimePicker()
+        }
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().popBackStack()
         }
     }
 

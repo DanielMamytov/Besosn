@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupWindow
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besosn.app.R
@@ -34,6 +36,10 @@ class InventoryEditFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setupDropdown()
+        binding.btnBack.setOnClickListener { findNavController().popBackStack() }
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
+            findNavController().popBackStack()
+        }
     }
 
     private fun setupDropdown() {
