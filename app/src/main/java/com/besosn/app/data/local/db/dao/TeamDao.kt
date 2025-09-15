@@ -2,15 +2,13 @@ package com.besosn.app.data.local.db.dao
 
 import androidx.room.*
 import com.besosn.app.data.model.TeamEntity
-import kotlinx.coroutines.flow.Flow
-
 @Dao
 interface TeamDao {
     @Query("SELECT * FROM teams")
-    fun getTeams(): Flow<List<TeamEntity>>
+    suspend fun getTeams(): List<TeamEntity>
 
     @Insert
-    suspend fun insertTeam(team: TeamEntity)
+    suspend fun insertTeam(team: TeamEntity): Long
 
     @Delete
     suspend fun deleteTeam(team: TeamEntity)
