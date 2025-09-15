@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.text.InputFilter
 import android.view.View
 import androidx.activity.addCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
@@ -77,6 +78,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             binding.etPlayersCount.error = "Invalid"
             return
         }
+
 
         val players = if (playersCount > 0) {
             List(playersCount) { index ->

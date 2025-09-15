@@ -32,6 +32,7 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
     }
 
     private fun bindTeam(team: TeamModel) {
+
         binding.tvTeamName.text = team.name
         binding.tvCityValue.text = team.city
         binding.tvFoundedValue.text = team.foundedYear.toString()

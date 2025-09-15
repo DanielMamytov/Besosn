@@ -3,12 +3,14 @@ package com.besosn.app.presentation.ui.teams
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.lifecycleScope
 import androidx.room.Room
+
 import com.besosn.app.R
 import com.besosn.app.data.local.db.AppDatabase
 import com.besosn.app.databinding.FragmentTeamsBinding
@@ -34,12 +36,14 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
 
         adapter = TeamsAdapter(teams) { team ->
             val bundle = Bundle().apply { putSerializable("team", team) }
+
             findNavController().navigate(R.id.action_teamsFragment_to_teamsDetailFragment, bundle)
         }
         binding.rvTeams.layoutManager = LinearLayoutManager(requireContext())
         binding.rvTeams.adapter = adapter
 
         loadTeams()
+
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnAdd.setOnClickListener {
@@ -49,6 +53,7 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
         // Listen for newly added team from edit screen and reload
         setFragmentResultListener("add_team_result") { _, _ ->
             loadTeams()
+
         }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
