@@ -128,9 +128,7 @@
 
             android:textSize="16sp"
             android:fontFamily="@font/unbounded"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/imgTeam2"
-            app:layout_constraintBaseline_toBaselineOf="@id/imgTeam2"/>
+            android:textStyle="bold"/>
         </LinearLayout>
 
         <!-- Лого и название первой команды -->

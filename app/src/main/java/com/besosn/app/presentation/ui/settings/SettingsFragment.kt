@@ -18,9 +18,9 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         _binding = FragmentSettingsBinding.bind(view)
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
-        binding.btnPrivacyPolicy.setOnClickListener {
-            findNavController().navigate(R.id.action_settingsFragment_to_privacyPolicyFragment)
-        }
+//        binding.btnPrivacyPolicy.setOnClickListener {
+//            findNavController().navigate(R.id.action_settingsFragment_to_privacyPolicyFragment)
+//        }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
         }
