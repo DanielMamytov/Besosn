@@ -3,12 +3,11 @@ package com.besosn.app.presentation.ui.inventory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.besosn.app.databinding.InventoryItemBinding
 import com.besosn.app.databinding.ItemInventoryBinding
 import com.besosn.app.domain.model.InventoryItem
 
-/**
- * Adapter displaying inventory items.
- */
+
 class InventoryAdapter(
     private val items: MutableList<InventoryItem>,
     private val onEdit: (InventoryItem) -> Unit,
@@ -16,7 +15,7 @@ class InventoryAdapter(
 ) : RecyclerView.Adapter<InventoryAdapter.InventoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryViewHolder {
-        val binding = ItemInventoryBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding = InventoryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return InventoryViewHolder(binding)
     }
 
@@ -32,14 +31,14 @@ class InventoryAdapter(
         notifyDataSetChanged()
     }
 
-    inner class InventoryViewHolder(private val binding: ItemInventoryBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class InventoryViewHolder(private val binding: InventoryItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: InventoryItem) {
-            binding.tvName.text = item.name
-            binding.tvQuantity.text = "Qty: ${item.quantity}"
-            binding.tvCategory.text = item.category
-            binding.tvBadge.text = item.badge
-            binding.btnEdit.setOnClickListener { onEdit(item) }
-            binding.btnDelete.setOnClickListener { onDelete(item) }
+            binding.tvItemTitle.text = item.name
+            binding.tvItemQuantity.text = "Qty: ${item.quantity}"
+            binding.tvItemCategory.text = item.category
+            binding.tvItemStatus.text = item.badge
+            binding.btnNext.setOnClickListener { onEdit(item) }
+//            binding.btnDelete.setOnClickListener { onDelete(item) }
         }
     }
 }
