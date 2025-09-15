@@ -18,9 +18,9 @@ class ArticlesFragment : Fragment(R.layout.fragment_articles) {
         _binding = FragmentArticlesBinding.bind(view)
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
-        binding.btnOpenArticle.setOnClickListener {
-            findNavController().navigate(R.id.action_articlesFragment_to_articleDetailFragment)
-        }
+//        binding.btnOpenArticle.setOnClickListener {
+//            findNavController().navigate(R.id.action_articlesFragment_to_articleDetailFragment)
+//        }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
         }
