@@ -107,7 +107,7 @@ class MatchEditFragment : Fragment() {
         picker.show(parentFragmentManager, "time")
     }
 
-    private fun saveMatch() {
+    private fun fdsfs() {
         val homeTeam = binding.tvTeam.text.toString()
         val awayTeam = binding.tvTeam2.text.toString()
         val homeGoalsText = binding.etGoals.text.toString()
@@ -145,7 +145,7 @@ class MatchEditFragment : Fragment() {
         findNavController().popBackStack()
     }
 
-    private fun setupDropdown(
+    private fun fdsf(
         anchorView: FrameLayout,
         tv: TextView,
         arrow: View,
