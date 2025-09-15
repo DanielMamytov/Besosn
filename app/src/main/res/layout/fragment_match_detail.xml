@@ -150,7 +150,7 @@
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginEnd="16dp"
-                        android:src="@drawable/fcbarcelona_logo"
+                        android:src="@drawable/ic_launcher_background"
                         android:contentDescription="FC Barcelona Logo"
                         android:scaleType="centerCrop"
                         android:layout_gravity="start"/>
@@ -212,7 +212,7 @@
 
                         android:layout_height="60dp"
                         android:layout_marginStart="16dp"
-                        android:src="@drawable/realmadrid_logo"
+                        android:src="@drawable/ic_launcher_background"
                         android:contentDescription="Real Madrid Logo"
                         android:scaleType="centerCrop"
                         android:layout_gravity="end"/>

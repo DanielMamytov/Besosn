@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Context
 import android.graphics.Color
+
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -24,6 +25,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
+
 import java.util.Locale
 
 class MatchEditFragment : Fragment() {
@@ -46,9 +48,11 @@ class MatchEditFragment : Fragment() {
         val now = Calendar.getInstance()
         updateTimeViews(now.get(Calendar.HOUR_OF_DAY), now.get(Calendar.MINUTE))
 
+
         // time and date pickers
         binding.timePickerContainer.setOnClickListener { showTimePicker() }
         binding.datePickerContainer.setOnClickListener { showDatePicker() }
+
 
         // dropdowns for teams
         setupDropdown(binding.ddTeam, binding.tvTeam, binding.ivCategoryArrow, teams)
@@ -117,6 +121,7 @@ class MatchEditFragment : Fragment() {
     }
 
     private fun saveMatch() {
+
         val homeTeam = binding.tvTeam.text.toString()
         val awayTeam = binding.tvTeam2.text.toString()
         val homeGoalsText = binding.etGoals.text.toString()
@@ -154,6 +159,7 @@ class MatchEditFragment : Fragment() {
         findNavController().popBackStack()
     }
 
+
     private fun setupDropdown(
         anchorView: FrameLayout,
         tv: TextView,
@@ -184,6 +190,7 @@ class MatchEditFragment : Fragment() {
                     holder.itemView.setOnClickListener {
                         tv.text = list[pos]
                         tv.setTextColor(Color.WHITE)
+
                         popup.dismiss()
                     }
                 }
