@@ -275,10 +275,10 @@ class MatchEditFragment : Fragment() {
             }
 
             val content = layoutInflater.inflate(R.layout.popup_dropdown, null, false)
-            val header = content.findViewById<TextView>(R.id.tvHeader)
+//            val header = content.findViewById<TextView>(R.id.tvHeader)
             val rv = content.findViewById<RecyclerView>(R.id.rv)
 
-            header.text = tv.text
+//            header.text = tv.text
             rv.layoutManager = LinearLayoutManager(requireContext())
 
             val popupWindow = PopupWindow(

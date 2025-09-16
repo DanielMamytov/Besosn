@@ -116,10 +116,8 @@ class InventoryEditFragment : Fragment() {
             }
 
             val content = layoutInflater.inflate(R.layout.popup_dropdown, null, false)
-            val header = content.findViewById<TextView>(R.id.tvHeader)
             val rv = content.findViewById<RecyclerView>(R.id.rv)
 
-            header.text = tv.text
             rv.layoutManager = LinearLayoutManager(requireContext())
             rv.adapter = object : RecyclerView.Adapter<VH>() {
                 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/gradient_bg2"
     android:orientation="vertical">
 
@@ -56,14 +57,13 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
-                    android:id="@+id/imgCover"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgTeamIcon"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/one" />
+                    android:src="@drawable/one"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -98,13 +98,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/two"/>
+                    android:src="@drawable/two"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -138,13 +137,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/three"/>
+                    android:src="@drawable/three"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -178,13 +176,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/four"/>
+                    android:src="@drawable/four"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -218,13 +215,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/five"/>
+                    android:src="@drawable/five"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -258,13 +254,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/six"/>
+                    android:src="@drawable/six"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -298,13 +293,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/seven"/>
+                    android:src="@drawable/seven"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -338,13 +332,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/eight" />
+                    android:src="@drawable/eight"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -378,13 +371,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/nine"/>
+                    android:src="@drawable/nine"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -418,13 +410,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ten"/>
+                    android:src="@drawable/ten"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -458,13 +449,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/eleven"/>
+                    android:src="@drawable/eleven"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -498,13 +488,12 @@
                 android:orientation="horizontal"
                 android:padding="16dp">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/twelve"/>
+                    android:src="@drawable/twelve"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
 
                 <TextView
                     android:layout_width="0dp"

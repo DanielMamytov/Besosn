@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:fontFamily="@font/poppins_regular"
-                    android:text="Category"
+                    android:text="Position"
                     android:textColor="@android:color/white"
                     android:textSize="16sp" />
 
@@ -102,7 +102,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="@string/select_position"
+                        android:text="Choose"
                         android:textColor="#72FFFFFF"
                         android:textSize="16sp"/>
 
@@ -111,7 +111,7 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_gravity="end|center_vertical"
-                        android:src="@drawable/ic_arrow_drop_down"/>
+                        android:src="@drawable/arrow_down"/>
 
                 </FrameLayout>
 
@@ -179,19 +179,14 @@
                 android:layout_width="12dp"
                 android:layout_height="1dp" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <ImageButton
                 android:id="@+id/btnCancel"
-                android:layout_width="0dp"
+                android:layout_width="56dp"
                 android:layout_height="56dp"
-                android:layout_weight="1"
                 android:background="@drawable/btn_delete_gradient"
-                android:text="Cancel"
-                android:textAllCaps="false"
-                android:textColor="@android:color/white"
-                android:textStyle="bold"
-                android:textFontWeight="700"
-                android:fontFamily="@font/unbounded"
-                android:textSize="24sp"/>
+                android:src="@drawable/trash_icon"
+                android:scaleType="centerInside"
+                android:contentDescription="Delete"/>
 
         </LinearLayout>
 

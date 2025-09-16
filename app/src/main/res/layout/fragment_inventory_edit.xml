@@ -61,17 +61,15 @@
             android:layout_width="12dp"
             android:layout_height="wrap_content" />
 
-        <androidx.appcompat.widget.AppCompatButton
+        <ImageButton
             android:id="@+id/btnCancel"
-            android:layout_width="0dp"
+            android:layout_width="56dp"
             android:layout_height="56dp"
-            android:layout_weight="1"
+
             android:background="@drawable/btn_delete_gradient"
-            android:fontFamily="@font/unbounded"
-            android:text="Cancel"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
-            android:textStyle="bold" />
+            android:src="@drawable/trash_icon"
+            android:scaleType="centerInside"
+            android:contentDescription="Delete"/>
     </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -211,7 +209,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_gravity="end|center_vertical"
-                            android:src="@drawable/ic_arrow_drop_down" />
+                            android:src="@drawable/arrow_down" />
                     </FrameLayout>
 
 
@@ -252,9 +250,9 @@
                         <ImageView
                             android:id="@+id/ivCategoryArrow1"
                             android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="end|center_vertical"
-                            android:src="@drawable/ic_arrow_drop_down" />
+                            android:src="@drawable/arrow_down" />
                     </FrameLayout>
 
 
