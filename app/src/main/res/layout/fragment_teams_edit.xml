@@ -14,7 +14,7 @@
         android:scaleType="centerCrop"
         android:elevation="1dp"
         android:src="@drawable/ball"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="30dp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -89,7 +89,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
                 android:clipToOutline="true"
-
+                android:layout_gravity="bottom"
                 android:src="@drawable/image3"/>
 
             <!-- Контент поверх -->
