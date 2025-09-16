@@ -91,11 +91,12 @@
 
                 <!-- Подзаголовок -->
                 <TextView
+                    android:id="@+id/teamsCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/home_card_subtitle_margin_top"
                     android:fontFamily="@font/prompt_regular"
-                    android:text="You have no teams yet"
+                    android:text="@string/home_teams_placeholder"
                     android:textColor="#E6FFFFFF"
                     android:textSize="@dimen/home_card_subtitle_text_size" />
             </LinearLayout>
@@ -152,11 +153,12 @@
 
                 <!-- Подзаголовок -->
                 <TextView
+                    android:id="@+id/inventoryCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/home_card_subtitle_margin_top"
                     android:fontFamily="@font/prompt_regular"
-                    android:text="You have no teams yet"
+                    android:text="@string/home_inventory_placeholder"
                     android:textColor="#E6FFFFFF"
                     android:textSize="@dimen/home_card_subtitle_text_size" />
             </LinearLayout>

@@ -3,14 +3,23 @@ package com.besosn.app.presentation.ui.home
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.besosn.app.R
 import com.besosn.app.databinding.FragmentHomeBinding
+import com.besosn.app.presentation.ui.inventory.InventoryLocalDataSource
+import com.besosn.app.presentation.ui.matches.MatchesLocalDataSource
+import com.besosn.app.presentation.ui.teams.TeamsLocalDataSource
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var statsJob: Job? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,10 +40,59 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.btnSettings.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_settingsFragment)
         }
+
+        refreshHomeStats()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (_binding != null) {
+            refreshHomeStats()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        statsJob?.cancel()
+        statsJob = null
         _binding = null
+    }
+
+    private fun refreshHomeStats() {
+        val ctx = context?.applicationContext ?: return
+        statsJob?.cancel()
+        statsJob = viewLifecycleOwner.lifecycleScope.launch {
+            val matchesDeferred = async(Dispatchers.IO) {
+                MatchesLocalDataSource.loadMatches(ctx).size
+            }
+            val teamsDeferred = async(Dispatchers.IO) {
+                TeamsLocalDataSource.countTeams(ctx)
+            }
+            val inventoryDeferred = async(Dispatchers.IO) {
+                InventoryLocalDataSource.countItems(ctx)
+            }
+
+            val totalMatches = matchesDeferred.await()
+            val totalTeams = teamsDeferred.await()
+            val totalInventoryItems = inventoryDeferred.await()
+
+            _binding?.let { binding ->
+                binding.matchesCount.text = resources.getQuantityString(
+                    R.plurals.home_matches_count,
+                    totalMatches,
+                    totalMatches,
+                )
+                binding.teamsCount.text = resources.getQuantityString(
+                    R.plurals.home_teams_count,
+                    totalTeams,
+                    totalTeams,
+                )
+                binding.inventoryCount.text = resources.getQuantityString(
+                    R.plurals.home_inventory_count,
+                    totalInventoryItems,
+                    totalInventoryItems,
+                )
+            }
+        }
     }
 }

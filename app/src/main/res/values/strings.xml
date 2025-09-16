@@ -32,4 +32,20 @@
     <string name="article_cover_content_description">Article cover image</string>
     <string name="article_not_found">Unable to load this article.</string>
 
+    <plurals name="home_matches_count">
+        <item quantity="one">%d match</item>
+        <item quantity="other">%d matches</item>
+    </plurals>
+
+    <string name="home_teams_placeholder">0 teams</string>
+    <string name="home_inventory_placeholder">0 items</string>
+    <plurals name="home_teams_count">
+        <item quantity="one">%d team</item>
+        <item quantity="other">%d teams</item>
+    </plurals>
+    <plurals name="home_inventory_count">
+        <item quantity="one">%d item</item>
+        <item quantity="other">%d items</item>
+    </plurals>
+
 </resources>
