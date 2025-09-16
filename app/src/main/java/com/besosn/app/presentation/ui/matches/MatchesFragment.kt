@@ -3,7 +3,6 @@ package com.besosn.app.presentation.ui.matches
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
-import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -103,6 +102,7 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
         )
     }
 
+
     private fun setupFilters() {
         binding.rgTabs.setOnCheckedChangeListener { _, checkedId ->
             val filter = when (checkedId) {
@@ -166,6 +166,7 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
     private companion object {
         private const val SAVED_MATCH_ID_OFFSET = 1000
     }
+
 }
 
 private enum class MatchFilter { ALL, SCHEDULED, FINISHED }

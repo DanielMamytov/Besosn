@@ -33,4 +33,9 @@
     <string name="article_cover_content_description">Article cover image</string>
     <string name="article_not_found">Unable to load this article.</string>
 
+    <plurals name="home_matches_count">
+        <item quantity="one">%d match</item>
+        <item quantity="other">%d matches</item>
+    </plurals>
+
 </resources>
