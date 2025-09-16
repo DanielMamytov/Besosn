@@ -254,37 +254,56 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         a.get(Calendar.YEAR) == b.get(Calendar.YEAR)
                 && a.get(Calendar.DAY_OF_YEAR) == b.get(Calendar.DAY_OF_YEAR)
 
+    private fun makeYearCell(): TextView =
+        TextView(requireContext()).apply {
+            gravity = android.view.Gravity.CENTER
+            textSize = 14f
+            typeface = unbounded
+            setBackgroundResource(R.drawable.bg_day_cell)
+            setTextColor(0xFFFFFFFF.toInt())
+        }
+
+    /* ---------------- Year view ---------------- */
     /* ---------------- Year view ---------------- */
     private fun renderYear() {
         gridYear.removeAllViews()
         gridYear.columnCount = 3
 
-        val months = (0..11).toList()
-        for (m in months) {
-            val tv = TextView(requireContext()).apply {
-                val name = Calendar.getInstance().apply { set(Calendar.MONTH, m) }
-                    .getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault()) ?: (m + 1).toString()
-                text = name.uppercase(Locale.getDefault())
-                gravity = android.view.Gravity.CENTER
-                textSize = 14f
-                typeface = unbounded
-                setTextColor(if (m == cal.get(Calendar.MONTH)) activeColor else 0xFFFFFFFF.toInt())
-                setBackgroundResource(R.drawable.bg_day_cell)
+        // Show a 12-year window with the current year roughly centered
+        val currentYear = cal.get(Calendar.YEAR)
+        val startYear = currentYear - 5   // 5 before current
+        val endYear   = startYear + 11    // total 12 items
+
+
+
+
+        for (year in startYear..endYear) {
+            val tv = makeYearCell().apply {
+                text = year.toString()
+                // Highlight the active year
+                setTextColor(if (year == currentYear) activeColor else 0xFFFFFFFF.toInt())
+                // Slightly bolder look for the active year (optional)
+                paint.isFakeBoldText = year == currentYear
+
                 setOnClickListener {
-                    cal.set(Calendar.MONTH, m)
-                    // ставим выбранный день в рамках месяца
+                    // Update main calendar to selected year, keep the same month
+                    val month = cal.get(Calendar.MONTH)
+                    cal.set(Calendar.YEAR, year)
+                    cal.set(Calendar.MONTH, month)
+
+                    // Keep selected day within valid range for new year/month
                     val max = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
-                    if (selectedCal.get(Calendar.MONTH) != m ||
-                        selectedCal.get(Calendar.YEAR) != cal.get(Calendar.YEAR)) {
-                        selectedCal.set(Calendar.DAY_OF_MONTH, minOf(selectedCal.get(Calendar.DAY_OF_MONTH), max))
-                        selectedCal.set(Calendar.MONTH, m)
-                        selectedCal.set(Calendar.YEAR, cal.get(Calendar.YEAR))
-                    }
+                    selectedCal.set(Calendar.YEAR, year)
+                    selectedCal.set(Calendar.MONTH, month)
+                    selectedCal.set(Calendar.DAY_OF_MONTH, minOf(selectedCal.get(Calendar.DAY_OF_MONTH), max))
+
+                    // Re-render and jump to Month mode
                     renderYear()
                     renderMonth()
                     select(Mode.MONTH)
                 }
             }
+
             val lp = GridLayout.LayoutParams().apply {
                 width = 0
                 height = dp(44)
@@ -294,6 +313,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             gridYear.addView(tv, lp)
         }
     }
+
 
     /* ----------------- Utils ------------------ */
     private fun dp(v: Int): Int {

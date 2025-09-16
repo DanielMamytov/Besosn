@@ -8,17 +8,20 @@
     android:background="@drawable/bg_teams_dark"
     tools:context=".presentation.ui.inventory.InventoryEditFragment">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center|top"
-        app:layout_constraintTop_toTopOf="parent"
-        android:elevation="1dp"
-        android:src="@drawable/plus_ic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/imageView2"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_gravity="center_horizontal"
+        android:scaleType="centerCrop"
+        android:elevation="1dp"
+        android:src="@drawable/ball"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RoundedImage18"/>
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="40dp"
@@ -263,13 +266,6 @@
                     android:background="#2FFFFFFF"
                     android:paddingHorizontal="20dp" />
 
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="15dp"
-                    android:background="#2FFFFFFF"
-                    android:paddingHorizontal="20dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
