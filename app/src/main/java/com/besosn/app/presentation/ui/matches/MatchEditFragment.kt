@@ -2,6 +2,8 @@ package com.besosn.app.presentation.ui.matches
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.ContentResolver
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
@@ -48,23 +50,26 @@ class MatchEditFragment : Fragment() {
     private var homePhotoUri: String? = null
     private var awayPhotoUri: String? = null
 
-    private val pickHomeImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
-            homePhotoUri = it.toString()
-            _binding?.ivAddPhoto?.apply {
-                setImageURI(it)
-                scaleType = ImageView.ScaleType.CENTER_CROP
-            }
+    private val pickHomeImage =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+            handleImagePicked(uri, isHomeTeam = true)
         }
-    }
 
-    private val pickAwayImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-        uri?.let {
-            awayPhotoUri = it.toString()
-            _binding?.ivAddPhotoAwayt?.apply {
-                setImageURI(it)
-                scaleType = ImageView.ScaleType.CENTER_CROP
+    private val pickAwayImage =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+            handleImagePicked(uri, isHomeTeam = false)
+        }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        savedInstanceState?.let { state ->
+            homePhotoUri = state.getString(KEY_HOME_PHOTO_URI)
+            awayPhotoUri = state.getString(KEY_AWAY_PHOTO_URI)
+            val timeMillis = state.getLong(KEY_MATCH_TIME, -1L)
+            if (timeMillis > 0) {
+                matchCalendar.timeInMillis = timeMillis
             }
+            dateSelected = state.getBoolean(KEY_DATE_SELECTED, false)
         }
     }
 
@@ -87,6 +92,15 @@ class MatchEditFragment : Fragment() {
             matchCalendar.get(Calendar.MINUTE),
         )
 
+        if (dateSelected) {
+            val fmt = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+            binding.tvDate.text = fmt.format(matchCalendar.time)
+            binding.tvDate.setTextColor(Color.WHITE)
+        }
+
+        homePhotoUri?.let { loadSelectedImage(binding.ivAddPhoto, it) }
+        awayPhotoUri?.let { loadSelectedImage(binding.ivAddPhotoAwayt, it) }
+
         val scoreTooHighMessage = getString(R.string.match_edit_score_too_high)
         val goalsFilter = InputFilter { source, start, end, dest, dstart, dend ->
             val newValue = dest.toString().substring(0, dstart) +
@@ -108,14 +122,66 @@ class MatchEditFragment : Fragment() {
         setupDropdown(binding.ddTeam, binding.tvTeam, binding.ivCategoryArrow, teamOptions)
         setupDropdown(binding.ddTeam2, binding.tvTeam2, binding.ivTeamAwayArrow, teamOptions)
 
-        binding.ivAddPhoto.setOnClickListener { pickHomeImage.launch("image/*") }
-        binding.ivAddPhotoAwayt.setOnClickListener { pickAwayImage.launch("image/*") }
+        binding.ivAddPhoto.setOnClickListener { pickHomeImage.launch(arrayOf("image/*")) }
+        binding.ivAddPhotoAwayt.setOnClickListener { pickAwayImage.launch(arrayOf("image/*")) }
 
         binding.btnEdit.setOnClickListener { saveMatch() }
         binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
+        }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(KEY_HOME_PHOTO_URI, homePhotoUri)
+        outState.putString(KEY_AWAY_PHOTO_URI, awayPhotoUri)
+        outState.putLong(KEY_MATCH_TIME, matchCalendar.timeInMillis)
+        outState.putBoolean(KEY_DATE_SELECTED, dateSelected)
+    }
+
+    private fun handleImagePicked(uri: Uri?, isHomeTeam: Boolean) {
+        if (uri == null) return
+        val resolver = context?.contentResolver ?: return
+
+        try {
+            resolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        } catch (_: SecurityException) {
+            // Ignore if the URI does not grant persistable permissions
+        }
+
+        val uriString = uri.toString()
+        if (isHomeTeam) {
+            if (!homePhotoUri.isNullOrBlank() && homePhotoUri != uriString) {
+                releasePersistedUri(resolver, homePhotoUri)
+            }
+            homePhotoUri = uriString
+            _binding?.ivAddPhoto?.let { loadSelectedImage(it, uriString) }
+        } else {
+            if (!awayPhotoUri.isNullOrBlank() && awayPhotoUri != uriString) {
+                releasePersistedUri(resolver, awayPhotoUri)
+            }
+            awayPhotoUri = uriString
+            _binding?.ivAddPhotoAwayt?.let { loadSelectedImage(it, uriString) }
+        }
+    }
+
+    private fun releasePersistedUri(resolver: ContentResolver, uriString: String?) {
+        val oldUri = uriString?.takeIf { it.isNotBlank() }?.let { runCatching { Uri.parse(it) }.getOrNull() }
+            ?: return
+        try {
+            resolver.releasePersistableUriPermission(oldUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        } catch (_: SecurityException) {
+            // Ignore if we no longer hold the permission
+        }
+    }
+
+    private fun loadSelectedImage(view: ImageView, uriString: String) {
+        val uri = runCatching { Uri.parse(uriString) }.getOrNull() ?: return
+        view.setImageURI(uri)
+        if (view.drawable != null) {
+            view.scaleType = ImageView.ScaleType.CENTER_CROP
         }
     }
 
@@ -368,6 +434,13 @@ class MatchEditFragment : Fragment() {
         popup = null
         super.onDestroyView()
         _binding = null
+    }
+
+    private companion object {
+        private const val KEY_HOME_PHOTO_URI = "match_edit_home_photo_uri"
+        private const val KEY_AWAY_PHOTO_URI = "match_edit_away_photo_uri"
+        private const val KEY_MATCH_TIME = "match_edit_time"
+        private const val KEY_DATE_SELECTED = "match_edit_date_selected"
     }
 
     private class DropdownViewHolder(view: View) : RecyclerView.ViewHolder(view) {
