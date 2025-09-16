@@ -149,10 +149,18 @@
         <action
             android:id="@+id/action_settingsFragment_to_privacyPolicyFragment"
             app:destination="@id/privacyPolicyFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_termsOfUseFragment"
+            app:destination="@id/termsOfUseFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/privacyPolicyFragment"
         android:name="com.besosn.app.presentation.ui.settings.PrivacyPolicyFragment"
         android:label="PrivacyPolicyFragment" />
+
+    <fragment
+        android:id="@+id/termsOfUseFragment"
+        android:name="com.besosn.app.presentation.ui.settings.TermsOfUseFragment"
+        android:label="TermsOfUseFragment" />
 </navigation>

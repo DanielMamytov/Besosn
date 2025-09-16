@@ -15,5 +15,8 @@ interface TeamDao {
 
     @Update
     suspend fun updateTeam(team: TeamEntity)
+
+    @Query("DELETE FROM teams")
+    suspend fun deleteAllTeams()
 }
 

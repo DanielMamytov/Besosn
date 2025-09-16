@@ -17,6 +17,17 @@
     <string name="match_edit_notes_label">Notes</string>
     <string name="match_edit_time_label">Match time</string>
 
+    <string name="settings_share_text">Look at wonderful app for soccer team and inventory management: http://play.google.com/store/apps/details?id=%1$s</string>
+    <string name="settings_share_chooser_title">Share the app via</string>
+    <string name="settings_share_error">No application available to share content.</string>
+    <string name="settings_rate_error">Unable to open Google Play Store.</string>
+    <string name="settings_clear_data_title">Clear data</string>
+    <string name="settings_clear_data_message">This will remove all saved teams, players, inventory items, and matches. Continue?</string>
+    <string name="settings_clear_data_confirm">Clear</string>
+    <string name="settings_clear_data_success">App data cleared.</string>
+    <string name="settings_clear_data_error">Unable to clear app data.</string>
+    <string name="settings_terms_title">Terms of Use</string>
+
     <string name="article_back_content_description">Go back</string>
     <string name="article_cover_content_description">Article cover image</string>
     <string name="article_not_found">Unable to load this article.</string>
