@@ -13,6 +13,7 @@
     <string name="match_edit_enter_valid_scores">Enter valid numeric scores for each team</string>
     <string name="match_edit_score_too_high">Score value can’t be more than 99 goals</string>
     <string name="match_edit_saved_message">Match saved</string>
+    <string name="match_edit_save_failed">Failed to save match. Please try again.</string>
     <string name="match_edit_cancel">Cancel</string>
     <string name="match_edit_notes_label">Notes</string>
     <string name="match_edit_time_label">Match time</string>
@@ -48,6 +49,7 @@
     <plurals name="home_inventory_count">
         <item quantity="one">You have %d inventory item</item>
         <item quantity="other">You have %d inventory items</item>
+
     </plurals>
 
 </resources>

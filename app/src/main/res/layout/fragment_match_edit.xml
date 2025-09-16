@@ -121,9 +121,9 @@
                         <ImageView
                             android:id="@+id/ivCategoryArrow"
                             android:layout_width="24dp"
-                            android:layout_height="24dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="end|center_vertical"
-                            android:src="@drawable/ic_arrow_drop_down" />
+                            android:src="@drawable/arrow_down" />
                     </FrameLayout>
 
 
@@ -188,7 +188,7 @@
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:layout_gravity="end|center_vertical"
-                                android:src="@drawable/ic_arrow_drop_down" />
+                                android:src="@drawable/arrow_down" />
                         </FrameLayout>
 
 

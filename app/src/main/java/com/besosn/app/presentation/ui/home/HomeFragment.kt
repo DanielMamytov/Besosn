@@ -17,6 +17,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 
+
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private var _binding: FragmentHomeBinding? = null
@@ -44,12 +45,14 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
         refreshHomeStats()
+
     }
 
     override fun onResume() {
         super.onResume()
         if (_binding != null) {
             refreshHomeStats()
+
         }
     }
 
@@ -108,5 +111,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         } else {
             resources.getQuantityString(pluralResId, count, count)
         }
+
     }
 }

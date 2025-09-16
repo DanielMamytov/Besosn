@@ -1,5 +1,6 @@
 package com.besosn.app.presentation.ui.inventory
 
+import android.app.Dialog
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
@@ -18,6 +19,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.besosn.app.R
+import com.besosn.app.databinding.DialogInventoryConfirmDeleteBinding
 import com.besosn.app.databinding.FragmentInventoryEditBinding
 import com.besosn.app.domain.model.InventoryItem
 import com.besosn.app.presentation.viewmodel.InventoryViewModel
@@ -73,7 +75,14 @@ class InventoryEditFragment : Fragment() {
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener { saveItem() }
-        binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
+        binding.btnCancel.setOnClickListener {
+            val itemToDelete = currentItem
+            if (itemToDelete != null) {
+                showDeleteConfirmationDialog(itemToDelete)
+            } else {
+                findNavController().popBackStack()
+            }
+        }
 
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
@@ -108,6 +117,25 @@ class InventoryEditFragment : Fragment() {
         findNavController().popBackStack()
     }
 
+    private fun showDeleteConfirmationDialog(item: InventoryItem) {
+        val dialogBinding = DialogInventoryConfirmDeleteBinding.inflate(layoutInflater)
+        val dialog = Dialog(requireContext())
+        dialog.setContentView(dialogBinding.root)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+        val deleteAction = {
+            viewModel.deleteItem(item)
+            dialog.dismiss()
+            findNavController().popBackStack()
+        }
+
+        dialogBinding.btnConfirm.setOnClickListener { deleteAction() }
+        dialogBinding.btnDelete.setOnClickListener { deleteAction() }
+
+        dialog.show()
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
     private fun setupDropdown(anchorView: FrameLayout, tv: TextView, arrow: View, list: List<String>) {
         anchorView.setOnClickListener {
             if (::popup.isInitialized && popup.isShowing) {
@@ -116,10 +144,8 @@ class InventoryEditFragment : Fragment() {
             }
 
             val content = layoutInflater.inflate(R.layout.popup_dropdown, null, false)
-            val header = content.findViewById<TextView>(R.id.tvHeader)
             val rv = content.findViewById<RecyclerView>(R.id.rv)
 
-            header.text = tv.text
             rv.layoutManager = LinearLayoutManager(requireContext())
             rv.adapter = object : RecyclerView.Adapter<VH>() {
                 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =

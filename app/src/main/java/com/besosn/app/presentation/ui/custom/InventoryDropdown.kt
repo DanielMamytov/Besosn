@@ -45,7 +45,7 @@ class InventoryDropdown @JvmOverloads constructor(
     private fun showPopup() {
         val content = LayoutInflater.from(context).inflate(R.layout.popup_dropdown, null, false)
         val rv = content.findViewById<RecyclerView>(R.id.rv)
-        content.findViewById<TextView>(R.id.tvHeader).text = tv.text
+//        content.findViewById<TextView>(R.id.tvHeader).text = tv.text
 
         rv.layoutManager = LinearLayoutManager(context)
         rv.adapter = object : RecyclerView.Adapter<VH>() {
