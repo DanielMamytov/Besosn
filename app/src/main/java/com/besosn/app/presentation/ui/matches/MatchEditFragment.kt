@@ -2,20 +2,21 @@ package com.besosn.app.presentation.ui.matches
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import android.widget.ImageView
 import android.widget.PopupWindow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -25,12 +26,11 @@ import androidx.room.Room
 
 import com.besosn.app.R
 import com.besosn.app.data.local.db.AppDatabase
+import com.besosn.app.data.model.MatchEntity
 import com.besosn.app.databinding.FragmentMatchEditBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.json.JSONArray
-import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -45,6 +45,28 @@ class MatchEditFragment : Fragment() {
     private val teamOptions = mutableListOf("Barcelona", "Real Madrid", "Arsenal", "Chelsea")
     private val matchCalendar: Calendar = Calendar.getInstance()
     private var dateSelected = false
+    private var homePhotoUri: String? = null
+    private var awayPhotoUri: String? = null
+
+    private val pickHomeImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            homePhotoUri = it.toString()
+            _binding?.ivAddPhoto?.apply {
+                setImageURI(it)
+                scaleType = ImageView.ScaleType.CENTER_CROP
+            }
+        }
+    }
+
+    private val pickAwayImage = registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+        uri?.let {
+            awayPhotoUri = it.toString()
+            _binding?.ivAddPhotoAwayt?.apply {
+                setImageURI(it)
+                scaleType = ImageView.ScaleType.CENTER_CROP
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -85,6 +107,9 @@ class MatchEditFragment : Fragment() {
 
         setupDropdown(binding.ddTeam, binding.tvTeam, binding.ivCategoryArrow, teamOptions)
         setupDropdown(binding.ddTeam2, binding.tvTeam2, binding.ivTeamAwayArrow, teamOptions)
+
+        binding.ivAddPhoto.setOnClickListener { pickHomeImage.launch("image/*") }
+        binding.ivAddPhotoAwayt.setOnClickListener { pickAwayImage.launch("image/*") }
 
         binding.btnEdit.setOnClickListener { saveMatch() }
         binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
@@ -229,34 +254,48 @@ class MatchEditFragment : Fragment() {
             return
         }
 
-        val prefs = requireContext().getSharedPreferences("matches_prefs", Context.MODE_PRIVATE)
-        val arr = JSONArray(prefs.getString("matches", "[]"))
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        val timeFormat = SimpleDateFormat("hh:mm a", Locale.getDefault())
-        val obj = JSONObject().apply {
-            put("homeTeam", homeTeam)
-            put("awayTeam", awayTeam)
-            if (scoresProvided) {
-                homeGoals?.let { put("homeGoals", it) }
-                awayGoals?.let { put("awayGoals", it) }
+        val homeGoalsValue = if (scoresProvided) homeGoals else null
+        val awayGoalsValue = if (scoresProvided) awayGoals else null
+        val homePhoto = homePhotoUri?.takeIf { it.isNotBlank() }
+        val awayPhoto = awayPhotoUri?.takeIf { it.isNotBlank() }
+        val match = MatchEntity(
+            homeTeamName = homeTeam,
+            awayTeamName = awayTeam,
+            date = matchCalendar.timeInMillis,
+            city = city,
+            notes = notes,
+            homeGoals = homeGoalsValue,
+            awayGoals = awayGoalsValue,
+            homePhotoUri = homePhoto,
+            awayPhotoUri = awayPhoto,
+        )
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val context = requireContext().applicationContext
+            val db = Room.databaseBuilder(context, AppDatabase::class.java, "app_db")
+                .fallbackToDestructiveMigration()
+                .build()
+            try {
+                withContext(Dispatchers.IO) {
+                    db.matchDao().insertMatch(match)
+                }
+
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.match_edit_saved_message),
+                    Toast.LENGTH_SHORT,
+                ).show()
+                findNavController().popBackStack()
+            } catch (_: Exception) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.match_edit_save_failed),
+                    Toast.LENGTH_SHORT,
+                ).show()
+            } finally {
+                db.close()
             }
-            put("notes", notes)
-            put("city", city)
-            put("date", dateFormat.format(matchCalendar.time))
-            put("time", timeFormat.format(matchCalendar.time))
-            put("timestamp", matchCalendar.timeInMillis)
-
         }
-        arr.put(obj)
-        prefs.edit().putString("matches", arr.toString()).apply()
-
-        Toast.makeText(
-            requireContext(),
-            getString(R.string.match_edit_saved_message),
-            Toast.LENGTH_SHORT,
-        ).show()
-
-        findNavController().popBackStack()
     }
 
     private fun setupDropdown(
