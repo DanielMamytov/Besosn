@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/gradient_bg"
+    android:background="@drawable/gradient_bg2"
     android:orientation="vertical">
 
     <LinearLayout
@@ -59,7 +59,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/one" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/two"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -132,7 +132,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/three"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -165,10 +165,10 @@
                 <ImageView
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    android:background="@drawable/rounded_13"
+                    android:background="@drawable/managingMinutes"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/four"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -204,7 +204,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/five"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -240,7 +240,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/six"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -276,7 +276,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/seven"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -312,7 +312,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/eight" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -348,7 +348,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/nine"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -384,7 +384,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/ten"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -420,7 +420,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/eleven"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -456,7 +456,7 @@
                     android:background="@drawable/rounded_13"
                     android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background"/>
+                    android:src="@drawable/twelve"/>
 
                 <TextView
                     android:layout_width="0dp"
