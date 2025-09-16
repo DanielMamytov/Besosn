@@ -6,8 +6,14 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "matches")
 data class MatchEntity(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    val homeTeamId: Int,
-    val awayTeamId: Int,
-    val date: Long
+    val homeTeamName: String,
+    val awayTeamName: String,
+    val date: Long,
+    val city: String,
+    val notes: String,
+    val homeGoals: Int?,
+    val awayGoals: Int?,
+    val homePhotoUri: String?,
+    val awayPhotoUri: String?,
 )
 
