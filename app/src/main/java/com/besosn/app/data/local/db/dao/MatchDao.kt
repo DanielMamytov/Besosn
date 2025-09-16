@@ -14,5 +14,8 @@ interface MatchDao {
 
     @Delete
     suspend fun deleteMatch(match: MatchEntity)
+
+    @Query("DELETE FROM matches")
+    suspend fun deleteAllMatches()
 }
 
