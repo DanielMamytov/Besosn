@@ -3,20 +3,15 @@ package com.besosn.app.presentation.ui.teams
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
-import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.lifecycle.lifecycleScope
-import androidx.room.Room
 
 import com.besosn.app.R
-import com.besosn.app.data.local.db.AppDatabase
 import com.besosn.app.databinding.FragmentTeamsBinding
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
  * Screen displaying list of teams. Allows navigating to team details
@@ -61,55 +56,9 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
         }
     }
 
-    private fun defaultTeams(): List<TeamModel> {
-        val team1 = TeamModel(
-            name = "YoungTeam",
-            city = "New York",
-            foundedYear = 2024,
-            notes = "Default team",
-            players = listOf(PlayerModel("Alex Finch", "FW", 10)),
-            iconRes = R.drawable.vdgdsgfds,
-            iconUri = null,
-            isDefault = true
-        )
-        val team2 = TeamModel(
-            name = "TalentTeam",
-            city = "Chicago",
-            foundedYear = 2021,
-            notes = "Default team",
-            players = listOf(PlayerModel("Yacob Sunny", "GK", 1)),
-            iconRes = R.drawable.jkljfsjfls,
-            iconUri = null,
-            isDefault = true
-        )
-        return listOf(team1, team2)
-    }
-
     private fun loadTeams() {
         viewLifecycleOwner.lifecycleScope.launch {
-            val db = Room.databaseBuilder(requireContext(), AppDatabase::class.java, "app_db")
-                .fallbackToDestructiveMigration()
-                .build()
-            val teamDao = db.teamDao()
-            val playerDao = db.playerDao()
-
-            val existing = withContext(Dispatchers.IO) { teamDao.getTeams() }
-            if (existing.isEmpty()) {
-                withContext(Dispatchers.IO) {
-                    defaultTeams().forEach { model ->
-                        val teamId = teamDao.insertTeam(model.toEntity()).toInt()
-                        playerDao.insertPlayers(model.players.map { it.toEntity(teamId) })
-                    }
-                }
-            }
-
-            val teamEntities = withContext(Dispatchers.IO) { teamDao.getTeams() }
-            val playerEntities = withContext(Dispatchers.IO) { playerDao.getPlayers() }
-            val playersByTeam = playerEntities.groupBy { it.teamId }
-            val models = teamEntities.map { entity ->
-                entity.toModel(playersByTeam[entity.id].orEmpty())
-            }
-
+            val models = TeamsLocalDataSource.loadTeams(requireContext())
             teams.clear()
             teams.addAll(models)
             adapter.notifyDataSetChanged()
