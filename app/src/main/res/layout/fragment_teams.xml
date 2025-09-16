@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="18dp"/>
+        android:layout_marginTop="25dp"/>
 
     <TextView
         android:id="@+id/tvTitle"
@@ -55,6 +55,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp"
+        android:layout_marginBottom="10dp"
         android:background="@drawable/bg_bottom_fade"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

@@ -20,12 +20,12 @@
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="30dp"
         android:fontFamily="@font/unbounded"
         android:text="BESOSN"
-        android:layout_marginStart="24dp"
+        android:layout_marginStart="30dp"
         android:textColor="#FC4F08"
-        android:textSize="32sp"
+        android:textSize="48sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -33,8 +33,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginBottom="15dp"
+            android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/bottomButtons"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -62,8 +62,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/ic_users" />
 
                     <View
@@ -72,8 +72,8 @@
                         android:layout_weight="1" />
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_gravity="top"
                         android:src="@drawable/ic_arrow_ne" />
                 </LinearLayout>
@@ -86,7 +86,7 @@
                     android:fontFamily="@font/unbounded"
                     android:text="Teams"
                     android:textColor="@android:color/white"
-                    android:textSize="30sp"
+                    android:textSize="40sp"
                     android:textStyle="bold" />
 
                 <!-- Подзаголовок -->
@@ -123,8 +123,8 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:layout_width="55dp"
-                        android:layout_height="55dp"
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
                         android:src="@drawable/backpack_ic" />
 
                     <View
@@ -133,8 +133,8 @@
                         android:layout_weight="1" />
 
                     <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
                         android:layout_gravity="top"
                         android:src="@drawable/ic_arrow_ne" />
                 </LinearLayout>
@@ -178,8 +178,8 @@
                 app:layout_constraintTop_toBottomOf="@id/cardInventory">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="55dp"
+                    android:layout_height="55dp"
                     android:layout_marginRight="10dp"
                     android:src="@drawable/soccer_ball" />
 
@@ -205,8 +205,8 @@
                             android:textStyle="bold" />
 
                         <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
+                            android:layout_width="35dp"
+                            android:layout_height="35dp"
                             android:layout_gravity="top"
                             android:src="@drawable/ic_arrow_ne" />
 
@@ -216,6 +216,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="16 matches"
+                        android:layout_marginTop="5dp"
                         android:textColor="@android:color/white"
                         android:textSize="14sp" />
                 </LinearLayout>
@@ -241,7 +242,7 @@
         <LinearLayout
             android:id="@+id/btnArticles"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="55dp"
             android:layout_weight="1"
             android:background="@drawable/bg_outline_orange"
             android:gravity="center_vertical"
@@ -258,6 +259,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Articles"
+                android:textSize="18dp"
                 android:textColor="#FC4F08"
                 android:textStyle="bold"
                 android:fontFamily="@font/unbounded"/>
@@ -271,7 +273,7 @@
         <LinearLayout
             android:id="@+id/btnSettings"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="55dp"
             android:layout_weight="1"
             android:background="@drawable/bg_outline_orange"
             android:gravity="center_vertical"
@@ -289,6 +291,7 @@
                 android:layout_height="wrap_content"
                 android:text="Settings"
                 android:textColor="#FC4F08"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 android:fontFamily="@font/unbounded"/>
         </LinearLayout>
