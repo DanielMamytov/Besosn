@@ -136,7 +136,11 @@
     <fragment
         android:id="@+id/articleDetailFragment"
         android:name="com.besosn.app.presentation.ui.articles.ArticleDetailFragment"
-        android:label="ArticleDetailFragment" />
+        android:label="ArticleDetailFragment">
+        <argument
+            android:name="articleId"
+            app:argType="integer" />
+    </fragment>
 
     <fragment
         android:id="@+id/settingsFragment"

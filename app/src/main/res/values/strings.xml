@@ -17,4 +17,8 @@
     <string name="match_edit_notes_label">Notes</string>
     <string name="match_edit_time_label">Match time</string>
 
+    <string name="article_back_content_description">Go back</string>
+    <string name="article_cover_content_description">Article cover image</string>
+    <string name="article_not_found">Unable to load this article.</string>
+
 </resources>

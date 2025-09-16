@@ -45,10 +45,14 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/articleItemOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -82,11 +86,15 @@
 
             <!-- 2) SELECTING A CAPTAIN THAT LEADS QUIETLY -->
             <LinearLayout
+                android:id="@+id/articleItemTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -118,11 +126,15 @@
 
             <!-- 3) INVENTORY THAT WINS YOU POINTS -->
             <LinearLayout
+                android:id="@+id/articleItemThree"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -154,11 +166,15 @@
 
             <!-- 4) DESIGNING SET PLAYS FOR AMATEURS -->
             <LinearLayout
+                android:id="@+id/articleItemFour"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -190,11 +206,15 @@
 
             <!-- 5) DATA LITE: NOTES COACHES ACTUALLY USE -->
             <LinearLayout
+                android:id="@+id/articleItemFive"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -226,11 +246,15 @@
 
             <!-- 6) SCOUTING OPPONENTS WITH A PHONE -->
             <LinearLayout
+                android:id="@+id/articleItemSix"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -262,11 +286,15 @@
 
             <!-- 7) MANAGING MINUTES ACROSS A SEASON -->
             <LinearLayout
+                android:id="@+id/articleItemSeven"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -298,11 +326,15 @@
 
             <!-- 8) CULTURE WITHOUT CLICHES -->
             <LinearLayout
+                android:id="@+id/articleItemEight"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -334,11 +366,15 @@
 
             <!-- 9) FROM 4-4-2 TO 3-2-5 IN TWO WEEKS -->
             <LinearLayout
+                android:id="@+id/articleItemNine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -370,11 +406,15 @@
 
             <!-- 10) GOALKEEPER AS PLAYMAKER -->
             <LinearLayout
+                android:id="@+id/articleItemTen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -406,11 +446,15 @@
 
             <!-- 11) YOUTH INTEGRATION THAT STICKS -->
             <LinearLayout
+                android:id="@+id/articleItemEleven"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
@@ -442,11 +486,15 @@
 
             <!-- 12) POST-MATCH REVIEWS IN 12 MINUTES -->
             <LinearLayout
+                android:id="@+id/articleItemTwelve"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="12dp"
                 android:background="@drawable/bg_custom_gradient"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground"
                 android:orientation="horizontal"
                 android:padding="16dp">
 
