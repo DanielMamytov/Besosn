@@ -57,5 +57,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             totalMatches,
         )
         binding.matchesCount.text = countText
+
+
     }
 }

@@ -263,7 +263,11 @@
                 android:textSize="@dimen/home_bottom_buttons_text_size"
                 android:textColor="#FC4F08"
                 android:textStyle="bold"
-                android:fontFamily="@font/unbounded"/>
+                android:fontFamily="@font/unbounded"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:maxLines="1"/>
+
         </LinearLayout>
 
         <View
@@ -291,10 +295,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Settings"
-                android:textColor="#FC4F08"
                 android:textSize="@dimen/home_bottom_buttons_text_size"
+                android:textColor="#FC4F08"
                 android:textStyle="bold"
-                android:fontFamily="@font/unbounded"/>
+                android:fontFamily="@font/unbounded"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:maxLines="1"/>
+
         </LinearLayout>
     </LinearLayout>
 

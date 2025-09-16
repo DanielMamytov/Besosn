@@ -149,7 +149,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
                 notes = notes,
                 players = currentPlayers,
                 iconUri = iconUri,
-                iconRes = if (iconUri != null) 0 else R.drawable.ic_users
+                iconRes = if (iconUri != null) 0 else R.drawable.jkljfsjfls
             )
 
             viewLifecycleOwner.lifecycleScope.launch {

@@ -68,7 +68,7 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
             foundedYear = 2024,
             notes = "Default team",
             players = listOf(PlayerModel("Alex Finch", "FW", 10)),
-            iconRes = R.drawable.ic_users,
+            iconRes = R.drawable.vdgdsgfds,
             iconUri = null,
             isDefault = true
         )
@@ -78,7 +78,7 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
             foundedYear = 2021,
             notes = "Default team",
             players = listOf(PlayerModel("Yacob Sunny", "GK", 1)),
-            iconRes = R.drawable.ic_users,
+            iconRes = R.drawable.jkljfsjfls,
             iconUri = null,
             isDefault = true
         )

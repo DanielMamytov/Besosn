@@ -77,6 +77,6 @@ private fun ImageView.loadMatchIcon(@DrawableRes iconRes: Int, iconUri: String?)
     if (iconRes != 0) {
         setImageResource(iconRes)
     } else {
-        setImageResource(R.drawable.ic_users)
+        setImageResource(R.drawable.jkljfsjfls)
     }
 }

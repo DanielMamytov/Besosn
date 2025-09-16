@@ -1,11 +1,10 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="wrap_content"
-    android:background="@drawable/gradient_bg"
     android:layout_marginTop="10dp"
+    android:background="@drawable/gradient_bg"
+    android:orientation="vertical"
     android:padding="16dp">
 
     <LinearLayout
@@ -13,42 +12,43 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-    <!-- Дата и время -->
-    <TextView
-        android:id="@+id/tvMatchDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="19.09.2025 - 22:00"
-        android:textColor="#B3FFFFFF"
-        android:layout_weight="1"
-        android:textSize="14sp"
-        android:fontFamily="@font/poppins_regular"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <!-- Дата и время -->
+        <TextView
+            android:id="@+id/tvMatchDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/poppins_regular"
+            android:text="19.09.2025 - 22:00"
+            android:textColor="#B3FFFFFF"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvMatchScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3:0"
             android:layout_weight="1"
-            android:gravity="end"
-            android:textFontWeight="700"
-            android:textColor="@android:color/white"
-            android:textSize="18sp"
             android:fontFamily="@font/poppins_regular"
+            android:gravity="end"
+            android:text="3:0"
+            android:textColor="@android:color/white"
+            android:textFontWeight="700"
+            android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center_vertical"
         android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,41 +67,44 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
 
-                    android:src="@drawable/vdgdsgfds"
                     android:layout_gravity="center"
-                    android:scaleType="fitCenter"/>
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/vdgdsgfds" />
             </FrameLayout>
 
             <TextView
-        android:id="@+id/tvTeam1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="BARCELONA"
-        android:textColor="#FEA613"
-        android:textSize="16sp"
-        android:fontFamily="@font/unbounded"
-        android:textStyle="bold"/>
+                android:id="@+id/tvTeam1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/unbounded"
+                android:text="BARCELONA"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textColor="#FEA613"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
-    <!-- Счет -->
+        <!-- Счет -->
         <TextView
             android:id="@+id/tvDivider"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:fontFamily="@font/unbounded"
             android:text="•"
             android:textColor="#B3FFFFFF"
             android:textSize="16sp"
-            android:fontFamily="@font/unbounded"
-            app:layout_constraintStart_toEndOf="@id/tvTeam1"
             app:layout_constraintBaseline_toBaselineOf="@id/tvTeam1"
-            android:layout_marginHorizontal="8dp"/>
+            app:layout_constraintStart_toEndOf="@id/tvTeam1" />
 
         <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="end"
-            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <FrameLayout
@@ -115,21 +118,24 @@
                     android:layout_width="24dp"
                     android:layout_height="24dp"
 
-                    android:src="@drawable/jkljfsjfls"
                     android:layout_gravity="center"
-                    android:scaleType="fitCenter"/>
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/jkljfsjfls" />
             </FrameLayout>
-        <TextView
-            android:id="@+id/tvTeam2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="REAL MADRID"
-            android:textColor="#FEA613"
 
-            android:textSize="16sp"
-            android:fontFamily="@font/unbounded"
-            android:textStyle="bold"/>
+            <TextView
+                android:id="@+id/tvTeam2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/unbounded"
+                android:text="REAL MADRID"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:textColor="#FEA613"
+                android:textSize="16sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
         <!-- Лого и название первой команды -->

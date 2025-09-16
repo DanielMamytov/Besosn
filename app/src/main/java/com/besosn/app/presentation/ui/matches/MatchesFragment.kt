@@ -12,7 +12,6 @@ import com.besosn.app.R
 import com.besosn.app.data.local.db.AppDatabase
 import com.besosn.app.data.model.MatchEntity
 import com.besosn.app.databinding.FragmentMatchesBinding
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
@@ -25,7 +24,7 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
     private lateinit var adapter: MatchesAdapter
     private val matches = mutableListOf<MatchModel>()
     private var currentFilter: MatchFilter = MatchFilter.ALL
-    private val defaultMatches: List<MatchModel> by lazy { getDefaultMatches() }
+    private val defaultMatches: List<MatchModel> by lazy { buildDefaultMatches() }
     private var savedMatches: List<MatchModel> = emptyList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,7 +74,7 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
         applyFilter(currentFilter)
     }
 
-    private fun getDefaultMatches(): List<MatchModel> {
+    private fun buildDefaultMatches(): List<MatchModel> {
         val now = Calendar.getInstance()
         val past = (now.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR, -1) }
         val future = (now.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR, 3) }
@@ -152,14 +151,13 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
         )
     }
 
-    @DrawableRes
     private fun resolveTeamIcon(teamName: String): Int {
         return when (teamName.trim().lowercase(Locale.getDefault())) {
             "barcelona" -> R.drawable.vdgdsgfds
             "real madrid" -> R.drawable.jkljfsjfls
             "arsenal" -> R.drawable.vdgdsgfds
             "chelsea" -> R.drawable.jkljfsjfls
-            else -> R.drawable.ic_users
+            else -> R.drawable.jkljfsjfls
         }
     }
 
