@@ -2,6 +2,8 @@ package com.besosn.app.presentation.ui.home
 
 import android.os.Bundle
 import android.view.View
+import androidx.annotation.PluralsRes
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -77,22 +79,34 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             val totalInventoryItems = inventoryDeferred.await()
 
             _binding?.let { binding ->
-                binding.matchesCount.text = resources.getQuantityString(
+                binding.matchesCount.text = formatCount(
+                    totalMatches,
+                    R.string.home_matches_empty,
                     R.plurals.home_matches_count,
-                    totalMatches,
-                    totalMatches,
                 )
-                binding.teamsCount.text = resources.getQuantityString(
+                binding.teamsCount.text = formatCount(
+                    totalTeams,
+                    R.string.home_teams_empty,
                     R.plurals.home_teams_count,
-                    totalTeams,
-                    totalTeams,
                 )
-                binding.inventoryCount.text = resources.getQuantityString(
+                binding.inventoryCount.text = formatCount(
+                    totalInventoryItems,
+                    R.string.home_inventory_empty,
                     R.plurals.home_inventory_count,
-                    totalInventoryItems,
-                    totalInventoryItems,
                 )
             }
+        }
+    }
+
+    private fun formatCount(
+        count: Int,
+        @StringRes emptyResId: Int,
+        @PluralsRes pluralResId: Int,
+    ): String {
+        return if (count == 0) {
+            getString(emptyResId)
+        } else {
+            resources.getQuantityString(pluralResId, count, count)
         }
     }
 }
