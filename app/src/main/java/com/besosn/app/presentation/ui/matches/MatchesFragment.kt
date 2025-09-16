@@ -12,6 +12,7 @@ import com.besosn.app.R
 import com.besosn.app.data.local.db.AppDatabase
 import com.besosn.app.data.model.MatchEntity
 import com.besosn.app.databinding.FragmentMatchesBinding
+import kotlinx.coroutines.launch
 
 
 class MatchesFragment : Fragment(R.layout.fragment_matches) {
@@ -22,8 +23,8 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
     private lateinit var adapter: MatchesAdapter
     private val matches = mutableListOf<MatchModel>()
     private var currentFilter: MatchFilter = MatchFilter.ALL
-    private val defaultMatches: List<MatchModel> by lazy { getDefaultMatches() }
-    private var savedMatches: List<MatchModel> = emptyList()
+//    private val defaultMatches: List<MatchModel> by lazy { buildDefaultMatches() }
+//    private var savedMatches: List<MatchModel> = emptyList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,7 +38,7 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
 
         setupFilters()
         loadMatches()
-        observeSavedMatches()
+//        observeSavedMatches()
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnAdd.setOnClickListener {
@@ -48,22 +49,22 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
         }
     }
 
-    private fun observeSavedMatches() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            val context = requireContext().applicationContext
-            val db = Room.databaseBuilder(context, AppDatabase::class.java, "app_db")
-                .fallbackToDestructiveMigration()
-                .build()
-            try {
-                db.matchDao().getMatches().collect { entities ->
-                    savedMatches = entities.map { it.toModel() }
-                    loadMatches()
-                }
-            } finally {
-                db.close()
-            }
-        }
-    }
+//    private fun observeSavedMatches() {
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            val context = requireContext().applicationContext
+//            val db = Room.databaseBuilder(context, AppDatabase::class.java, "app_db")
+//                .fallbackToDestructiveMigration()
+//                .build()
+//            try {
+//                db.matchDao().getMatches().collect { entities ->
+//                    savedMatches = entities.map { it.toModel() }
+//                    loadMatches()
+//                }
+//            } finally {
+//                db.close()
+//            }
+//        }
+//    }
 
     private fun loadMatches() {
         matches.clear()
