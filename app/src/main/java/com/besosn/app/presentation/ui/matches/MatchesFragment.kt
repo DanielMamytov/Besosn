@@ -1,18 +1,20 @@
 package com.besosn.app.presentation.ui.matches
 
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
 import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.room.Room
 import com.besosn.app.R
+import com.besosn.app.data.local.db.AppDatabase
+import com.besosn.app.data.model.MatchEntity
 import com.besosn.app.databinding.FragmentMatchesBinding
-import org.json.JSONArray
-import org.json.JSONException
-import java.text.SimpleDateFormat
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.util.Calendar
 import java.util.Locale
 
@@ -24,6 +26,8 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
     private lateinit var adapter: MatchesAdapter
     private val matches = mutableListOf<MatchModel>()
     private var currentFilter: MatchFilter = MatchFilter.ALL
+    private val defaultMatches: List<MatchModel> by lazy { getDefaultMatches() }
+    private var savedMatches: List<MatchModel> = emptyList()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -37,6 +41,7 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
 
         setupFilters()
         loadMatches()
+        observeSavedMatches()
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnAdd.setOnClickListener {
@@ -47,17 +52,27 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        if (_binding != null) {
-            loadMatches()
+    private fun observeSavedMatches() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val context = requireContext().applicationContext
+            val db = Room.databaseBuilder(context, AppDatabase::class.java, "app_db")
+                .fallbackToDestructiveMigration()
+                .build()
+            try {
+                db.matchDao().getMatches().collect { entities ->
+                    savedMatches = entities.map { it.toModel() }
+                    loadMatches()
+                }
+            } finally {
+                db.close()
+            }
         }
     }
 
     private fun loadMatches() {
         matches.clear()
-        matches.addAll(getDefaultMatches())
-        matches.addAll(loadSavedMatches())
+        matches.addAll(defaultMatches)
+        matches.addAll(savedMatches)
         applyFilter(currentFilter)
     }
 
@@ -75,7 +90,7 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
                 awayIconRes = R.drawable.jkljfsjfls,
                 date = past.timeInMillis,
                 homeScore = 1,
-                awayScore = 2
+                awayScore = 2,
             ),
             MatchModel(
                 id = 2,
@@ -83,49 +98,9 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
                 awayTeam = "Chelsea",
                 homeIconRes = R.drawable.vdgdsgfds,
                 awayIconRes = R.drawable.jkljfsjfls,
-                date = future.timeInMillis
+                date = future.timeInMillis,
             ),
         )
-    }
-
-    private fun loadSavedMatches(): List<MatchModel> {
-        val prefs = requireContext().getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
-        val raw = prefs.getString(PREFS_KEY_MATCHES, null) ?: return emptyList()
-
-        return try {
-            val array = JSONArray(raw)
-            val result = mutableListOf<MatchModel>()
-            for (i in 0 until array.length()) {
-                val obj = array.optJSONObject(i) ?: continue
-                val homeTeam = obj.optString("homeTeam")
-                val awayTeam = obj.optString("awayTeam")
-                if (homeTeam.isBlank() || awayTeam.isBlank()) continue
-
-                val timestamp = obj.optLong("timestamp", -1L)
-                val dateMillis = if (timestamp > 0L) {
-                    timestamp
-                } else {
-                    parseDateTime(obj.optString("date"), obj.optString("time")) ?: continue
-                }
-
-                val homeScore = (obj.opt("homeGoals") as? Number)?.toInt()
-                val awayScore = (obj.opt("awayGoals") as? Number)?.toInt()
-
-                result += MatchModel(
-                    id = SAVED_MATCH_ID_OFFSET + i,
-                    homeTeam = homeTeam,
-                    awayTeam = awayTeam,
-                    homeIconRes = resolveTeamIcon(homeTeam),
-                    awayIconRes = resolveTeamIcon(awayTeam),
-                    date = dateMillis,
-                    homeScore = homeScore,
-                    awayScore = awayScore,
-                )
-            }
-            result
-        } catch (_: JSONException) {
-            emptyList()
-        }
     }
 
     private fun setupFilters() {
@@ -158,14 +133,23 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
         _binding = null
     }
 
-    private fun parseDateTime(date: String?, time: String?): Long? {
-        if (date.isNullOrBlank() || time.isNullOrBlank()) return null
-        return try {
-            val format = SimpleDateFormat("yyyy-MM-dd hh:mm a", Locale.getDefault())
-            format.parse("$date $time")?.time
-        } catch (_: Exception) {
-            null
-        }
+    private fun MatchEntity.toModel(): MatchModel {
+        val homeUri = homePhotoUri?.takeIf { it.isNotBlank() }
+        val awayUri = awayPhotoUri?.takeIf { it.isNotBlank() }
+        return MatchModel(
+            id = SAVED_MATCH_ID_OFFSET + id,
+            homeTeam = homeTeamName,
+            awayTeam = awayTeamName,
+            homeIconRes = if (homeUri == null) resolveTeamIcon(homeTeamName) else 0,
+            awayIconRes = if (awayUri == null) resolveTeamIcon(awayTeamName) else 0,
+            homeIconUri = homeUri,
+            awayIconUri = awayUri,
+            date = date,
+            homeScore = homeGoals,
+            awayScore = awayGoals,
+            city = city,
+            notes = notes,
+        )
     }
 
     @DrawableRes
@@ -181,8 +165,6 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
 
     private companion object {
         private const val SAVED_MATCH_ID_OFFSET = 1000
-        private const val PREFS_NAME = "matches_prefs"
-        private const val PREFS_KEY_MATCHES = "matches"
     }
 }
 
