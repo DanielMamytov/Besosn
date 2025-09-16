@@ -9,6 +9,8 @@
     <string name="match_edit_select_date">Select date</string>
     <string name="match_edit_fill_all_fields">Fill all fields to add match</string>
     <string name="match_edit_same_team_error">One team does not play against each other</string>
+    <string name="match_edit_enter_both_scores">Enter both team scores to finish the match</string>
+    <string name="match_edit_enter_valid_scores">Enter valid numeric scores for each team</string>
     <string name="match_edit_score_too_high">Score value can’t be more than 99 goals</string>
     <string name="match_edit_saved_message">Match saved</string>
     <string name="match_edit_cancel">Cancel</string>

@@ -176,14 +176,35 @@ class MatchEditFragment : Fragment() {
 
         val homeGoals = homeGoalsText.toIntOrNull()
         val awayGoals = awayGoalsText.toIntOrNull()
+        val hasHomeGoalsInput = homeGoalsText.isNotBlank()
+        val hasAwayGoalsInput = awayGoalsText.isNotBlank()
 
         if (homeTeam == teamPlaceholder || awayTeam == teamPlaceholder ||
-            homeGoals == null || awayGoals == null ||
             city.isBlank() || !dateSelected || dateText == datePlaceholder
         ) {
             Toast.makeText(
                 requireContext(),
                 getString(R.string.match_edit_fill_all_fields),
+                Toast.LENGTH_SHORT,
+            ).show()
+            return
+        }
+
+        if (hasHomeGoalsInput != hasAwayGoalsInput) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.match_edit_enter_both_scores),
+                Toast.LENGTH_SHORT,
+            ).show()
+            return
+        }
+
+        val scoresProvided = hasHomeGoalsInput && hasAwayGoalsInput
+
+        if (scoresProvided && (homeGoals == null || awayGoals == null)) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.match_edit_enter_valid_scores),
                 Toast.LENGTH_SHORT,
             ).show()
             return
@@ -198,7 +219,7 @@ class MatchEditFragment : Fragment() {
             return
         }
 
-        if (homeGoals > 99 || awayGoals > 99) {
+        if ((homeGoals != null && homeGoals > 99) || (awayGoals != null && awayGoals > 99)) {
             Toast.makeText(
                 requireContext(),
                 getString(R.string.match_edit_score_too_high),
@@ -215,8 +236,10 @@ class MatchEditFragment : Fragment() {
         val obj = JSONObject().apply {
             put("homeTeam", homeTeam)
             put("awayTeam", awayTeam)
-            put("homeGoals", homeGoals)
-            put("awayGoals", awayGoals)
+            if (scoresProvided) {
+                homeGoals?.let { put("homeGoals", it) }
+                awayGoals?.let { put("awayGoals", it) }
+            }
             put("notes", notes)
             put("city", city)
             put("date", dateFormat.format(matchCalendar.time))
