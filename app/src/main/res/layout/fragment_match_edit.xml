@@ -41,6 +41,7 @@
             android:elevation="1dp"
             android:clipToOutline="true">
 
+            android:id="@+id/bgImage"
 
 
             <ImageView
