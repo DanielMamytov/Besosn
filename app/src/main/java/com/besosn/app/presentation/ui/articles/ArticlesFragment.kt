@@ -18,11 +18,36 @@ class ArticlesFragment : Fragment(R.layout.fragment_articles) {
         _binding = FragmentArticlesBinding.bind(view)
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
-//        binding.btnOpenArticle.setOnClickListener {
-//            findNavController().navigate(R.id.action_articlesFragment_to_articleDetailFragment)
-//        }
+        setArticleClickListeners()
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
+        }
+    }
+
+    private fun setArticleClickListeners() {
+        val articleViews = listOf(
+            binding.articleItemOne,
+            binding.articleItemTwo,
+            binding.articleItemThree,
+            binding.articleItemFour,
+            binding.articleItemFive,
+            binding.articleItemSix,
+            binding.articleItemSeven,
+            binding.articleItemEight,
+            binding.articleItemNine,
+            binding.articleItemTen,
+            binding.articleItemEleven,
+            binding.articleItemTwelve,
+        )
+
+        ArticleDataSource.articles.zip(articleViews).forEach { (article, container) ->
+            container.setOnClickListener {
+                val direction =
+                    ArticlesFragmentDirections.actionArticlesFragmentToArticleDetailFragment(
+                        article.id,
+                    )
+                findNavController().navigate(direction)
+            }
         }
     }
 
