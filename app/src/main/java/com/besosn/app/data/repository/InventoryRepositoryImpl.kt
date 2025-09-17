@@ -31,7 +31,8 @@ class InventoryRepositoryImpl @Inject constructor(
         quantity = quantity,
         category = category,
         badge = badge,
-        notes = notes
+        notes = notes,
+        photoUri = photoUri,
     )
 
     private fun InventoryItem.toEntity() = InventoryEntity(
@@ -40,7 +41,8 @@ class InventoryRepositoryImpl @Inject constructor(
         quantity = quantity,
         category = category,
         badge = badge,
-        notes = notes
+        notes = notes,
+        photoUri = photoUri,
     )
 }
 

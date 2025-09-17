@@ -1,8 +1,10 @@
 package com.besosn.app.presentation.ui.inventory
 
 import android.app.Dialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -13,6 +15,7 @@ import android.widget.PopupWindow
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -33,6 +36,23 @@ class InventoryEditFragment : Fragment() {
 
     private val viewModel: InventoryViewModel by viewModels()
     private var currentItem: InventoryItem? = null
+    private var selectedImageUri: Uri? = null
+
+    private val imagePickerLauncher =
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+            if (uri != null) {
+                context?.contentResolver?.let { resolver ->
+                    runCatching {
+                        resolver.takePersistableUriPermission(
+                            uri,
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION,
+                        )
+                    }
+                }
+                selectedImageUri = uri
+                _binding?.imageView2?.setImageURI(uri)
+            }
+        }
 
     private lateinit var popup: PopupWindow
     private val categories = listOf("Balls", "Cones", "Bibs", "Nets", "Med", "Other")
@@ -51,17 +71,32 @@ class InventoryEditFragment : Fragment() {
 
         currentItem = arguments?.getSerializable("item") as? InventoryItem
 
+        val restoredImage = savedInstanceState?.getString(STATE_SELECTED_IMAGE_URI)
+        if (!restoredImage.isNullOrBlank()) {
+            selectedImageUri = Uri.parse(restoredImage)
+            binding.imageView2.setImageURI(selectedImageUri)
+        }
+
+        binding.imageView2.setOnClickListener {
+            imagePickerLauncher.launch(arrayOf("image/*"))
+        }
+
         setupDropdown(binding.ddCategory, binding.tvCategory, binding.ivCategoryArrow, categories)
         setupDropdown(binding.ddCategoryAnchor, binding.tvCategoryValue, binding.ivCategoryArrow1, badges)
 
-        if (currentItem != null) {
-            binding.etTeamName.setText(currentItem!!.name)
-            binding.etCity.setText(currentItem!!.quantity.toString())
-            binding.tvCategory.text = currentItem!!.category
+        currentItem?.let { item ->
+            binding.etTeamName.setText(item.name)
+            binding.etCity.setText(item.quantity.toString())
+            binding.tvCategory.text = item.category
             binding.tvCategory.setTextColor(Color.WHITE)
-            binding.tvCategoryValue.text = currentItem!!.badge
+            binding.tvCategoryValue.text = item.badge
             binding.tvCategoryValue.setTextColor(Color.WHITE)
-            binding.etNotes.setText(currentItem!!.notes)
+            binding.etNotes.setText(item.notes)
+
+            if (selectedImageUri == null && !item.photoUri.isNullOrBlank()) {
+                selectedImageUri = Uri.parse(item.photoUri)
+                binding.imageView2.setImageURI(selectedImageUri)
+            }
         }
 
         binding.etCity.filters = arrayOf(InputFilter { source, start, end, dest, dstart, dend ->
@@ -111,7 +146,8 @@ class InventoryEditFragment : Fragment() {
             quantity = quantity,
             category = category,
             badge = badge,
-            notes = notes
+            notes = notes,
+            photoUri = selectedImageUri?.toString(),
         )
         viewModel.addItem(item)
         findNavController().popBackStack()
@@ -186,9 +222,18 @@ class InventoryEditFragment : Fragment() {
         val divider: View = view.findViewById(R.id.divider)
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putString(STATE_SELECTED_IMAGE_URI, selectedImageUri?.toString())
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        private const val STATE_SELECTED_IMAGE_URI = "state_selected_image_uri"
     }
 }
 

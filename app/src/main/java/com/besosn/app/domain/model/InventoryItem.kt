@@ -11,6 +11,7 @@ data class InventoryItem(
     val quantity: Int,
     val category: String,
     val badge: String,
-    val notes: String
+    val notes: String,
+    val photoUri: String? = null,
 ) : Serializable
 
