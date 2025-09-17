@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.besosn.app.databinding.TeamsItemBinding
+import java.util.Locale
 
 /**
  * Adapter showing list of teams in [TeamsFragment].
@@ -31,7 +32,7 @@ class TeamsAdapter(
 
     inner class TeamViewHolder(private val binding: TeamsItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(team: TeamModel) {
-            binding.tvTeamTitle.text = team.name
+            binding.tvTeamTitle.text = team.name.uppercase(Locale.getDefault())
             binding.tvTeamCity.text = "${team.city} \u2022"
             binding.tvTeamPlayers.text = " ${team.playersCount} players"
             binding.imgTeamLogo.loadTeamImage(team)

@@ -30,6 +30,7 @@
         android:layout_marginStart="12dp"
         android:fontFamily="@font/unbounded"
         android:text="YOUNGTEAM"
+
         android:textColor="@android:color/white"
         android:textSize="18sp"
         android:textStyle="bold"

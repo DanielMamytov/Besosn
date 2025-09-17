@@ -106,7 +106,7 @@ object MatchesLocalDataSource {
             "real madrid" -> R.drawable.jkljfsjfls
             "arsenal" -> R.drawable.vdgdsgfds
             "chelsea" -> R.drawable.jkljfsjfls
-            else -> R.drawable.ic_users
+            else -> R.drawable.ball
         }
     }
 

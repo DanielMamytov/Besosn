@@ -7,7 +7,7 @@ import java.io.FileNotFoundException
 import androidx.annotation.DrawableRes
 import com.besosn.app.R
 
-internal fun ImageView.loadTeamImage(team: TeamModel, @DrawableRes fallback: Int = R.drawable.ic_users) {
+internal fun ImageView.loadTeamImage(team: TeamModel, @DrawableRes fallback: Int = R.drawable.ball) {
     val iconUri = team.iconUri
     if (!iconUri.isNullOrBlank()) {
         val parsed = runCatching { Uri.parse(iconUri) }.getOrNull()
@@ -34,7 +34,7 @@ internal fun ImageView.loadTeamImage(team: TeamModel, @DrawableRes fallback: Int
 internal fun resolveTeamIconRes(
     resources: Resources,
     @DrawableRes candidate: Int,
-    @DrawableRes fallback: Int = R.drawable.ic_users
+    @DrawableRes fallback: Int = R.drawable.ball
 ): Int {
     if (candidate == 0) return fallback
 

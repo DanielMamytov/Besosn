@@ -60,7 +60,7 @@ object TeamsLocalDataSource {
             foundedYear = 2024,
             notes = "Default team",
             players = listOf(PlayerModel("Alex Finch", "FW", 10)),
-            iconRes = R.drawable.ic_users,
+            iconRes = R.drawable.ball,
             iconUri = null,
             isDefault = true,
         )
@@ -70,7 +70,7 @@ object TeamsLocalDataSource {
             foundedYear = 2021,
             notes = "Default team",
             players = listOf(PlayerModel("Yacob Sunny", "GK", 1)),
-            iconRes = R.drawable.ic_users,
+            iconRes = R.drawable.ball,
             iconUri = null,
             isDefault = true,
         )
