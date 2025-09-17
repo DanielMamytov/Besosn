@@ -387,7 +387,12 @@ class MatchEditFragment : Fragment() {
         val awayGoalsValue = if (scoresProvided) awayGoals else null
         val homePhoto = homePhotoUri?.takeIf { it.isNotBlank() }
         val awayPhoto = awayPhotoUri?.takeIf { it.isNotBlank() }
+        val existingDbId = editingMatch
+            ?.takeIf { it.id >= DB_MATCH_ID_OFFSET }
+            ?.let { it.id - DB_MATCH_ID_OFFSET }
+
         val match = MatchEntity(
+            id = existingDbId ?: 0,
             homeTeamName = homeTeam,
             awayTeamName = awayTeam,
             date = matchCalendar.timeInMillis,
@@ -405,8 +410,14 @@ class MatchEditFragment : Fragment() {
                 .fallbackToDestructiveMigration()
                 .build()
             try {
+                val wasUpdate = existingDbId != null
                 withContext(Dispatchers.IO) {
-                    db.matchDao().insertMatch(match)
+                    val dao = db.matchDao()
+                    if (wasUpdate) {
+                        dao.updateMatch(match)
+                    } else {
+                        dao.insertMatch(match)
+                    }
                 }
 
                 Toast.makeText(
