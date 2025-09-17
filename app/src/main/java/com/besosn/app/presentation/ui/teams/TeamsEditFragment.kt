@@ -283,6 +283,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
         btnCancel.setOnClickListener { dialog.dismiss() }
 
         dialog.show()
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
     }
 
     private class VH(view: View) : RecyclerView.ViewHolder(view) {
