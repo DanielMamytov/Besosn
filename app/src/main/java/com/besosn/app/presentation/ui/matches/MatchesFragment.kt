@@ -3,6 +3,7 @@ package com.besosn.app.presentation.ui.matches
 import android.os.Bundle
 import android.view.View
 import androidx.activity.addCallback
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -10,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.room.Room
 import com.besosn.app.R
 import com.besosn.app.data.local.db.AppDatabase
-import com.besosn.app.data.model.MatchEntity
 import com.besosn.app.databinding.FragmentMatchesBinding
 import kotlinx.coroutines.launch
 
@@ -30,8 +30,9 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentMatchesBinding.bind(view)
 
-        adapter = MatchesAdapter(mutableListOf()) {
-            findNavController().navigate(R.id.action_matchesFragment_to_matchDetailFragment)
+        adapter = MatchesAdapter(mutableListOf()) { match ->
+            val args = bundleOf(MatchDetailFragment.ARG_MATCH to match)
+            findNavController().navigate(R.id.action_matchesFragment_to_matchDetailFragment, args)
         }
         binding.rvMatches.layoutManager = LinearLayoutManager(requireContext())
         binding.rvMatches.adapter = adapter

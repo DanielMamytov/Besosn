@@ -1,14 +1,9 @@
 package com.besosn.app.presentation.ui.matches
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.RecyclerView
-import com.besosn.app.R
 import com.besosn.app.databinding.MatchItemBinding
-import java.io.FileNotFoundException
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,31 +47,5 @@ class MatchesAdapter(
             }
             binding.root.setOnClickListener { onItemClick(match) }
         }
-    }
-}
-
-private fun ImageView.loadMatchIcon(@DrawableRes iconRes: Int, iconUri: String?) {
-    if (!iconUri.isNullOrBlank()) {
-        val parsed = runCatching { Uri.parse(iconUri) }.getOrNull()
-        if (parsed != null) {
-            try {
-                setImageURI(parsed)
-                if (drawable != null) {
-                    return
-                }
-            } catch (_: SecurityException) {
-                // Ignore and fall back to resource icon
-            } catch (_: FileNotFoundException) {
-                // Ignore and fall back to resource icon
-            } catch (_: IllegalArgumentException) {
-                // Ignore and fall back to resource icon
-            }
-        }
-    }
-
-    if (iconRes != 0) {
-        setImageResource(iconRes)
-    } else {
-        setImageResource(R.drawable.jkljfsjfls)
     }
 }
