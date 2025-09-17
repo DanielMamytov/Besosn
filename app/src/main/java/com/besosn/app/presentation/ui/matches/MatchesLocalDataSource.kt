@@ -100,7 +100,7 @@ object MatchesLocalDataSource {
     }
 
     @DrawableRes
-    private fun resolveTeamIcon(teamName: String): Int {
+    internal fun resolveTeamIcon(teamName: String): Int {
         return when (teamName.trim().lowercase(Locale.getDefault())) {
             "barcelona" -> R.drawable.vdgdsgfds
             "real madrid" -> R.drawable.jkljfsjfls
