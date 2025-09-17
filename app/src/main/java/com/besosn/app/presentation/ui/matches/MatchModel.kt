@@ -22,3 +22,5 @@ data class MatchModel(
 ) : Serializable {
     val isFinished: Boolean get() = homeScore != null && awayScore != null
 }
+
+internal const val DB_MATCH_ID_OFFSET = 10_000

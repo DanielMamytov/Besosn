@@ -110,8 +110,6 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
 
 private enum class MatchFilter { ALL, SCHEDULED, FINISHED }
 
-private const val DB_MATCH_ID_OFFSET = 10_000
-
 private fun MatchEntity.toModel(): MatchModel = MatchModel(
     id = DB_MATCH_ID_OFFSET + id,
     homeTeam = homeTeamName,

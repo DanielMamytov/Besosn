@@ -12,6 +12,9 @@ interface MatchDao {
     @Insert
     suspend fun insertMatch(match: MatchEntity)
 
+    @Update
+    suspend fun updateMatch(match: MatchEntity)
+
     @Delete
     suspend fun deleteMatch(match: MatchEntity)
 
