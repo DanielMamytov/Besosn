@@ -95,8 +95,9 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
 
         playersAdapter = PlayersAdapter(players)
-        binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)  // Horizontal layout for alignment
         binding.rvPlayers.adapter = playersAdapter
+
         binding.btnAddPlayer.setOnClickListener { showAddPlayerDialog() }
 
         binding.imageView2.setOnClickListener {
