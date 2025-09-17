@@ -7,6 +7,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.text.InputFilter
 import android.view.LayoutInflater
@@ -49,6 +50,7 @@ class MatchEditFragment : Fragment() {
     private var dateSelected = false
     private var homePhotoUri: String? = null
     private var awayPhotoUri: String? = null
+    private var editingMatch: MatchModel? = null
 
     private val pickHomeImage =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
@@ -71,6 +73,24 @@ class MatchEditFragment : Fragment() {
             }
             dateSelected = state.getBoolean(KEY_DATE_SELECTED, false)
         }
+
+        editingMatch = arguments?.let { bundle ->
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                bundle.getSerializable(ARG_MATCH_TO_EDIT, MatchModel::class.java)
+            } else {
+                @Suppress("DEPRECATION")
+                bundle.getSerializable(ARG_MATCH_TO_EDIT) as? MatchModel
+            }
+        }
+
+        if (savedInstanceState == null) {
+            editingMatch?.let { match ->
+                matchCalendar.timeInMillis = match.date
+                dateSelected = true
+                homePhotoUri = match.homeIconUri?.takeIf { it.isNotBlank() }
+                awayPhotoUri = match.awayIconUri?.takeIf { it.isNotBlank() }
+            }
+        }
     }
 
     override fun onCreateView(
@@ -87,10 +107,22 @@ class MatchEditFragment : Fragment() {
 
         loadTeamOptions()
 
-        updateTimeViews(
-            matchCalendar.get(Calendar.HOUR_OF_DAY),
-            matchCalendar.get(Calendar.MINUTE),
-        )
+        if (savedInstanceState == null) {
+            val matchToEdit = editingMatch
+            if (matchToEdit != null) {
+                applyEditingMatch(matchToEdit)
+            } else {
+                updateTimeViews(
+                    matchCalendar.get(Calendar.HOUR_OF_DAY),
+                    matchCalendar.get(Calendar.MINUTE),
+                )
+            }
+        } else {
+            updateTimeViews(
+                matchCalendar.get(Calendar.HOUR_OF_DAY),
+                matchCalendar.get(Calendar.MINUTE),
+            )
+        }
 
         if (dateSelected) {
             val fmt = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
@@ -207,6 +239,37 @@ class MatchEditFragment : Fragment() {
                 teamOptions.addAll(names)
             }
         }
+    }
+
+
+    private fun applyEditingMatch(match: MatchModel) {
+        binding.tvTeam.text = match.homeTeam
+        binding.tvTeam.setTextColor(Color.WHITE)
+        binding.tvTeam2.text = match.awayTeam
+        binding.tvTeam2.setTextColor(Color.WHITE)
+
+        binding.etGoals.setText(match.homeScore?.toString() ?: "")
+        binding.etAwayGoals.setText(match.awayScore?.toString() ?: "")
+        binding.etCity.setText(match.city.orEmpty())
+        binding.etNotes.setText(match.notes.orEmpty())
+
+        matchCalendar.timeInMillis = match.date
+        dateSelected = true
+
+        updateTimeViews(
+            matchCalendar.get(Calendar.HOUR_OF_DAY),
+            matchCalendar.get(Calendar.MINUTE),
+        )
+
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+        binding.tvDate.text = dateFormat.format(matchCalendar.time)
+        binding.tvDate.setTextColor(Color.WHITE)
+
+        homePhotoUri = match.homeIconUri?.takeIf { it.isNotBlank() }
+        awayPhotoUri = match.awayIconUri?.takeIf { it.isNotBlank() }
+
+        binding.ivAddPhoto.loadMatchIcon(match.homeIconRes, match.homeIconUri)
+        binding.ivAddPhotoAwayt.loadMatchIcon(match.awayIconRes, match.awayIconUri)
     }
 
 
@@ -436,7 +499,8 @@ class MatchEditFragment : Fragment() {
         _binding = null
     }
 
-    private companion object {
+    companion object {
+        const val ARG_MATCH_TO_EDIT = "match_to_edit"
         private const val KEY_HOME_PHOTO_URI = "match_edit_home_photo_uri"
         private const val KEY_AWAY_PHOTO_URI = "match_edit_away_photo_uri"
         private const val KEY_MATCH_TIME = "match_edit_time"

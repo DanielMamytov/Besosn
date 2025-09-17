@@ -125,6 +125,9 @@
                         android:textColorHint="#72FFFFFF"
                         android:textColor="@android:color/white"
                         android:paddingHorizontal="16dp"
+                        android:paddingVertical="12dp"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -153,6 +156,9 @@
                         android:textColorHint="#72FFFFFF"
                         android:textColor="@android:color/white"
                         android:paddingHorizontal="16dp"
+                        android:paddingVertical="12dp"
+                        android:gravity="center_vertical"
+                        android:maxLines="1"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -182,10 +188,12 @@
                         android:textColor="@android:color/white"
                         android:textColorHint="#72FFFFFF"
                         android:paddingHorizontal="16dp"
+                        android:paddingVertical="12dp"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="16sp"
                         android:inputType="number"
                         android:maxLength="4"
+                        android:maxLines="1"
                         android:gravity="center_vertical"
                         android:singleLine="true"/>
                 </LinearLayout>
@@ -276,6 +284,9 @@
                     android:textColorHint="#72FFFFFF"
                     android:textColor="@android:color/white"
                     android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="16sp"/>
             </LinearLayout>
