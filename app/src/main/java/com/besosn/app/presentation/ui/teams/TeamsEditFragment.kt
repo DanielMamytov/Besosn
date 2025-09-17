@@ -9,6 +9,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.view.ViewGroup
 import android.widget.EditText
+import androidx.appcompat.widget.AppCompatImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -176,7 +177,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
         val ivArrow = dialogView.findViewById<ImageView>(R.id.ivPositionArrow)
         val ivPhoto = dialogView.findViewById<ImageView>(R.id.ivAddPhoto)
         val btnAdd = dialogView.findViewById<AppCompatButton>(R.id.btnAddPlayer)
-        val btnCancel = dialogView.findViewById<AppCompatButton>(R.id.btnCancel)
+        val btnCancel = dialogView.findViewById<AppCompatImageButton>(R.id.btnCancel)
 
         var popup: PopupWindow? = null
         val positions = resources.getStringArray(R.array.player_positions)
