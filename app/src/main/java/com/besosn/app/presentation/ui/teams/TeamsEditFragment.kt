@@ -36,6 +36,7 @@ import com.besosn.app.databinding.FragmentTeamsEditBinding
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import androidx.core.graphics.drawable.toDrawable
 
 class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
 
@@ -240,7 +241,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
                 true
             ).apply {
                 isOutsideTouchable = true
-                setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                setBackgroundDrawable(Color.TRANSPARENT.toDrawable())
                 elevation = 16f
                 setOnDismissListener { ivArrow.rotation = 0f }
             }
