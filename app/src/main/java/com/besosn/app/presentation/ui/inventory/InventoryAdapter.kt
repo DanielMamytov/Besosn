@@ -1,10 +1,11 @@
 package com.besosn.app.presentation.ui.inventory
 
+import android.net.Uri
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.besosn.app.R
 import com.besosn.app.databinding.InventoryItemBinding
-import com.besosn.app.databinding.ItemInventoryBinding
 import com.besosn.app.domain.model.InventoryItem
 
 
@@ -37,6 +38,15 @@ class InventoryAdapter(
             binding.tvItemQuantity.text = "Qty: ${item.quantity}"
             binding.tvItemCategory.text = item.category
             binding.tvItemStatus.text = item.badge
+
+            binding.imgItemIcon.setImageResource(R.drawable.ball)
+            val photoUri = item.photoUri?.takeIf { it.isNotBlank() }
+            if (photoUri != null) {
+                runCatching { Uri.parse(photoUri) }.getOrNull()?.let { uri ->
+                    binding.imgItemIcon.setImageURI(uri)
+                }
+            }
+
             binding.btnNext.setOnClickListener { onEdit(item) }
 
 //            binding.btnDelete.setOnClickListener { onDelete(item) }

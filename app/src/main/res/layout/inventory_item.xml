@@ -12,7 +12,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="centerCrop"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/ball"
         android:background="@drawable/bg_circle"
         android:clipToOutline="true"
         app:layout_constraintStart_toStartOf="parent"
