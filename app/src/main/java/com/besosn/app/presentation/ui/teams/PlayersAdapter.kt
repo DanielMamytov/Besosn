@@ -49,7 +49,7 @@ class PlayersAdapter(private val items: List<PlayerModel>) :
                 }
             }
 
-            binding.imgPlayer.setImageResource(com.besosn.app.R.drawable.ic_users)
+            binding.imgPlayer.setImageResource(com.besosn.app.R.drawable.ball)
         }
     }
 }

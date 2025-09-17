@@ -14,11 +14,12 @@
         android:scaleType="centerCrop"
         android:elevation="1dp"
         android:src="@drawable/ball"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/team_icon_bg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+        app:shapeAppearanceOverlay="@style/RoundedImage18" />
 
     <ImageView
         android:id="@+id/btnBack"
@@ -30,44 +31,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:elevation="1dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_gravity="bottom"
-        android:layout_margin="16dp">
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnEdit"
-            android:layout_width="0dp"
-            android:layout_height="56dp"
-            android:layout_weight="1"
-            android:text="Edit"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:background="@drawable/btn_edit_gradient"
-            android:fontFamily="@font/unbounded"
-            android:textSize="18sp"/>
-
-        <Space
-            android:layout_width="12dp"
-            android:layout_height="wrap_content" />
-
-        <ImageButton
-            android:id="@+id/btnDelete"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-
-            android:background="@drawable/btn_delete_gradient"
-            android:src="@drawable/trash_icon"
-            android:scaleType="centerInside"
-            android:contentDescription="Delete"/>
-    </LinearLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -258,6 +221,48 @@
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="#A2FFFFFF"
                 android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:elevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
+                >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnEdit"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_weight="1"
+                    android:text="Edit"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/white"
+                    android:background="@drawable/btn_edit_gradient"
+                    android:fontFamily="@font/unbounded"
+                    android:textSize="18sp"/>
+
+                <Space
+                    android:layout_width="12dp"
+                    android:layout_height="wrap_content" />
+
+                <ImageButton
+                    android:id="@+id/btnDelete"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+
+                    android:background="@drawable/btn_delete_gradient"
+                    android:src="@drawable/trash_icon"
+                    android:scaleType="centerInside"
+                    android:contentDescription="Delete"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </FrameLayout>

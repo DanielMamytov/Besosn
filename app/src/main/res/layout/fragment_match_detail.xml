@@ -156,9 +156,12 @@
                         android:layout_height="60dp"
                         android:layout_marginEnd="16dp"
                         android:src="@drawable/ic_launcher_background"
-                        android:contentDescription="FC Barcelona Logo"
-                        android:scaleType="centerCrop"
-                        android:layout_gravity="start"/>
+                    android:background="@drawable/rounded_bg_white"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:layout_gravity="start"
+                    android:contentDescription="FC Barcelona Logo"/>
+
 
                     <LinearLayout
                         android:layout_width="wrap_content"
@@ -214,14 +217,14 @@
                     <ImageView
                         android:id="@+id/team2Logo"
                         android:layout_width="60dp"
-
                         android:layout_height="60dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
                         android:src="@drawable/ic_launcher_background"
-                        android:contentDescription="Real Madrid Logo"
+                        android:background="@drawable/rounded_bg_white"
+                        android:clipToOutline="true"
                         android:scaleType="centerCrop"
-                        android:layout_gravity="end"/>
-
+                        android:layout_gravity="end"
+                        android:contentDescription="FC Barcelona Logo"/>
                 </FrameLayout>
 
 
@@ -246,6 +249,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Barcelona"
+
                             android:textColor="#FEA613"
                             android:textSize="20sp"
                             android:textFontWeight="700"
@@ -278,6 +282,9 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="1908"
+                            android:ellipsize="end"
+                            android:singleLine="true"
+                            android:maxLines="1"
                             android:textColor="#FEA613"
                             android:textSize="20sp"
                             android:textStyle="bold"

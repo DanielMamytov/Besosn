@@ -81,10 +81,14 @@
 
                         <ImageView
                             android:id="@+id/ivAddPhoto"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_plus"
-                            android:scaleType="center"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rounded_circle"
+                            android:clipToOutline="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_plus"/>
+
                     </FrameLayout>
 
                 <LinearLayout
@@ -146,10 +150,13 @@
 
                         <ImageView
                             android:id="@+id/ivAddPhotoAwayt"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:src="@drawable/ic_plus"
-                            android:scaleType="center"/>
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/rounded_circle"
+                            android:clipToOutline="true"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/ic_plus"/>
                     </FrameLayout>
 
                     <LinearLayout

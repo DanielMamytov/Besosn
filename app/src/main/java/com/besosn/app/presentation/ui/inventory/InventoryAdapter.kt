@@ -38,6 +38,7 @@ class InventoryAdapter(
             binding.tvItemCategory.text = item.category
             binding.tvItemStatus.text = item.badge
             binding.btnNext.setOnClickListener { onEdit(item) }
+
 //            binding.btnDelete.setOnClickListener { onDelete(item) }
         }
     }
