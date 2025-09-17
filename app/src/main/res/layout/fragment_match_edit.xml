@@ -234,6 +234,9 @@
                             android:hint="0"
                             android:inputType="number"
                             android:paddingHorizontal="16dp"
+                            android:paddingVertical="12dp"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
                             android:textColor="@android:color/white"
                             android:textColorHint="#72FFFFFF"
                             android:textSize="16sp" />
@@ -265,6 +268,9 @@
                             android:hint="0"
                             android:inputType="number"
                             android:paddingHorizontal="16dp"
+                            android:paddingVertical="12dp"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
                             android:textColor="@android:color/white"
                             android:textColorHint="#72FFFFFF"
                             android:textSize="16sp" />
@@ -493,6 +499,9 @@
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Enter city"
                     android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
                     android:textColor="@android:color/white"
                     android:textColorHint="#72FFFFFF"
                     android:textSize="16sp" />
@@ -527,6 +536,9 @@
                     android:fontFamily="@font/poppins_regular"
                     android:hint="Enter your notes"
                     android:paddingHorizontal="16dp"
+                    android:paddingVertical="12dp"
+                    android:gravity="center_vertical"
+                    android:maxLines="1"
                     android:textColor="@android:color/white"
                     android:textColorHint="#72FFFFFF"
                     android:textSize="16sp" />

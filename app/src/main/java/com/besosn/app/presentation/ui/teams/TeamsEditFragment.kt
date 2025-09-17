@@ -20,6 +20,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.os.bundleOf
+import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
 import androidx.navigation.fragment.findNavController
@@ -68,6 +69,24 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
         binding.etTeamName.filters = arrayOf(lettersOnly)
         binding.etCity.filters = arrayOf(lettersOnly)
 
+        var skipFoundedYearWatcher = false
+        var foundedYearWarningShown = false
+
+        binding.etFoundedYear.doOnTextChanged { text, _, _, _ ->
+            if (skipFoundedYearWatcher) return@doOnTextChanged
+            val length = text?.length ?: 0
+            if (length == 4 && !foundedYearWarningShown) {
+                Toast.makeText(
+                    requireContext(),
+                    getString(R.string.team_edit_founded_year_limit_warning),
+                    Toast.LENGTH_SHORT,
+                ).show()
+                foundedYearWarningShown = true
+            } else if (length < 4) {
+                foundedYearWarningShown = false
+            }
+        }
+
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener { saveTeam() }
         binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
@@ -85,7 +104,10 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
         editingTeam?.let { team ->
             binding.etTeamName.setText(team.name)
             binding.etCity.setText(team.city)
+            skipFoundedYearWatcher = true
             binding.etFoundedYear.setText(team.foundedYear.toString())
+            skipFoundedYearWatcher = false
+            foundedYearWarningShown = binding.etFoundedYear.length() == 4
             binding.etNotes.setText(team.notes)
             selectedIconUri = team.iconUri
             binding.imageView2.loadTeamImage(team)
