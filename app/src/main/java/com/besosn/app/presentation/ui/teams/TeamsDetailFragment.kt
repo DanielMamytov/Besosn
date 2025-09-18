@@ -70,8 +70,9 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
         binding.tvPlayersValue.text = team.playersCount.toString()
         binding.tvNotes.text = team.notes
 
-        binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext())
+        binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvPlayers.adapter = PlayersAdapter(team.players)
+
 
         if (team.isDefault) {
             binding.btnEdit.isEnabled = false
