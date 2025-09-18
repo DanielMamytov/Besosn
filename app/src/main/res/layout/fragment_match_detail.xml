@@ -150,17 +150,17 @@
                     android:layout_marginTop="20dp">
 
                     <!-- Левая команда -->
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/team1Logo"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginEnd="16dp"
                         android:src="@drawable/ic_launcher_background"
-                    android:background="@drawable/rounded_bg_white"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="start"
-                    android:contentDescription="FC Barcelona Logo"/>
+                        android:background="@drawable/rounded_bg_white"
+                        android:scaleType="centerCrop"
+                        android:layout_gravity="start"
+                        android:contentDescription="FC Barcelona Logo"
+                        app:shapeAppearanceOverlay="@style/imageRounded"/>
 
 
                     <LinearLayout
@@ -214,17 +214,17 @@
 
 
                     <!-- Правая команда -->
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/team2Logo"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
                         android:layout_marginEnd="16dp"
                         android:src="@drawable/ic_launcher_background"
                         android:background="@drawable/rounded_bg_white"
-                        android:clipToOutline="true"
                         android:scaleType="centerCrop"
                         android:layout_gravity="end"
-                        android:contentDescription="FC Barcelona Logo"/>
+                        android:contentDescription="FC Barcelona Logo"
+                        app:shapeAppearanceOverlay="@style/imageRounded"/>
                 </FrameLayout>
 
 

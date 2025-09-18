@@ -21,7 +21,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+        app:shapeAppearanceOverlay="@style/imageRounded"/>
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="40dp"

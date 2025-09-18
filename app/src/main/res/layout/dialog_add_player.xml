@@ -28,15 +28,15 @@
                 android:layout_gravity="bottom"
                 android:background="@drawable/bg_avatar_circle">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/ivAddPhoto"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:background="@drawable/rounded_circle"
-                    android:clipToOutline="true"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_plus"/>
+                    android:src="@drawable/ic_plus"
+                    app:shapeAppearanceOverlay="@style/circle"/>
 
             </FrameLayout>
 

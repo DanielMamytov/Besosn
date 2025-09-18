@@ -62,14 +62,15 @@
                 android:layout_height="30dp"
                 android:background="@drawable/bg_white_circle">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgTeamLogo"
                     android:layout_width="24dp"
                     android:layout_height="30dp"
 
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/vdgdsgfds" />
+                    android:src="@drawable/vdgdsgfds"
+                    app:shapeAppearanceOverlay="@style/circle" />
             </FrameLayout>
 
             <TextView
@@ -113,14 +114,15 @@
                 android:layout_height="30dp"
                 android:background="@drawable/bg_white_circle">
 
-                <ImageView
+                <com.google.android.material.imageview.ShapeableImageView
                     android:id="@+id/imgTeamLogo2"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
 
                     android:layout_gravity="center"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/jkljfsjfls" />
+                    android:src="@drawable/jkljfsjfls"
+                    app:shapeAppearanceOverlay="@style/circle" />
             </FrameLayout>
 
             <TextView

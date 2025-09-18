@@ -66,7 +66,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/one"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -106,7 +106,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/two"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -145,7 +145,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/three"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -184,7 +184,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/four"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -223,7 +223,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/five"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -262,7 +262,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/six"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -301,7 +301,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/seven"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -340,7 +340,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/eight"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -379,7 +379,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/nine"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -418,7 +418,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/ten"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -457,7 +457,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/eleven"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
@@ -496,7 +496,7 @@
                     android:layout_height="96dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/twelve"
-                    app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+                    app:shapeAppearanceOverlay="@style/imageRounded"/>
 
                 <TextView
                     android:layout_width="0dp"
