@@ -19,7 +19,7 @@ class OnboardingFragment : Fragment(R.layout.fragment_onboarding) {
             val prefs = requireContext().getSharedPreferences(Constants.PREFS_NAME, Context.MODE_PRIVATE)
             prefs.edit().putBoolean(Constants.PREF_HAS_SEEN_ONBOARDING, true).apply()
             val navOptions = NavOptions.Builder()
-                .setPopUpTo(R.id.onboardingFragment, true)
+                .setPopUpTo(R.id.splashFragment, true)
                 .build()
             findNavController().navigate(R.id.action_onboardingFragment_to_homeFragment, null, navOptions)
         }
