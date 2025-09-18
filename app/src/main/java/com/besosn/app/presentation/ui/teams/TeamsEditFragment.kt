@@ -93,9 +93,8 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
         binding.btnEdit.setOnClickListener { saveTeam() }
         binding.btnCancel.setOnClickListener { findNavController().popBackStack() }
 
-
         playersAdapter = PlayersAdapter(players)
-        binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)  // Horizontal layout for alignment
+        binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)  
         binding.rvPlayers.adapter = playersAdapter
 
         binding.btnAddPlayer.setOnClickListener { showAddPlayerDialog() }
@@ -248,10 +247,9 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             }
 
             val content = layoutInflater.inflate(R.layout.popup_dropdown, null, false)
-//            val header = content.findViewById<TextView>(R.id.tvHeader)
+
             val rv = content.findViewById<RecyclerView>(R.id.rv)
 
-//            header.text = tvPosition.text
             rv.layoutManager = LinearLayoutManager(requireContext())
             rv.adapter = object : RecyclerView.Adapter<VH>() {
                 override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
@@ -294,7 +292,6 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             }
             pickPlayerImage.launch("image/*")
         }
-
 
         val dialog = AlertDialog.Builder(requireContext()).setView(dialogView).create()
 

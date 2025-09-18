@@ -14,10 +14,6 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
-/**
- * Provides access to match data that is stored locally in SharedPreferences
- * together with the predefined demo matches that ship with the app.
- */
 object MatchesLocalDataSource {
 
     fun loadMatches(context: Context): List<MatchModel> {

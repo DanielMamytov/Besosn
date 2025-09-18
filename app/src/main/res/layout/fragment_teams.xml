@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_teams_dark">
 
-    <!-- Top bar -->
+    
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="35dp"
@@ -33,7 +33,7 @@
         android:layout_marginStart="12dp"
         android:layout_marginEnd="16dp"/>
 
-    <!-- Список команд (пустой) -->
+    
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTeams"
         android:layout_width="0dp"
@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Нижняя панель с кнопкой -->
+    
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="0dp"

@@ -16,7 +16,6 @@ import kotlin.math.roundToInt
 
 class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
-    // UI
     private lateinit var monthContainer: View
     private lateinit var weekContainer: View
     private lateinit var yearContainer: View
@@ -34,7 +33,6 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
     private lateinit var gridYear: GridLayout
     private lateinit var tvDateTitle: TextView
 
-    // state
     private val cal: Calendar = Calendar.getInstance()
     private val selectedCal: Calendar = Calendar.getInstance()
 
@@ -78,12 +76,10 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
         unbounded = ResourcesCompat.getFont(requireContext(), R.font.unbounded)
 
-        // tabs
         view.findViewById<View>(R.id.tabMonth).setOnClickListener { select(Mode.MONTH) }
-        view.findViewById<View>(R.id.tabWeek).setOnClickListener  { select(Mode.WEEK) }
-        view.findViewById<View>(R.id.tabYear).setOnClickListener  { select(Mode.YEAR) }
+        view.findViewById<View>(R.id.tabWeek).setOnClickListener { select(Mode.WEEK) }
+        view.findViewById<View>(R.id.tabYear).setOnClickListener { select(Mode.YEAR) }
 
-        // headers Sun..Sat
         buildWeekHeader()
 
         val initialMillis = pendingSelectionMillis ?: selectedCal.timeInMillis
@@ -172,43 +168,42 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         notifyDateSelected()
     }
 
-    /* ---------------- Tabs ----------------- */
+    
     private fun select(mode: Mode) {
         monthContainer.visibility = if (mode == Mode.MONTH) View.VISIBLE else View.GONE
         weekContainer.visibility  = if (mode == Mode.WEEK)  View.VISIBLE else View.GONE
         yearContainer.visibility  = if (mode == Mode.YEAR)  View.VISIBLE else View.GONE
 
-        tvTabMonth.setTextColor(if (mode == Mode.MONTH) activeColor else 0xFFFFFFFF.toInt())  // Белый для неактивных
-        tvTabWeek.setTextColor (if (mode == Mode.WEEK)  activeColor else 0xFFFFFFFF.toInt())   // Белый для неактивных
-        tvTabYear.setTextColor (if (mode == Mode.YEAR)  activeColor else 0xFFFFFFFF.toInt())   // Белый для неактивных
+        tvTabMonth.setTextColor(if (mode == Mode.MONTH) activeColor else 0xFFFFFFFF.toInt())  
+        tvTabWeek.setTextColor (if (mode == Mode.WEEK)  activeColor else 0xFFFFFFFF.toInt())   
+        tvTabYear.setTextColor (if (mode == Mode.YEAR)  activeColor else 0xFFFFFFFF.toInt())   
 
         indMonth.visibility = if (mode == Mode.MONTH) View.VISIBLE else View.GONE
         indWeek.visibility  = if (mode == Mode.WEEK)  View.VISIBLE else View.GONE
         indYear.visibility  = if (mode == Mode.YEAR)  View.VISIBLE else View.GONE
     }
 
-
-    /* -------------- Month view -------------- */
+    
     private fun renderMonth() {
         gridMonth.removeAllViews()
         gridMonth.columnCount = 7
 
         val year = cal.get(Calendar.YEAR)
-        val month = cal.get(Calendar.MONTH) // 0..11
+        val month = cal.get(Calendar.MONTH) 
 
-        // 1) offset (Sun..Sat)
+        
         val first = Calendar.getInstance().apply {
             set(Calendar.YEAR, year)
             set(Calendar.MONTH, month)
             set(Calendar.DAY_OF_MONTH, 1)
         }
-        val firstDow = first.get(Calendar.DAY_OF_WEEK) // 1=Sun .. 7=Sat
+        val firstDow = first.get(Calendar.DAY_OF_WEEK) 
         val offset = (firstDow - Calendar.SUNDAY + 7) % 7
 
-        // 2) days in month
+        
         val daysInMonth = first.getActualMaximum(Calendar.DAY_OF_MONTH)
 
-        // 3) prev month last day
+        
         val prev = Calendar.getInstance().apply {
             set(Calendar.YEAR, year)
             set(Calendar.MONTH, month)
@@ -217,38 +212,38 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         }
         val prevLastDay = prev.get(Calendar.DAY_OF_MONTH)
 
-        // 6 rows x 7 cols = 42
+        
         for (i in 0 until 42) {
             val tv = makeDayCell()
             val lp = GridLayout.LayoutParams().apply {
                 width = 0
                 height = dp(44)
                 columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f)
-                setMargins(dp(1), dp(1), dp(1), dp(1))  // минимальные отступы 1dp
+                setMargins(dp(1), dp(1), dp(1), dp(1))  
             }
 
             when {
                 i < offset -> {
-                    // previous month
+                    
                     val day = prevLastDay - (offset - 1 - i)
                     tv.text = day.toString()
-                    tv.setTextColor(0xFFFFFFFF.toInt())  // Белый цвет для чисел
+                    tv.setTextColor(0xFFFFFFFF.toInt())  
                     tv.alpha = 0.5f
                     tv.setOnClickListener(null)
                 }
                 i >= offset + daysInMonth -> {
-                    // next month
+                    
                     val day = i - (offset + daysInMonth) + 1
                     tv.text = day.toString()
-                    tv.setTextColor(0xFFFFFFFF.toInt())  // Белый цвет для чисел
+                    tv.setTextColor(0xFFFFFFFF.toInt())  
                     tv.alpha = 0.5f
                     tv.setOnClickListener(null)
                 }
                 else -> {
-                    // current month
+                    
                     val day = i - offset + 1
                     tv.text = day.toString()
-                    tv.setTextColor(0xFFFFFFFF.toInt())  // Белый цвет для чисел
+                    tv.setTextColor(0xFFFFFFFF.toInt())  
                     val isSelected = hasSelection && isSameDate(cal, selectedCal, day)
                     tv.setBackgroundResource(
                         if (isSelected) R.drawable.bg_day_cell_selected else R.drawable.bg_day_cell
@@ -260,14 +255,13 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         }
     }
 
-
     private fun isSameDate(monthCal: Calendar, sel: Calendar, day: Int): Boolean {
         return (monthCal.get(Calendar.YEAR) == sel.get(Calendar.YEAR)
                 && monthCal.get(Calendar.MONTH) == sel.get(Calendar.MONTH)
                 && day == sel.get(Calendar.DAY_OF_MONTH))
     }
 
-    /* -------------- Week header -------------- */
+    
     private fun buildWeekHeader() {
         weekHeader.removeAllViews()
         val names = arrayOf("Sun","Mon","Tue","Wed","Thu","Fri","Sat")
@@ -275,7 +269,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             val tv = TextView(requireContext()).apply {
                 text = n
                 gravity = android.view.Gravity.CENTER
-                setTextColor(0xFFFFFFFF.toInt())  // Белый цвет текста
+                setTextColor(0xFFFFFFFF.toInt())  
                 textSize = 12f
                 typeface = unbounded
             }
@@ -284,24 +278,22 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         }
     }
 
-
     private fun makeDayCell(): TextView =
         TextView(requireContext()).apply {
             gravity = android.view.Gravity.CENTER
             textSize = 14f
             typeface = unbounded
             setBackgroundResource(R.drawable.ripple_calendar)
-            setTextColor(0xFFFFFFFF.toInt())  // Белый цвет текста
+            setTextColor(0xFFFFFFFF.toInt())  
         }
 
-
-    /* --------------- Week view ---------------- */
+    
     private fun renderWeek() {
         rowWeek.removeAllViews()
 
-        // старт от Sunday недели выбранной даты
+        
         val base = Calendar.getInstance().apply { timeInMillis = selectedCal.timeInMillis }
-        val dow = base.get(Calendar.DAY_OF_WEEK) // 1..7 (Sun..Sat)
+        val dow = base.get(Calendar.DAY_OF_WEEK) 
         val shift = (dow - Calendar.SUNDAY + 7) % 7
         base.add(Calendar.DAY_OF_MONTH, -shift)
 
@@ -324,7 +316,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
                 }
             }
             val lp = LinearLayout.LayoutParams(0, dp(44), 1f).apply {
-                setMargins(dp(1), dp(1), dp(1), dp(1))  // минимальные отступы 1dp
+                setMargins(dp(1), dp(1), dp(1), dp(1))  
             }
             rowWeek.addView(tv, lp)
         }
@@ -343,41 +335,38 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             setTextColor(0xFFFFFFFF.toInt())
         }
 
-    /* ---------------- Year view ---------------- */
-    /* ---------------- Year view ---------------- */
+    
+    
     private fun renderYear() {
         gridYear.removeAllViews()
         gridYear.columnCount = 3
 
-        // Show a 12-year window with the current year roughly centered
+        
         val currentYear = cal.get(Calendar.YEAR)
-        val startYear = currentYear - 5   // 5 before current
-        val endYear   = startYear + 11    // total 12 items
-
-
-
+        val startYear = currentYear - 5   
+        val endYear   = startYear + 11    
 
         for (year in startYear..endYear) {
             val tv = makeYearCell().apply {
                 text = year.toString()
-                // Highlight the active year
+                
                 setTextColor(if (year == currentYear) activeColor else 0xFFFFFFFF.toInt())
-                // Slightly bolder look for the active year (optional)
+                
                 paint.isFakeBoldText = year == currentYear
 
                 setOnClickListener {
-                    // Update main calendar to selected year, keep the same month
+                    
                     val month = cal.get(Calendar.MONTH)
                     cal.set(Calendar.YEAR, year)
                     cal.set(Calendar.MONTH, month)
 
-                    // Keep selected day within valid range for new year/month
+                    
                     val max = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
                     selectedCal.set(Calendar.YEAR, year)
                     selectedCal.set(Calendar.MONTH, month)
                     selectedCal.set(Calendar.DAY_OF_MONTH, minOf(selectedCal.get(Calendar.DAY_OF_MONTH), max))
 
-                    // Re-render and jump to Month mode
+                    
                     renderYear()
                     renderMonth()
                     renderWeek()
@@ -397,8 +386,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         }
     }
 
-
-    /* ----------------- Utils ------------------ */
+    
     private fun dp(v: Int): Int {
         val d = resources.displayMetrics.density
         return (v * d).roundToInt()

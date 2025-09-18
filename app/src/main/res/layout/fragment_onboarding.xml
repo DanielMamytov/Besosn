@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Фоновая картинка (сам поставишь свою) -->
+    
     <ImageView
         android:id="@+id/bgImage"
         android:layout_width="0dp"
@@ -16,8 +16,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
-    <!-- Контейнер для текста и кнопки -->
+    
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"

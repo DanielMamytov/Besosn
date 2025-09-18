@@ -4,12 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.besosn.app.utils.Constants
 
-/**
- * Lightweight singleton provider that exposes the Room database
- * without relying on dependency injection. This is useful in
- * fragments or helpers that need occasional access to the stored
- * data but cannot receive the database through Hilt.
- */
+
 object DatabaseProvider {
 
     @Volatile

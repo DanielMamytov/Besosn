@@ -7,9 +7,6 @@ import java.io.FileNotFoundException
 import androidx.recyclerview.widget.RecyclerView
 import com.besosn.app.databinding.ItemPlayerBinding
 
-/**
- * Adapter displaying list of players inside team detail screen.
- */
 class PlayersAdapter(private val items: List<PlayerModel>) :
     RecyclerView.Adapter<PlayersAdapter.PlayerViewHolder>() {
 
@@ -40,11 +37,11 @@ class PlayersAdapter(private val items: List<PlayerModel>) :
                             return
                         }
                     } catch (_: SecurityException) {
-                        // The app no longer has permission to read the selected photo.
+                        
                     } catch (_: FileNotFoundException) {
-                        // Image removed from the device, so we show the fallback icon instead.
+                        
                     } catch (_: IllegalArgumentException) {
-                        // Invalid URI format, fall back to the default icon below.
+                        
                     }
                 }
             }

@@ -20,11 +20,11 @@ internal fun ImageView.loadMatchIcon(
                     return
                 }
             } catch (_: SecurityException) {
-                // Ignore and fall back to resource icon
+                
             } catch (_: FileNotFoundException) {
-                // Ignore and fall back to resource icon
+                
             } catch (_: IllegalArgumentException) {
-                // Ignore and fall back to resource icon
+                
             }
         }
     }
@@ -34,7 +34,7 @@ internal fun ImageView.loadMatchIcon(
             setImageResource(iconRes)
             return
         } catch (_: Exception) {
-            // Fall through and use fallback icon
+            
         }
     }
 

@@ -9,12 +9,7 @@ import kotlinx.coroutines.withContext
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 
-/**
- * Provides access to locally stored team data along with the
- * predefined demo teams that ship with the app. The logic is shared
- * between the Teams screen and the Home dashboard so both display
- * consistent data.
- */
+
 object TeamsLocalDataSource {
 
     private val seedMutex = Mutex()

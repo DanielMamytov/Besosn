@@ -37,7 +37,6 @@ import kotlinx.coroutines.withContext
 import java.util.Calendar
 import java.util.Locale
 
-
 class MatchEditFragment : Fragment() {
 
     private var _binding: FragmentMatchEditBinding? = null
@@ -188,7 +187,7 @@ class MatchEditFragment : Fragment() {
         try {
             resolver.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         } catch (_: SecurityException) {
-            // Ignore if the URI does not grant persistable permissions
+            
         }
 
         val uriString = uri.toString()
@@ -213,7 +212,7 @@ class MatchEditFragment : Fragment() {
         try {
             resolver.releasePersistableUriPermission(oldUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
         } catch (_: SecurityException) {
-            // Ignore if we no longer hold the permission
+            
         }
     }
 
@@ -248,7 +247,6 @@ class MatchEditFragment : Fragment() {
             }
         }
     }
-
 
     private fun applyEditingMatch(match: MatchModel) {
         binding.tvTeam.text = match.homeTeam
@@ -471,10 +469,9 @@ class MatchEditFragment : Fragment() {
             }
 
             val content = layoutInflater.inflate(R.layout.popup_dropdown, null, false)
-//            val header = content.findViewById<TextView>(R.id.tvHeader)
+
             val rv = content.findViewById<RecyclerView>(R.id.rv)
 
-//            header.text = tv.text
             rv.layoutManager = LinearLayoutManager(requireContext())
 
             val popupWindow = PopupWindow(

@@ -14,8 +14,7 @@
         android:src="@drawable/onboarding_bg"
         android:contentDescription="@null" />
 
-    <!-- нижняя затемнённая подложка -->
-
+    
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/homeScroll"
@@ -29,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <!-- Заголовок -->
+            
             <TextView
                 android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
@@ -44,7 +43,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <!-- Контейнер карточек -->
+            
             <LinearLayout
                 android:id="@+id/cardsContainer"
                 android:layout_width="match_parent"
@@ -55,7 +54,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/bottomButtons">
 
-                <!-- Card: Teams -->
+                
                 <LinearLayout
                     android:id="@+id/cardTeams"
                     android:layout_width="match_parent"
@@ -112,7 +111,7 @@
                         android:textSize="@dimen/home_card_subtitle_text_size" />
                 </LinearLayout>
 
-                <!-- Card: Inventory -->
+                
                 <LinearLayout
                     android:id="@+id/cardInventory"
                     android:layout_width="match_parent"
@@ -169,7 +168,7 @@
                         android:textSize="@dimen/home_card_subtitle_text_size" />
                 </LinearLayout>
 
-                <!-- Card: Matches -->
+                
                 <LinearLayout
                     android:id="@+id/cardMatches"
                     android:layout_width="match_parent"
@@ -230,7 +229,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <!-- Нижние кнопки (останутся видимыми: проскроллится до них) -->
+            
             <LinearLayout
                 android:id="@+id/bottomButtons"
                 android:layout_width="0dp"

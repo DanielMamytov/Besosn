@@ -6,9 +6,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.besosn.app.databinding.TeamsItemBinding
 import java.util.Locale
 
-/**
- * Adapter showing list of teams in [TeamsFragment].
- */
 class TeamsAdapter(
     private val items: MutableList<TeamModel>,
     private val onItemClick: (TeamModel) -> Unit

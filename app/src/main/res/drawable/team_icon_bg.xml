@@ -4,7 +4,7 @@
     <gradient
         android:startColor="#FC4F08"
         android:endColor="#000000"
-        android:angle="225"/> <!-- 315° = снизу-слева к вверх-справа -->
+        android:angle="225"/> 
 
-    <corners android:radius="20dp"/> <!-- скругления -->
+    <corners android:radius="20dp"/> 
 </shape>
