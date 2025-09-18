@@ -6,7 +6,7 @@
     <string name="select_position">Select position</string>
     <string name="team_edit_founded_year_limit_warning">Founded year can contain at most 4 digits.</string>
     <string name="team_edit_player_number_limit_warning">Player number can contain at most 2 digits.</string>
-
+    <string name="team_edit_founded_year_range_warning">Founded year must be between %1$d and %2$d.</string>
     <string name="match_edit_choose_team">Choose team</string>
     <string name="match_edit_select_date">Select date</string>
     <string name="match_edit_fill_all_fields">Fill all fields to add match</string>

@@ -136,6 +136,15 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             return
         }
 
+        if (founded < MIN_FOUNDED_YEAR || founded > MAX_FOUNDED_YEAR) {
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.team_edit_founded_year_range_warning, MIN_FOUNDED_YEAR, MAX_FOUNDED_YEAR),
+                Toast.LENGTH_SHORT,
+            ).show()
+            return
+        }
+
         val iconUri = selectedIconUri ?: editingTeam?.iconUri
         val currentPlayers = players.toList()
 
@@ -326,5 +335,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
     private companion object {
         const val MAX_FOUNDED_YEAR_DIGITS = 4
         const val MAX_PLAYER_NUMBER_DIGITS = 2
+        const val MIN_FOUNDED_YEAR = 1900
+        const val MAX_FOUNDED_YEAR = 2025
     }
 }
