@@ -7,12 +7,19 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.room.Room
 import com.besosn.app.R
+import com.besosn.app.data.local.db.AppDatabase
+import com.besosn.app.data.model.MatchEntity
 import com.besosn.app.databinding.FragmentMatchDetailBinding
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MatchDetailFragment : Fragment(R.layout.fragment_match_detail) {
 
@@ -52,6 +59,15 @@ class MatchDetailFragment : Fragment(R.layout.fragment_match_detail) {
                 R.id.action_matchDetailFragment_to_matchEditFragment,
                 args,
             )
+        }
+        binding.btnDelete.setOnClickListener {
+            val matchToDelete = match ?: return@setOnClickListener
+            when {
+                matchToDelete.isImmutable -> showDeleteNotAllowedToast()
+                matchToDelete.isLegacyMatch() -> deleteLegacyMatch(matchToDelete)
+                matchToDelete.isDatabaseMatch() -> deleteDatabaseMatch(matchToDelete)
+                else -> showDeleteNotAllowedToast()
+            }
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
@@ -99,9 +115,117 @@ class MatchDetailFragment : Fragment(R.layout.fragment_match_detail) {
         val notes = match.notes?.takeIf { it.isNotBlank() }
             ?: getString(R.string.match_detail_no_notes)
         binding.tvNotes.text = notes
+
+        binding.btnEdit.alpha = if (match.isImmutable) 0.6f else 1f
+        binding.btnDelete.alpha = if (match.canBeDeleted()) 1f else 0.6f
+    }
+
+    private fun deleteLegacyMatch(match: MatchModel) {
+        val index = match.id - LEGACY_MATCH_ID_OFFSET
+        if (index < 0) {
+            showDeleteFailedToast()
+            return
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val context = requireContext().applicationContext
+            val deleted = withContext(Dispatchers.IO) {
+                MatchesLocalDataSource.deleteSavedMatch(context, index)
+            }
+
+            if (deleted) {
+                onMatchDeleted()
+            } else {
+                showDeleteFailedToast()
+            }
+        }
+    }
+
+    private fun deleteDatabaseMatch(match: MatchModel) {
+        val entity = match.toEntityForDatabase()
+        if (entity == null) {
+            showDeleteFailedToast()
+            return
+        }
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            val context = requireContext().applicationContext
+            val db = Room.databaseBuilder(context, AppDatabase::class.java, "app_db")
+                .fallbackToDestructiveMigration()
+                .build()
+            try {
+                withContext(Dispatchers.IO) {
+                    db.matchDao().deleteMatch(entity)
+                }
+                onMatchDeleted()
+            } catch (_: Exception) {
+                showDeleteFailedToast()
+            } finally {
+                db.close()
+            }
+        }
+    }
+
+    private fun onMatchDeleted() {
+        Toast.makeText(
+            requireContext(),
+            R.string.match_delete_success,
+            Toast.LENGTH_SHORT,
+        ).show()
+        notifyMatchesChanged()
+        findNavController().popBackStack()
+    }
+
+    private fun showDeleteFailedToast() {
+        Toast.makeText(
+            requireContext(),
+            R.string.match_delete_failed,
+            Toast.LENGTH_SHORT,
+        ).show()
+    }
+
+    private fun showDeleteNotAllowedToast() {
+        Toast.makeText(
+            requireContext(),
+            R.string.match_default_delete_toast,
+            Toast.LENGTH_SHORT,
+        ).show()
+    }
+
+    private fun notifyMatchesChanged() {
+        runCatching {
+            val entry = findNavController().getBackStackEntry(R.id.matchesFragment)
+            entry.savedStateHandle[MatchEditFragment.RESULT_KEY_MATCHES_UPDATED] = true
+        }
     }
 
     companion object {
         const val ARG_MATCH = "arg_match"
     }
+}
+
+private fun MatchModel.canBeDeleted(): Boolean {
+    if (isImmutable) return false
+    return isLegacyMatch() || isDatabaseMatch()
+}
+
+private fun MatchModel.isLegacyMatch(): Boolean =
+    id in LEGACY_MATCH_ID_OFFSET until DB_MATCH_ID_OFFSET
+
+private fun MatchModel.isDatabaseMatch(): Boolean = id >= DB_MATCH_ID_OFFSET
+
+private fun MatchModel.toEntityForDatabase(): MatchEntity? {
+    if (!isDatabaseMatch()) return null
+    return MatchEntity(
+        id = id - DB_MATCH_ID_OFFSET,
+        homeTeamName = homeTeam,
+        awayTeamName = awayTeam,
+        date = date,
+        city = city.orEmpty(),
+        notes = notes.orEmpty(),
+        homeGoals = homeScore,
+        awayGoals = awayScore,
+        homePhotoUri = homeIconUri,
+        awayPhotoUri = awayIconUri,
+    )
 }

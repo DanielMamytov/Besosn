@@ -24,6 +24,9 @@
     <string name="match_detail_no_notes">No additional notes for this match.</string>
     <string name="match_detail_date_time">%1$s at %2$s</string>
     <string name="match_default_edit_toast">Default matches are immutable and cannot be edited.</string>
+    <string name="match_default_delete_toast">Default matches cannot be deleted.</string>
+    <string name="match_delete_success">Match deleted.</string>
+    <string name="match_delete_failed">Failed to delete match. Please try again.</string>
 
     <string name="teams_minimum_edit_delete_warning">You can’t edit or delete teams when only two teams remain.</string>
     <string name="teams_default_edit_tooltip">Default teams are immutable and cannot be edited.</string>

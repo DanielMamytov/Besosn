@@ -131,6 +131,34 @@ object MatchesLocalDataSource {
         }
     }
 
+    internal fun deleteSavedMatch(context: Context, index: Int): Boolean {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val raw = prefs.getString(PREFS_KEY_MATCHES, null) ?: return false
+
+        return try {
+            val array = JSONArray(raw)
+            if (index < 0 || index >= array.length()) return false
+
+            val updated = JSONArray()
+            for (i in 0 until array.length()) {
+                if (i == index) continue
+                val obj = array.optJSONObject(i) ?: continue
+                updated.put(obj)
+            }
+
+            val editor = prefs.edit()
+            if (updated.length() == 0) {
+                editor.remove(PREFS_KEY_MATCHES)
+            } else {
+                editor.putString(PREFS_KEY_MATCHES, updated.toString())
+            }
+            editor.apply()
+            true
+        } catch (_: JSONException) {
+            false
+        }
+    }
+
     private fun getDefaultMatches(): List<MatchModel> {
         val now = Calendar.getInstance()
         val past = (now.clone() as Calendar).apply { add(Calendar.DAY_OF_YEAR, -1) }
