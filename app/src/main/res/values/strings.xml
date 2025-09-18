@@ -72,5 +72,6 @@
     <string name="inventory_detail_about_title">About %1$s</string>
     <string name="inventory_detail_about_default">About item</string>
     <string name="inventory_detail_no_notes">No notes provided.</string>
+    <string name="inventory_delete_success">Inventory item deleted.</string>
 
 </resources>
