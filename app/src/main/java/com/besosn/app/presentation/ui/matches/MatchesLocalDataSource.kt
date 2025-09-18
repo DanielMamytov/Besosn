@@ -3,11 +3,14 @@ package com.besosn.app.presentation.ui.matches
 import android.content.Context
 import androidx.annotation.DrawableRes
 import com.besosn.app.R
+import com.besosn.app.data.local.db.DatabaseProvider
 import org.json.JSONArray
 import org.json.JSONException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 /**
  * Provides access to match data that is stored locally in SharedPreferences
@@ -20,6 +23,16 @@ object MatchesLocalDataSource {
         matches += getDefaultMatches()
         matches += loadSavedMatches(context)
         return matches
+    }
+
+    suspend fun countMatches(context: Context): Int = withContext(Dispatchers.IO) {
+        val defaultMatches = getDefaultMatches().size
+        val savedMatches = loadSavedMatches(context).size
+        val storedMatches = runCatching {
+            DatabaseProvider.get(context).matchDao().countMatches()
+        }.getOrDefault(0)
+
+        defaultMatches + savedMatches + storedMatches
     }
 
     internal fun loadSavedMatches(context: Context): List<MatchModel> {
