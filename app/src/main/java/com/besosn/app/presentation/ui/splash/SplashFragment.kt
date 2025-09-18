@@ -7,6 +7,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.besosn.app.R
 
@@ -39,8 +40,14 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
 
         viewLifecycleOwner.lifecycleScope.launch {
             delay(2500)
-            findNavController().navigate(R.id.action_splashFragment_to_onboardingFragment)
-
+            val navOptions = NavOptions.Builder()
+                .setPopUpTo(R.id.splashFragment, true)
+                .build()
+            findNavController().navigate(
+                R.id.action_splashFragment_to_onboardingFragment,
+                null,
+                navOptions
+            )
         }
     }
 }

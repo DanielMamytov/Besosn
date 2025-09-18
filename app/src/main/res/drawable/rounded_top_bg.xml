@@ -1,6 +1,6 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle">
-    <solid android:color="@android:color/white"/> <!-- Цвет фона -->
+    <solid android:color="@android:color/black"/> <!-- Цвет фона -->
     <corners
         android:topLeftRadius="38dp"
         android:topRightRadius="38dp"

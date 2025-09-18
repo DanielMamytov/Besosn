@@ -6,20 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_teams_dark">
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imgTeamIcon"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="centerCrop"
-        android:elevation="1dp"
-        android:src="@drawable/ball"
-        android:layout_marginTop="40dp"
-        android:background="@drawable/team_icon_bg"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundedImage18" />
+
 
     <ImageView
         android:id="@+id/btnBack"
@@ -70,8 +57,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="100dp">
+                android:paddingHorizontal="20dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imgTeamIcon"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:layout_gravity="center_horizontal"
+                    android:scaleType="centerCrop"
+                    android:elevation="1dp"
+                    android:src="@drawable/ball"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/team_icon_bg"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18" />
 
                 <TextView
                     android:id="@+id/tvTeamName"
@@ -81,7 +82,7 @@
                     android:fontFamily="@font/unbounded"
                     android:lineSpacingExtra="-8dp"
                     android:maxLines="1"
-
+                    android:layout_marginTop="10dp"
                     android:singleLine="true"
                     android:text="YOUNGTEAM"
                     android:textColor="#FC4F08"
