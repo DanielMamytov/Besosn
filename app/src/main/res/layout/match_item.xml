@@ -65,10 +65,10 @@
                 <ImageView
                     android:id="@+id/imgTeamLogo"
                     android:layout_width="24dp"
-                    android:layout_height="24dp"
+                    android:layout_height="30dp"
 
                     android:layout_gravity="center"
-                    android:scaleType="fitCenter"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/vdgdsgfds" />
             </FrameLayout>
 
@@ -119,7 +119,7 @@
                     android:layout_height="24dp"
 
                     android:layout_gravity="center"
-                    android:scaleType="fitCenter"
+                    android:scaleType="centerCrop"
                     android:src="@drawable/jkljfsjfls" />
             </FrameLayout>
 

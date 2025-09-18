@@ -9,17 +9,19 @@
     android:layout_marginTop="8dp">
 
     <!-- Team Logo -->
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgTeamLogo"
         android:layout_width="48dp"
         android:layout_height="48dp"
-        android:background="@drawable/bg_circle"
+        android:background="@drawable/bg_round_24"
         android:clipToOutline="true"
+        android:elevation="1dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_launcher_background"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:shapeAppearanceOverlay="@style/imageRounded"/>
 
 
     <!-- Team Title -->

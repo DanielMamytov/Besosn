@@ -3,313 +3,309 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/onboarding_bg">
+    android:background="@color/black">
 
-    <View
+    <ImageView
+        android:id="@+id/bgImage"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/home_background_fade_height"
-        android:layout_gravity="bottom"
-        android:background="@drawable/bg_black_fade"/>
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:src="@drawable/onboarding_bg"
+        android:contentDescription="@null" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- нижняя затемнённая подложка -->
+
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/homeScroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingBottom="@dimen/home_scroll_padding_bottom">
 
-    <!-- Заголовок -->
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/home_title_margin_top"
-        android:fontFamily="@font/unbounded"
-        android:text="BESOSN"
-        android:layout_marginStart="@dimen/home_title_margin_start"
-        android:textColor="#FC4F08"
-        android:textSize="@dimen/home_title_text_size"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/home_cards_container_margin_bottom"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/bottomButtons"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="wrap_content">
 
-            <!-- Карточка Teams -->
+            <!-- Заголовок -->
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/home_title_margin_top"
+                android:layout_marginStart="@dimen/home_title_margin_start"
+                android:fontFamily="@font/unbounded"
+                android:text="BESOSN"
+                android:textColor="#FC4F08"
+                android:textSize="@dimen/home_title_text_size"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- Контейнер карточек -->
             <LinearLayout
-                android:id="@+id/cardTeams"
+                android:id="@+id/cardsContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/home_card_margin_horizontal"
-                android:layout_marginTop="@dimen/home_card_margin_top"
-                android:background="@drawable/bg_card_gradient"
-                android:clipToOutline="true"
                 android:orientation="vertical"
-                android:padding="@dimen/home_card_padding"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="@dimen/home_cards_container_margin_bottom"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tvTitle">
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/bottomButtons">
 
-                <!-- Верхняя строка: иконка слева, стрелка справа -->
+                <!-- Card: Teams -->
                 <LinearLayout
+                    android:id="@+id/cardTeams"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/home_card_icon_size"
-                        android:layout_height="@dimen/home_card_icon_size"
-                        android:src="@drawable/ic_users" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="@dimen/home_card_arrow_icon_size"
-                        android:layout_height="@dimen/home_card_arrow_icon_size"
-                        android:layout_gravity="top"
-                        android:src="@drawable/ic_arrow_ne" />
-                </LinearLayout>
-
-                <!-- Заголовок -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/home_card_title_margin_top"
-                    android:fontFamily="@font/unbounded"
-                    android:text="Teams"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/home_card_title_text_size"
-                    android:textStyle="bold" />
-
-                <!-- Подзаголовок -->
-                <TextView
-                    android:id="@+id/teamsCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/home_card_subtitle_margin_top"
-                    android:fontFamily="@font/prompt_regular"
-                    android:text="@string/home_teams_empty"
-                    android:textColor="#E6FFFFFF"
-                    android:textSize="@dimen/home_card_subtitle_text_size" />
-            </LinearLayout>
-
-            <!-- Карточка Inventory -->
-            <LinearLayout
-                android:id="@+id/cardInventory"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/home_card_margin_horizontal"
-                android:layout_marginTop="@dimen/home_inventory_card_margin_top"
-                android:background="@drawable/bg_card_gradient"
-                android:clipToOutline="true"
-                android:orientation="vertical"
-                android:padding="@dimen/home_inventory_card_padding"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardTeams">
-
-                <!-- Верхняя строка: иконка слева, стрелка справа -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="@dimen/home_card_icon_size"
-                        android:layout_height="@dimen/home_card_icon_size"
-                        android:src="@drawable/backpack_ic" />
-
-                    <View
-                        android:layout_width="0dp"
-                        android:layout_height="0dp"
-                        android:layout_weight="1" />
-
-                    <ImageView
-                        android:layout_width="@dimen/home_card_arrow_icon_size"
-                        android:layout_height="@dimen/home_card_arrow_icon_size"
-                        android:layout_gravity="top"
-                        android:src="@drawable/ic_arrow_ne" />
-                </LinearLayout>
-
-                <!-- Заголовок -->
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/home_card_title_margin_top"
-                    android:fontFamily="@font/unbounded"
-                    android:text="Inventory"
-                    android:textColor="@android:color/white"
-                    android:textSize="@dimen/home_card_title_text_size"
-                    android:textStyle="bold" />
-
-                <!-- Подзаголовок -->
-                <TextView
-                    android:id="@+id/inventoryCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/home_card_subtitle_margin_top"
-                    android:fontFamily="@font/prompt_regular"
-                    android:text="@string/home_inventory_empty"
-                    android:textColor="#E6FFFFFF"
-                    android:textSize="@dimen/home_card_subtitle_text_size" />
-            </LinearLayout>
-
-            <!-- Карточка Matches -->
-            <LinearLayout
-                android:id="@+id/cardMatches"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/home_card_margin_horizontal"
-                android:layout_marginTop="@dimen/home_card_margin_top"
-                android:background="@drawable/bg_card_gradient"
-                android:clipToOutline="true"
-                android:gravity="center|start"
-                android:orientation="horizontal"
-                android:padding="@dimen/home_matches_card_padding"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cardInventory">
-
-                <ImageView
-                    android:layout_width="@dimen/home_matches_icon_size"
-                    android:layout_height="@dimen/home_matches_icon_size"
-                    android:layout_marginEnd="@dimen/home_matches_icon_margin_end"
-                    android:src="@drawable/soccer_ball" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/home_card_margin_horizontal"
+                    android:layout_marginTop="@dimen/home_card_margin_top"
+                    android:background="@drawable/bg_card_gradient"
+                    android:outlineProvider="background"
+                    android:clipToOutline="true"
                     android:orientation="vertical"
-                    android:paddingVertical="@dimen/home_matches_content_padding_vertical">
+                    android:padding="@dimen/home_card_padding">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:fontFamily="@font/unbounded"
-                            android:text="Matches"
-                            android:textColor="@android:color/white"
-                            android:textSize="@dimen/home_matches_title_text_size"
-                            android:textStyle="bold" />
+                        <ImageView
+                            android:layout_width="@dimen/home_card_icon_size"
+                            android:layout_height="@dimen/home_card_icon_size"
+                            android:src="@drawable/ic_users" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
 
                         <ImageView
                             android:layout_width="@dimen/home_card_arrow_icon_size"
                             android:layout_height="@dimen/home_card_arrow_icon_size"
                             android:layout_gravity="top"
                             android:src="@drawable/ic_arrow_ne" />
-
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/matchesCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/home_matches_count_margin_top"
-                        android:fontFamily="@font/prompt_regular"
-                        android:text="@string/home_matches_empty"
+                        android:layout_marginTop="@dimen/home_card_title_margin_top"
+                        android:fontFamily="@font/unbounded"
+                        android:text="Teams"
                         android:textColor="@android:color/white"
-                        android:textSize="@dimen/home_matches_count_text_size" />
+                        android:textSize="@dimen/home_card_title_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/teamsCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/home_card_subtitle_margin_top"
+                        android:fontFamily="@font/prompt_regular"
+                        android:text="@string/home_teams_empty"
+                        android:textColor="#E6FFFFFF"
+                        android:textSize="@dimen/home_card_subtitle_text_size" />
                 </LinearLayout>
 
+                <!-- Card: Inventory -->
+                <LinearLayout
+                    android:id="@+id/cardInventory"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/home_card_margin_horizontal"
+                    android:layout_marginTop="@dimen/home_inventory_card_margin_top"
+                    android:background="@drawable/bg_card_gradient"
+                    android:outlineProvider="background"
+                    android:clipToOutline="true"
+                    android:orientation="vertical"
+                    android:padding="@dimen/home_inventory_card_padding">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/home_card_icon_size"
+                            android:layout_height="@dimen/home_card_icon_size"
+                            android:src="@drawable/backpack_ic" />
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1" />
+
+                        <ImageView
+                            android:layout_width="@dimen/home_card_arrow_icon_size"
+                            android:layout_height="@dimen/home_card_arrow_icon_size"
+                            android:layout_gravity="top"
+                            android:src="@drawable/ic_arrow_ne" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/home_card_title_margin_top"
+                        android:fontFamily="@font/unbounded"
+                        android:text="Inventory"
+                        android:textColor="@android:color/white"
+                        android:textSize="@dimen/home_card_title_text_size"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/inventoryCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/home_card_subtitle_margin_top"
+                        android:fontFamily="@font/prompt_regular"
+                        android:text="@string/home_inventory_empty"
+                        android:textColor="#E6FFFFFF"
+                        android:textSize="@dimen/home_card_subtitle_text_size" />
+                </LinearLayout>
+
+                <!-- Card: Matches -->
+                <LinearLayout
+                    android:id="@+id/cardMatches"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/home_card_margin_horizontal"
+                    android:layout_marginTop="@dimen/home_card_margin_top"
+                    android:background="@drawable/bg_card_gradient"
+                    android:outlineProvider="background"
+                    android:clipToOutline="true"
+                    android:gravity="center|start"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/home_matches_card_padding">
+
+                    <ImageView
+                        android:layout_width="@dimen/home_matches_icon_size"
+                        android:layout_height="@dimen/home_matches_icon_size"
+                        android:layout_marginEnd="@dimen/home_matches_icon_margin_end"
+                        android:src="@drawable/soccer_ball" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:paddingVertical="@dimen/home_matches_content_padding_vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/unbounded"
+                                android:text="Matches"
+                                android:textColor="@android:color/white"
+                                android:textSize="@dimen/home_matches_title_text_size"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:layout_width="@dimen/home_card_arrow_icon_size"
+                                android:layout_height="@dimen/home_card_arrow_icon_size"
+                                android:layout_gravity="top"
+                                android:src="@drawable/ic_arrow_ne" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/matchesCount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/home_matches_count_margin_top"
+                            android:fontFamily="@font/prompt_regular"
+                            android:text="@string/home_matches_empty"
+                            android:textColor="@android:color/white"
+                            android:textSize="@dimen/home_matches_count_text_size" />
+                    </LinearLayout>
+                </LinearLayout>
             </LinearLayout>
-        </LinearLayout>
 
-
-    <!-- Нижние кнопки -->
-    <LinearLayout
-        android:id="@+id/bottomButtons"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="@dimen/home_bottom_buttons_margin_horizontal"
-        android:layout_marginBottom="@dimen/home_bottom_buttons_margin_bottom"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <!-- Articles -->
-        <LinearLayout
-            android:id="@+id/btnArticles"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/home_bottom_buttons_height"
-            android:layout_weight="1"
-            android:background="@drawable/bg_outline_orange"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/home_bottom_buttons_padding_horizontal">
-
-            <ImageView
-                android:layout_width="@dimen/home_bottom_buttons_icon_size"
-                android:layout_height="@dimen/home_bottom_buttons_icon_size"
-                android:src="@drawable/vector"
-                android:layout_marginEnd="@dimen/home_bottom_buttons_icon_margin_end_articles"/>
-
-            <TextView
-                android:layout_width="wrap_content"
+            <!-- Нижние кнопки (останутся видимыми: проскроллится до них) -->
+            <LinearLayout
+                android:id="@+id/bottomButtons"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="Articles"
-                android:textSize="@dimen/home_bottom_buttons_text_size"
-                android:textColor="#FC4F08"
-                android:textStyle="bold"
-                android:fontFamily="@font/unbounded"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:maxLines="1"/>
+                android:layout_marginHorizontal="@dimen/home_bottom_buttons_margin_horizontal"
+                android:layout_marginBottom="@dimen/home_bottom_buttons_margin_bottom"
+                android:gravity="center"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/btnArticles"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/home_bottom_buttons_height"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_outline_orange"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/home_bottom_buttons_padding_horizontal">
 
-        <View
-            android:layout_width="@dimen/home_bottom_buttons_divider_width"
-            android:layout_height="0dp"/>
+                    <ImageView
+                        android:layout_width="@dimen/home_bottom_buttons_icon_size"
+                        android:layout_height="@dimen/home_bottom_buttons_icon_size"
+                        android:src="@drawable/vector"
+                        android:layout_marginEnd="@dimen/home_bottom_buttons_icon_margin_end_articles"/>
 
-        <!-- Settings -->
-        <LinearLayout
-            android:id="@+id/btnSettings"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/home_bottom_buttons_height"
-            android:layout_weight="1"
-            android:background="@drawable/bg_outline_orange"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingHorizontal="@dimen/home_bottom_buttons_padding_horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Articles"
+                        android:textSize="@dimen/home_bottom_buttons_text_size"
+                        android:textColor="#FC4F08"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/unbounded"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:maxLines="1"/>
+                </LinearLayout>
 
-            <ImageView
-                android:layout_width="@dimen/home_bottom_buttons_icon_size"
-                android:layout_height="@dimen/home_bottom_buttons_icon_size"
-                android:src="@drawable/sliders"
-                android:layout_marginEnd="@dimen/home_bottom_buttons_icon_margin_end_settings"/>
+                <View
+                    android:layout_width="@dimen/home_bottom_buttons_divider_width"
+                    android:layout_height="0dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Settings"
-                android:textSize="@dimen/home_bottom_buttons_text_size"
-                android:textColor="#FC4F08"
-                android:textStyle="bold"
-                android:fontFamily="@font/unbounded"
-                android:ellipsize="end"
-                android:singleLine="true"
-                android:maxLines="1"/>
+                <LinearLayout
+                    android:id="@+id/btnSettings"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/home_bottom_buttons_height"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_outline_orange"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="@dimen/home_bottom_buttons_padding_horizontal">
 
-        </LinearLayout>
-    </LinearLayout>
+                    <ImageView
+                        android:layout_width="@dimen/home_bottom_buttons_icon_size"
+                        android:layout_height="@dimen/home_bottom_buttons_icon_size"
+                        android:src="@drawable/sliders"
+                        android:layout_marginEnd="@dimen/home_bottom_buttons_icon_margin_end_settings"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Settings"
+                        android:textSize="@dimen/home_bottom_buttons_text_size"
+                        android:textColor="#FC4F08"
+                        android:textStyle="bold"
+                        android:fontFamily="@font/unbounded"
+                        android:ellipsize="end"
+                        android:singleLine="true"
+                        android:maxLines="1"/>
+                </LinearLayout>
+            </LinearLayout>
 
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </FrameLayout>

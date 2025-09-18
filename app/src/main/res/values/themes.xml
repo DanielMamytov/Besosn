@@ -14,6 +14,15 @@
         <item name="cornerSize">30dp</item>
     </style>
 
+    <style name="imageRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">18dp</item>
+    </style>
+    <style name="circle" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
 
 
     <style name="Theme.Besosn" parent="Base.Theme.Besosn" />
