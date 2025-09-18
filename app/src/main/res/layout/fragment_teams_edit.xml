@@ -130,6 +130,8 @@
                         android:paddingVertical="12dp"
                         android:gravity="center_vertical"
                         android:maxLines="1"
+                        android:ellipsize="end"
+                        android:singleLine="true"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -161,6 +163,8 @@
                         android:paddingVertical="12dp"
                         android:gravity="center_vertical"
                         android:maxLines="1"
+                        android:ellipsize="end"
+                        android:singleLine="true"
                         android:fontFamily="@font/poppins_regular"
                         android:textSize="16sp"/>
                 </LinearLayout>
@@ -197,6 +201,7 @@
                         android:maxLength="4"
                         android:maxLines="1"
                         android:gravity="center_vertical"
+                        android:ellipsize="end"
                         android:singleLine="true"/>
                 </LinearLayout>
 
@@ -291,6 +296,8 @@
                     android:paddingVertical="12dp"
                     android:gravity="center_vertical"
                     android:maxLines="1"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="16sp"/>
             </LinearLayout>

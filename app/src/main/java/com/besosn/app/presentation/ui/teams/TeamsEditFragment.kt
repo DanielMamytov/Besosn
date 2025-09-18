@@ -77,14 +77,14 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
         binding.etFoundedYear.doOnTextChanged { text, _, _, _ ->
             if (skipFoundedYearWatcher) return@doOnTextChanged
             val length = text?.length ?: 0
-            if (length == 4 && !foundedYearWarningShown) {
+            if (length == MAX_FOUNDED_YEAR_DIGITS && !foundedYearWarningShown) {
                 Toast.makeText(
                     requireContext(),
                     getString(R.string.team_edit_founded_year_limit_warning),
                     Toast.LENGTH_SHORT,
                 ).show()
                 foundedYearWarningShown = true
-            } else if (length < 4) {
+            } else if (length < MAX_FOUNDED_YEAR_DIGITS) {
                 foundedYearWarningShown = false
             }
         }
@@ -110,7 +110,7 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
             skipFoundedYearWatcher = true
             binding.etFoundedYear.setText(team.foundedYear.toString())
             skipFoundedYearWatcher = false
-            foundedYearWarningShown = binding.etFoundedYear.length() == 4
+            foundedYearWarningShown = binding.etFoundedYear.length() == MAX_FOUNDED_YEAR_DIGITS
             binding.etNotes.setText(team.notes)
             selectedIconUri = team.iconUri
             binding.imageView2.loadTeamImage(team)
@@ -202,6 +202,32 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
         val ivPhoto = dialogView.findViewById<ImageView>(R.id.ivAddPhoto)
         val btnAdd = dialogView.findViewById<AppCompatButton>(R.id.btnAddPlayer)
         val btnCancel = dialogView.findViewById<AppCompatImageButton>(R.id.btnCancel)
+
+        var numberLimitWarningShown = false
+        val numberLimitFilter = InputFilter { source, start, end, dest, dstart, dend ->
+            val newValue = dest.toString().substring(0, dstart) +
+                source.subSequence(start, end) + dest.toString().substring(dend)
+            if (newValue.length > MAX_PLAYER_NUMBER_DIGITS) {
+                if (!numberLimitWarningShown) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.team_edit_player_number_limit_warning),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                    numberLimitWarningShown = true
+                }
+                ""
+            } else {
+                null
+            }
+        }
+
+        etNumber.filters = arrayOf(numberLimitFilter)
+        etNumber.doOnTextChanged { text, _, _, _ ->
+            if ((text?.length ?: 0) < MAX_PLAYER_NUMBER_DIGITS) {
+                numberLimitWarningShown = false
+            }
+        }
 
         var popup: PopupWindow? = null
         val positions = resources.getStringArray(R.array.player_positions)
@@ -295,5 +321,10 @@ class TeamsEditFragment : Fragment(R.layout.fragment_teams_edit) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private companion object {
+        const val MAX_FOUNDED_YEAR_DIGITS = 4
+        const val MAX_PLAYER_NUMBER_DIGITS = 2
     }
 }

@@ -65,14 +65,17 @@
 
             <TextView
                 android:id="@+id/tvTeamName"
-                android:layout_width="270dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="YOUNG\nTEAM"
+                android:text="YOUNGTEAM"
                 android:textSize="48sp"
                 android:textColor="#FC4F08"
                 android:textStyle="bold"
 
                 android:fontFamily="@font/unbounded"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:singleLine="true"
                 android:lineSpacingExtra="-8dp" />
 
             <LinearLayout
