@@ -8,7 +8,6 @@
     android:paddingTop="20dp"
     tools:context=".presentation.ui.matches.MatchEditFragment">
 
-
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/btnBack"
         android:layout_width="40dp"
@@ -61,7 +60,6 @@
             android:src="@drawable/trash_icon" />
     </LinearLayout>
 
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
@@ -80,7 +78,6 @@
             android:clipToOutline="true"
             android:elevation="1dp">
 
-
             <ImageView
                 android:id="@+id/bgImage"
                 android:layout_width="match_parent"
@@ -94,8 +91,7 @@
                 android:layout_gravity="bottom"
                 android:background="@drawable/bg_bottom_fade" />
 
-
-            <!-- Контент поверх -->
+            
             <LinearLayout
                 android:id="@+id/conteinter"
                 android:layout_width="match_parent"
@@ -146,7 +142,7 @@
                     android:orientation="horizontal"
                     android:paddingVertical="10dp">
 
-                    <!-- Левая команда -->
+                    
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/team1Logo"
                         android:layout_width="60dp"
@@ -161,14 +157,13 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_launcher_background" />
 
-
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
                         android:orientation="horizontal">
 
-                        <!-- Счёт - Левая цифра -->
+                        
                         <TextView
                             android:id="@+id/team1Score"
                             android:layout_width="wrap_content"
@@ -182,7 +177,7 @@
                             android:textSize="50sp"
                             android:textStyle="bold" />
 
-                        <!-- Разделитель двоеточие -->
+                        
                         <TextView
                             android:id="@+id/colon"
                             android:layout_width="wrap_content"
@@ -196,7 +191,7 @@
                             android:textSize="50sp"
                             android:textStyle="bold" />
 
-                        <!-- Счёт - Правая цифра -->
+                        
                         <TextView
                             android:id="@+id/team2Score"
                             android:layout_width="wrap_content"
@@ -211,8 +206,7 @@
                             android:textStyle="bold" />
                     </LinearLayout>
 
-
-                    <!-- Правая команда -->
+                    
                     <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/team2Logo"
                         android:layout_width="60dp"
@@ -228,7 +222,6 @@
                         android:src="@drawable/ic_launcher_background" />
                 </FrameLayout>
 
-
                 <LinearLayout
                     android:id="@+id/teamInfoRow"
                     android:layout_width="match_parent"
@@ -237,7 +230,7 @@
                     android:orientation="horizontal"
                     android:paddingTop="8dp">
 
-                    <!-- Column 1 -->
+                    
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -268,7 +261,7 @@
                             android:textSize="18sp" />
                     </LinearLayout>
 
-                    <!-- Column 2 -->
+                    
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -300,7 +293,6 @@
                             android:textSize="18sp" />
                     </LinearLayout>
 
-
                 </LinearLayout>
 
                 <View
@@ -309,7 +301,6 @@
                     android:layout_marginTop="15dp"
                     android:background="#2FFFFFFF"
                     android:paddingHorizontal="20dp" />
-
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -330,7 +321,6 @@
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     android:textColor="#A2FFFFFF"
                     android:textSize="16sp" />
-
 
             </LinearLayout>
 

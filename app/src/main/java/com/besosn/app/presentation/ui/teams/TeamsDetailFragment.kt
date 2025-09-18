@@ -19,9 +19,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-/**
- * Screen displaying detailed information about a team.
- */
 class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
 
     private var _binding: FragmentTeamsDetailBinding? = null
@@ -91,7 +88,6 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
 
         binding.rvPlayers.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         binding.rvPlayers.adapter = PlayersAdapter(team.players)
-
 
         binding.btnEdit.isEnabled = true
         binding.btnEdit.alpha = if (team.isDefault) 0.6f else 1f

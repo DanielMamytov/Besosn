@@ -18,11 +18,11 @@ internal fun ImageView.loadTeamImage(team: TeamModel, @DrawableRes fallback: Int
                     return
                 }
             } catch (_: SecurityException) {
-                // We have lost URI read permissions (for example when using the Photo Picker).
+                
             } catch (_: FileNotFoundException) {
-                // The picked image is no longer available on the device.
+                
             } catch (_: IllegalArgumentException) {
-                // Invalid URI value – fall back to the default icon below.
+                
             }
         }
     }

@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Дата и время -->
+        
         <TextView
             android:id="@+id/tvMatchDate"
             android:layout_width="wrap_content"
@@ -87,7 +87,7 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Счет -->
+        
         <TextView
             android:id="@+id/tvDivider"
             android:layout_width="wrap_content"
@@ -138,14 +138,12 @@
                 android:textStyle="bold" />
         </LinearLayout>
 
-        <!-- Лого и название первой команды -->
-
+        
 
     </LinearLayout>
 
-    <!-- Divider (точка) -->
+    
 
-
-    <!-- Лого и название второй команды -->
+    
 
 </LinearLayout>

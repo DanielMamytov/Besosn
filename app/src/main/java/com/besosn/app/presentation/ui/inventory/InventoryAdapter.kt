@@ -8,7 +8,6 @@ import com.besosn.app.R
 import com.besosn.app.databinding.InventoryItemBinding
 import com.besosn.app.domain.model.InventoryItem
 
-
 class InventoryAdapter(
     private val items: MutableList<InventoryItem>,
     private val onItemClick: (InventoryItem) -> Unit,
@@ -51,7 +50,6 @@ class InventoryAdapter(
             binding.root.setOnClickListener { onItemClick(item) }
             binding.btnNext.setOnClickListener { onEdit(item) }
 
-//            binding.btnDelete.setOnClickListener { onDelete(item) }
         }
     }
 }

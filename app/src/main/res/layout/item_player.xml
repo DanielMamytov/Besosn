@@ -5,7 +5,7 @@
     android:layout_margin="8dp"
     android:background="@drawable/bg_player_item">
 
-    <!-- Avatar -->
+    
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgPlayer"
         android:layout_width="96dp"
@@ -19,7 +19,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!-- First name (line 1) -->
+    
     <TextView
         android:id="@+id/tvPlayerName"
         android:layout_width="0dp"
@@ -38,7 +38,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgPlayer" />
 
-    <!-- Meta row: position • number -->
+    
     <LinearLayout
         android:id="@+id/metaRow"
         android:layout_width="0dp"

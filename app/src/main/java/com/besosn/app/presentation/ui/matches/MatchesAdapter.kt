@@ -7,9 +7,6 @@ import com.besosn.app.databinding.MatchItemBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
-/**
- * Adapter displaying list of matches on the [MatchesFragment].
- */
 class MatchesAdapter(
     private val items: MutableList<MatchModel>,
     private val onItemClick: (MatchModel) -> Unit

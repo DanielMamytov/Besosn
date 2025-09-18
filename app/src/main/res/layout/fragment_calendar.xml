@@ -15,7 +15,7 @@
        android:fontFamily="@font/unbounded"
         android:layout_marginBottom="10dp"/>
 
-    <!-- Tabs -->
+    
     <LinearLayout
         android:id="@+id/tabsRow"
         android:layout_width="match_parent"
@@ -96,7 +96,7 @@
         </FrameLayout>
     </LinearLayout>
 
-    <!-- MONTH -->
+    
     <LinearLayout
         android:id="@+id/monthContainer"
         android:layout_width="match_parent"
@@ -106,7 +106,7 @@
         android:padding="12dp"
         android:orientation="vertical">
 
-        <!-- шапка дней недели -->
+        
         <LinearLayout
             android:id="@+id/weekHeader"
             android:layout_width="match_parent"
@@ -121,7 +121,7 @@
             android:columnCount="7"/>
     </LinearLayout>
 
-    <!-- WEEK -->
+    
     <LinearLayout
         android:id="@+id/weekContainer"
         android:layout_width="match_parent"
@@ -139,7 +139,7 @@
             android:orientation="horizontal"/>
     </LinearLayout>
 
-    <!-- YEAR -->
+    
     <LinearLayout
         android:id="@+id/yearContainer"
         android:layout_width="match_parent"

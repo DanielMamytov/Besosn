@@ -3,10 +3,6 @@ package com.besosn.app.presentation.ui.teams
 import androidx.annotation.DrawableRes
 import java.io.Serializable
 
-/**
- * UI model representing a team with all information
- * displayed on the screen.
- */
 data class TeamModel(
     val id: Int = 0,
 

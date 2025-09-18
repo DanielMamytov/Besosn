@@ -7,7 +7,7 @@
     android:paddingTop="10dp"
     android:background="@drawable/bg_teams_dark">
 
-    <!-- Top bar -->
+    
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="40dp"
@@ -39,7 +39,7 @@
         android:layout_marginStart="20dp"
         android:layout_marginEnd="16dp"/>
 
-    <!-- Inventory list -->
+    
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvInventory"
         android:layout_width="0dp"
@@ -68,7 +68,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:visibility="gone"/>
 
-    <!-- Нижняя панель с кнопкой -->
+    
     <LinearLayout
         android:id="@+id/bottomBar"
         android:layout_width="0dp"

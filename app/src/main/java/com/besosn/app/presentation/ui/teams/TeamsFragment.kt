@@ -13,10 +13,6 @@ import com.besosn.app.R
 import com.besosn.app.databinding.FragmentTeamsBinding
 import kotlinx.coroutines.launch
 
-/**
- * Screen displaying list of teams. Allows navigating to team details
- * and adding new teams.
- */
 class TeamsFragment : Fragment(R.layout.fragment_teams) {
 
     private var _binding: FragmentTeamsBinding? = null
@@ -39,13 +35,12 @@ class TeamsFragment : Fragment(R.layout.fragment_teams) {
 
         loadTeams()
 
-
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnAdd.setOnClickListener {
             findNavController().navigate(R.id.action_teamsFragment_to_teamsEditFragment)
         }
 
-        // Listen for newly added team from edit screen and reload
+        
         setFragmentResultListener("add_team_result") { _, _ ->
             loadTeams()
 

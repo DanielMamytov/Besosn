@@ -2,9 +2,7 @@ package com.besosn.app.domain.model
 
 import java.io.Serializable
 
-/**
- * Domain model representing a single item in the inventory.
- */
+
 data class InventoryItem(
     val id: Int = 0,
     val name: String,
