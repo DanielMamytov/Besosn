@@ -372,6 +372,10 @@ class MatchEditFragment : Fragment() {
             ?.takeIf { it.id >= DB_MATCH_ID_OFFSET }
             ?.let { it.id - DB_MATCH_ID_OFFSET }
 
+        val legacyMatchIndex = editingMatch
+            ?.takeIf { it.id in LEGACY_MATCH_ID_OFFSET until DB_MATCH_ID_OFFSET }
+            ?.let { it.id - LEGACY_MATCH_ID_OFFSET }
+
         val match = MatchEntity(
             id = existingDbId ?: 0,
             homeTeamName = homeTeam,
@@ -387,6 +391,30 @@ class MatchEditFragment : Fragment() {
 
         viewLifecycleOwner.lifecycleScope.launch {
             val context = requireContext().applicationContext
+            val isLegacyUpdate = legacyMatchIndex != null && existingDbId == null
+            if (isLegacyUpdate) {
+                val updated = withContext(Dispatchers.IO) {
+                    MatchesLocalDataSource.updateSavedMatch(context, legacyMatchIndex!!, match)
+                }
+
+                if (updated) {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.match_edit_saved_message),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                    notifyMatchesChanged()
+                    findNavController().popBackStack()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        getString(R.string.match_edit_save_failed),
+                        Toast.LENGTH_SHORT,
+                    ).show()
+                }
+                return@launch
+            }
+
             val db = Room.databaseBuilder(context, AppDatabase::class.java, "app_db")
                 .fallbackToDestructiveMigration()
                 .build()
@@ -406,6 +434,7 @@ class MatchEditFragment : Fragment() {
                     getString(R.string.match_edit_saved_message),
                     Toast.LENGTH_SHORT,
                 ).show()
+                notifyMatchesChanged()
                 findNavController().popBackStack()
             } catch (_: Exception) {
                 Toast.makeText(
@@ -416,6 +445,13 @@ class MatchEditFragment : Fragment() {
             } finally {
                 db.close()
             }
+        }
+    }
+
+    private fun notifyMatchesChanged() {
+        runCatching {
+            val entry = findNavController().getBackStackEntry(R.id.matchesFragment)
+            entry.savedStateHandle[RESULT_KEY_MATCHES_UPDATED] = true
         }
     }
 
@@ -493,6 +529,7 @@ class MatchEditFragment : Fragment() {
 
     companion object {
         const val ARG_MATCH_TO_EDIT = "match_to_edit"
+        const val RESULT_KEY_MATCHES_UPDATED = "match_edit_matches_updated"
         private const val KEY_HOME_PHOTO_URI = "match_edit_home_photo_uri"
         private const val KEY_AWAY_PHOTO_URI = "match_edit_away_photo_uri"
         private const val KEY_MATCH_TIME = "match_edit_time"

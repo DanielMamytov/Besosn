@@ -25,3 +25,4 @@ data class MatchModel(
 }
 
 internal const val DB_MATCH_ID_OFFSET = 10_000
+internal const val LEGACY_MATCH_ID_OFFSET = 1_000

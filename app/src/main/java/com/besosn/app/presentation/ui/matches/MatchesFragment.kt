@@ -5,6 +5,7 @@ import android.view.View
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -41,6 +42,16 @@ class MatchesFragment : Fragment(R.layout.fragment_matches) {
         setupFilters()
         loadMatches()
         observeSavedMatches()
+
+        findNavController().currentBackStackEntry?.savedStateHandle
+            ?.getLiveData<Boolean>(MatchEditFragment.RESULT_KEY_MATCHES_UPDATED)
+            ?.observe(viewLifecycleOwner, Observer { shouldReload ->
+                if (shouldReload == true) {
+                    loadMatches()
+                    findNavController().currentBackStackEntry?.savedStateHandle
+                        ?.remove<Boolean>(MatchEditFragment.RESULT_KEY_MATCHES_UPDATED)
+                }
+            })
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnAdd.setOnClickListener {
