@@ -70,6 +70,7 @@
                     android:maxLines="1"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="16sp"
+                    android:ellipsize="end"
                     android:singleLine="true"/>
             </LinearLayout>
         </LinearLayout>
@@ -159,7 +160,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="16sp"
                     android:inputType="number"
-                    android:maxLength="2"
+                    android:ellipsize="end"
                     android:singleLine="true"/>
             </LinearLayout>
         </LinearLayout>

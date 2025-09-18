@@ -120,7 +120,10 @@
                             android:gravity="center_vertical"
                             android:text="@string/match_edit_choose_team"
                             android:textColor="#B3FFFFFF"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:singleLine="true" />
 
                         <ImageView
                             android:id="@+id/ivCategoryArrow"
@@ -181,14 +184,17 @@
                             android:paddingStart="16dp"
                             android:paddingEnd="16dp">
 
-                            <TextView
-                                android:id="@+id/tvTeam2"
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:gravity="center_vertical"
-                                android:text="@string/match_edit_choose_team"
-                                android:textColor="#B3FFFFFF"
-                                android:textSize="16sp" />
+                        <TextView
+                            android:id="@+id/tvTeam2"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center_vertical"
+                            android:text="@string/match_edit_choose_team"
+                            android:textColor="#B3FFFFFF"
+                            android:textSize="16sp"
+                            android:maxLines="1"
+                            android:ellipsize="end"
+                            android:singleLine="true" />
 
                             <ImageView
                                 android:id="@+id/ivTeamAwayArrow"

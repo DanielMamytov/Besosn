@@ -34,6 +34,9 @@
         android:textSize="18sp"
         android:textFontWeight="700"
         android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:singleLine="true"
         app:layout_constraintEnd_toStartOf="@id/btnNext"
         app:layout_constraintStart_toEndOf="@id/imgTeamLogo"
         app:layout_constraintTop_toTopOf="@id/imgTeamLogo" />
@@ -48,6 +51,9 @@
         android:text="New York •"
         android:textColor="#B3FFFFFF"
         android:textSize="14sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:singleLine="true"
         app:layout_constraintStart_toStartOf="@id/tvTeamTitle"
         app:layout_constraintTop_toBottomOf="@id/tvTeamTitle" />
 
@@ -60,6 +66,9 @@
         android:text=" 23 Players"
         android:textColor="#B3FFFFFF"
         android:textSize="14sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:singleLine="true"
         app:layout_constraintStart_toEndOf="@+id/tvTeamCity"
         app:layout_constraintTop_toBottomOf="@+id/tvTeamTitle" />
 
