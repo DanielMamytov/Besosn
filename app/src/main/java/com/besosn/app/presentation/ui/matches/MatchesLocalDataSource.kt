@@ -90,6 +90,7 @@ object MatchesLocalDataSource {
                 date = past.timeInMillis,
                 homeScore = 1,
                 awayScore = 2,
+                isImmutable = true,
             ),
             MatchModel(
                 id = 2,
@@ -98,6 +99,7 @@ object MatchesLocalDataSource {
                 homeIconRes = R.drawable.vdgdsgfds,
                 awayIconRes = R.drawable.jkljfsjfls,
                 date = future.timeInMillis,
+                isImmutable = true,
             ),
         )
     }
