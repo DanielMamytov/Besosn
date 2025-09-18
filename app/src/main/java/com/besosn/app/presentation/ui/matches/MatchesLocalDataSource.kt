@@ -4,13 +4,15 @@ import android.content.Context
 import androidx.annotation.DrawableRes
 import com.besosn.app.R
 import com.besosn.app.data.local.db.DatabaseProvider
+import com.besosn.app.data.model.MatchEntity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.json.JSONArray
 import org.json.JSONException
+import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 
 /**
  * Provides access to match data that is stored locally in SharedPreferences
@@ -57,21 +59,75 @@ object MatchesLocalDataSource {
 
                 val homeScore = (obj.opt("homeGoals") as? Number)?.toInt()
                 val awayScore = (obj.opt("awayGoals") as? Number)?.toInt()
+                val city = obj.optString("city").takeIf { it.isNotBlank() }
+                val notes = obj.optString("notes").takeIf { it.isNotBlank() }
+                val homeIconUri = obj.optString("homePhotoUri").takeIf { it.isNotBlank() }
+                val awayIconUri = obj.optString("awayPhotoUri").takeIf { it.isNotBlank() }
 
                 result += MatchModel(
-                    id = SAVED_MATCH_ID_OFFSET + i,
+                    id = LEGACY_MATCH_ID_OFFSET + i,
                     homeTeam = homeTeam,
                     awayTeam = awayTeam,
                     homeIconRes = resolveTeamIcon(homeTeam),
                     awayIconRes = resolveTeamIcon(awayTeam),
+                    homeIconUri = homeIconUri,
+                    awayIconUri = awayIconUri,
                     date = dateMillis,
                     homeScore = homeScore,
                     awayScore = awayScore,
+                    city = city,
+                    notes = notes,
                 )
             }
             result
         } catch (_: JSONException) {
             emptyList()
+        }
+    }
+
+    internal fun updateSavedMatch(context: Context, index: Int, entity: MatchEntity): Boolean {
+        val prefs = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
+        val raw = prefs.getString(PREFS_KEY_MATCHES, null) ?: return false
+
+        return try {
+            val array = JSONArray(raw)
+            if (index < 0 || index >= array.length()) return false
+
+            val obj = array.optJSONObject(index) ?: JSONObject()
+            obj.put("homeTeam", entity.homeTeamName)
+            obj.put("awayTeam", entity.awayTeamName)
+            obj.put("timestamp", entity.date)
+
+            if (entity.homeGoals != null) obj.put("homeGoals", entity.homeGoals) else obj.remove("homeGoals")
+            if (entity.awayGoals != null) obj.put("awayGoals", entity.awayGoals) else obj.remove("awayGoals")
+
+            if (entity.city.isNotBlank()) {
+                obj.put("city", entity.city)
+            } else {
+                obj.remove("city")
+            }
+            if (entity.notes.isNotBlank()) {
+                obj.put("notes", entity.notes)
+            } else {
+                obj.remove("notes")
+            }
+
+            if (!entity.homePhotoUri.isNullOrBlank()) {
+                obj.put("homePhotoUri", entity.homePhotoUri)
+            } else {
+                obj.remove("homePhotoUri")
+            }
+            if (!entity.awayPhotoUri.isNullOrBlank()) {
+                obj.put("awayPhotoUri", entity.awayPhotoUri)
+            } else {
+                obj.remove("awayPhotoUri")
+            }
+
+            array.put(index, obj)
+            prefs.edit().putString(PREFS_KEY_MATCHES, array.toString()).apply()
+            true
+        } catch (_: JSONException) {
+            false
         }
     }
 
@@ -123,7 +179,6 @@ object MatchesLocalDataSource {
         }
     }
 
-    private const val SAVED_MATCH_ID_OFFSET = 1000
     private const val PREFS_NAME = "matches_prefs"
     private const val PREFS_KEY_MATCHES = "matches"
 }
