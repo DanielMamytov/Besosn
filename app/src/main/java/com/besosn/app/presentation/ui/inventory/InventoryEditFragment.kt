@@ -162,7 +162,12 @@ class InventoryEditFragment : Fragment() {
         val deleteAction = {
             viewModel.deleteItem(item)
             dialog.dismiss()
-            findNavController().popBackStack()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.inventory_delete_success),
+                Toast.LENGTH_SHORT,
+            ).show()
+            navigateToInventoryScreen()
         }
 
         dialogBinding.btnConfirm.setOnClickListener { deleteAction() }
@@ -170,6 +175,13 @@ class InventoryEditFragment : Fragment() {
 
         dialog.show()
         dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+    }
+
+    private fun navigateToInventoryScreen() {
+        val navController = findNavController()
+        if (!navController.popBackStack(R.id.inventoryFragment, false)) {
+            navController.navigate(R.id.inventoryFragment)
+        }
     }
 
     private fun setupDropdown(anchorView: FrameLayout, tv: TextView, arrow: View, list: List<String>) {
