@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import com.besosn.app.R
+import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 import kotlin.math.roundToInt
@@ -31,15 +32,23 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
     private lateinit var gridMonth: GridLayout
     private lateinit var rowWeek: LinearLayout
     private lateinit var gridYear: GridLayout
+    private lateinit var tvDateTitle: TextView
 
     // state
     private val cal: Calendar = Calendar.getInstance()
-    private var selectedCal: Calendar = Calendar.getInstance()
+    private val selectedCal: Calendar = Calendar.getInstance()
 
     private val activeColor = 0xFFFC4F08.toInt()
     private val inactiveColor = 0x9EFFFFFF.toInt()
     private val textBlack = 0xFF000000.toInt()
-    private val textDim = 0x80000000.toInt()
+
+    private var hasSelection: Boolean = false
+    private var onDateSelected: ((Long) -> Unit)? = null
+    private var pendingSelectionMillis: Long? = null
+    private var pendingSelectionActive: Boolean? = null
+    private var isViewReady: Boolean = false
+
+    private val dateFormatter = SimpleDateFormat("MMM dd, yyyy", Locale.getDefault())
 
     private var unbounded: Typeface? = null
 
@@ -47,6 +56,8 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        isViewReady = true
 
         monthContainer = view.findViewById(R.id.monthContainer)
         weekContainer = view.findViewById(R.id.weekContainer)
@@ -63,6 +74,7 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         gridMonth = view.findViewById(R.id.gridMonth)
         rowWeek = view.findViewById(R.id.rowWeek)
         gridYear = view.findViewById(R.id.gridYear)
+        tvDateTitle = view.findViewById(R.id.tvDateTitle)
 
         unbounded = ResourcesCompat.getFont(requireContext(), R.font.unbounded)
 
@@ -74,12 +86,90 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         // headers Sun..Sat
         buildWeekHeader()
 
-        // init content
+        val initialMillis = pendingSelectionMillis ?: selectedCal.timeInMillis
+        val initialSelectionActive = pendingSelectionActive ?: hasSelection
+        applySelection(initialMillis, initialSelectionActive)
+
+        select(Mode.MONTH)
+
+        pendingSelectionMillis = null
+        pendingSelectionActive = null
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        isViewReady = false
+    }
+
+    fun setOnDateSelectedListener(listener: (Long) -> Unit) {
+        onDateSelected = listener
+    }
+
+    fun setInitialDate(timeInMillis: Long, selectionActive: Boolean) {
+        if (isViewReady) {
+            applySelection(timeInMillis, selectionActive)
+            pendingSelectionMillis = null
+            pendingSelectionActive = null
+        } else {
+            pendingSelectionMillis = timeInMillis
+            pendingSelectionActive = selectionActive
+            cal.timeInMillis = timeInMillis
+            selectedCal.timeInMillis = timeInMillis
+            hasSelection = selectionActive
+        }
+    }
+
+    private fun applySelection(timeInMillis: Long, selectionActive: Boolean) {
+        cal.timeInMillis = timeInMillis
+        selectedCal.timeInMillis = timeInMillis
+        hasSelection = selectionActive
+
         renderMonth()
         renderWeek()
         renderYear()
+        updateDateTitle()
+    }
 
-        select(Mode.MONTH)
+    private fun updateDateTitle() {
+        if (!this::tvDateTitle.isInitialized) return
+        if (hasSelection) {
+            tvDateTitle.text = dateFormatter.format(selectedCal.time)
+            tvDateTitle.setTextColor(0xFFFFFFFF.toInt())
+        } else {
+            tvDateTitle.text = getString(R.string.match_edit_select_date)
+            tvDateTitle.setTextColor(inactiveColor)
+        }
+    }
+
+    private fun notifyDateSelected() {
+        if (!hasSelection) return
+
+        val millis = Calendar.getInstance().apply {
+            timeInMillis = selectedCal.timeInMillis
+            set(Calendar.HOUR_OF_DAY, 0)
+            set(Calendar.MINUTE, 0)
+            set(Calendar.SECOND, 0)
+            set(Calendar.MILLISECOND, 0)
+        }.timeInMillis
+
+        onDateSelected?.invoke(millis)
+    }
+
+    private fun onDateChosen(year: Int, month: Int, day: Int) {
+        hasSelection = true
+
+        selectedCal.set(Calendar.YEAR, year)
+        selectedCal.set(Calendar.MONTH, month)
+        selectedCal.set(Calendar.DAY_OF_MONTH, day)
+
+        cal.set(Calendar.YEAR, year)
+        cal.set(Calendar.MONTH, month)
+
+        renderMonth()
+        renderWeek()
+        renderYear()
+        updateDateTitle()
+        notifyDateSelected()
     }
 
     /* ---------------- Tabs ----------------- */
@@ -128,7 +218,6 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
         val prevLastDay = prev.get(Calendar.DAY_OF_MONTH)
 
         // 6 rows x 7 cols = 42
-        var cellIndex = 0
         for (i in 0 until 42) {
             val tv = makeDayCell()
             val lp = GridLayout.LayoutParams().apply {
@@ -160,23 +249,14 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
                     val day = i - offset + 1
                     tv.text = day.toString()
                     tv.setTextColor(0xFFFFFFFF.toInt())  // Белый цвет для чисел
+                    val isSelected = hasSelection && isSameDate(cal, selectedCal, day)
                     tv.setBackgroundResource(
-                        if (isSameDate(cal, selectedCal, day)) R.drawable.bg_day_cell_selected
-                        else R.drawable.bg_day_cell
+                        if (isSelected) R.drawable.bg_day_cell_selected else R.drawable.bg_day_cell
                     )
-                    tv.setOnClickListener {
-                        selectedCal = Calendar.getInstance().apply {
-                            set(Calendar.YEAR, year)
-                            set(Calendar.MONTH, month)
-                            set(Calendar.DAY_OF_MONTH, day)
-                        }
-                        renderMonth()
-                        renderWeek()
-                    }
+                    tv.setOnClickListener { onDateChosen(year, month, day) }
                 }
             }
             gridMonth.addView(tv, lp)
-            cellIndex++
         }
     }
 
@@ -230,17 +310,17 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
             val tv = makeDayCell().apply {
                 text = dayCal.get(Calendar.DAY_OF_MONTH).toString()
                 setTextColor(textBlack)
+                val isSelected = hasSelection && sameDay(dayCal, selectedCal)
                 background = resources.getDrawable(
-                    if (sameDay(dayCal, selectedCal)) R.drawable.bg_day_cell_selected else R.drawable.bg_day_cell,
+                    if (isSelected) R.drawable.bg_day_cell_selected else R.drawable.bg_day_cell,
                     null
                 )
                 setOnClickListener {
-                    selectedCal.timeInMillis = dayCal.timeInMillis
-                    // если месяц другой — обновим вид месяца
-                    cal.set(Calendar.YEAR, dayCal.get(Calendar.YEAR))
-                    cal.set(Calendar.MONTH, dayCal.get(Calendar.MONTH))
-                    renderMonth()
-                    renderWeek()
+                    onDateChosen(
+                        dayCal.get(Calendar.YEAR),
+                        dayCal.get(Calendar.MONTH),
+                        dayCal.get(Calendar.DAY_OF_MONTH),
+                    )
                 }
             }
             val lp = LinearLayout.LayoutParams(0, dp(44), 1f).apply {
@@ -300,7 +380,10 @@ class CalendarFragment : Fragment(R.layout.fragment_calendar) {
                     // Re-render and jump to Month mode
                     renderYear()
                     renderMonth()
+                    renderWeek()
+                    updateDateTitle()
                     select(Mode.MONTH)
+                    notifyDateSelected()
                 }
             }
 

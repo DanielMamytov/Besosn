@@ -1,6 +1,5 @@
 package com.besosn.app.presentation.ui.matches
 
-import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.ContentResolver
 import android.content.Intent
@@ -31,10 +30,10 @@ import com.besosn.app.R
 import com.besosn.app.data.local.db.AppDatabase
 import com.besosn.app.data.model.MatchEntity
 import com.besosn.app.databinding.FragmentMatchEditBinding
+import com.besosn.app.presentation.ui.calendar.CalendarFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
 
@@ -124,12 +123,6 @@ class MatchEditFragment : Fragment() {
             )
         }
 
-        if (dateSelected) {
-            val fmt = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-            binding.tvDate.text = fmt.format(matchCalendar.time)
-            binding.tvDate.setTextColor(Color.WHITE)
-        }
-
         homePhotoUri?.let { loadSelectedImage(binding.ivAddPhoto, it) }
         awayPhotoUri?.let { loadSelectedImage(binding.ivAddPhotoAwayt, it) }
 
@@ -149,7 +142,22 @@ class MatchEditFragment : Fragment() {
         binding.etAwayGoals.filters = arrayOf(goalsFilter)
 
         binding.timePickerContainer.setOnClickListener { showTimePicker() }
-        binding.datePickerContainer.setOnClickListener { showDatePicker() }
+
+        val calendarFragment = childFragmentManager.findFragmentById(R.id.calendarHost) as? CalendarFragment
+        calendarFragment?.setOnDateSelectedListener { selectedMillis ->
+            val hour = matchCalendar.get(Calendar.HOUR_OF_DAY)
+            val minute = matchCalendar.get(Calendar.MINUTE)
+            val second = matchCalendar.get(Calendar.SECOND)
+            val millisecond = matchCalendar.get(Calendar.MILLISECOND)
+
+            matchCalendar.timeInMillis = selectedMillis
+            matchCalendar.set(Calendar.HOUR_OF_DAY, hour)
+            matchCalendar.set(Calendar.MINUTE, minute)
+            matchCalendar.set(Calendar.SECOND, second)
+            matchCalendar.set(Calendar.MILLISECOND, millisecond)
+            dateSelected = true
+        }
+        calendarFragment?.setInitialDate(matchCalendar.timeInMillis, dateSelected)
 
         setupDropdown(binding.ddTeam, binding.tvTeam, binding.ivCategoryArrow, teamOptions)
         setupDropdown(binding.ddTeam2, binding.tvTeam2, binding.ivTeamAwayArrow, teamOptions)
@@ -261,35 +269,11 @@ class MatchEditFragment : Fragment() {
             matchCalendar.get(Calendar.MINUTE),
         )
 
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-        binding.tvDate.text = dateFormat.format(matchCalendar.time)
-        binding.tvDate.setTextColor(Color.WHITE)
-
         homePhotoUri = match.homeIconUri?.takeIf { it.isNotBlank() }
         awayPhotoUri = match.awayIconUri?.takeIf { it.isNotBlank() }
 
         binding.ivAddPhoto.loadMatchIcon(match.homeIconRes, match.homeIconUri)
         binding.ivAddPhotoAwayt.loadMatchIcon(match.awayIconRes, match.awayIconUri)
-    }
-
-
-    private fun showDatePicker() {
-        DatePickerDialog(
-            requireContext(),
-            { _, year, month, dayOfMonth ->
-                matchCalendar.set(Calendar.YEAR, year)
-                matchCalendar.set(Calendar.MONTH, month)
-                matchCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth)
-                dateSelected = true
-
-                val fmt = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                binding.tvDate.text = fmt.format(matchCalendar.time)
-                binding.tvDate.setTextColor(Color.WHITE)
-            },
-            matchCalendar.get(Calendar.YEAR),
-            matchCalendar.get(Calendar.MONTH),
-            matchCalendar.get(Calendar.DAY_OF_MONTH),
-        ).show()
     }
 
     private fun showTimePicker() {
@@ -318,7 +302,6 @@ class MatchEditFragment : Fragment() {
 
     private fun saveMatch() {
         val teamPlaceholder = getString(R.string.match_edit_choose_team)
-        val datePlaceholder = getString(R.string.match_edit_select_date)
 
         val homeTeam = binding.tvTeam.text.toString()
         val awayTeam = binding.tvTeam2.text.toString()
@@ -326,15 +309,13 @@ class MatchEditFragment : Fragment() {
         val awayGoalsText = binding.etAwayGoals.text.toString()
         val city = binding.etCity.text.toString().trim()
         val notes = binding.etNotes.text.toString().trim()
-        val dateText = binding.tvDate.text.toString()
-
         val homeGoals = homeGoalsText.toIntOrNull()
         val awayGoals = awayGoalsText.toIntOrNull()
         val hasHomeGoalsInput = homeGoalsText.isNotBlank()
         val hasAwayGoalsInput = awayGoalsText.isNotBlank()
 
         if (homeTeam == teamPlaceholder || awayTeam == teamPlaceholder ||
-            city.isBlank() || !dateSelected || dateText == datePlaceholder
+            city.isBlank() || !dateSelected
         ) {
             Toast.makeText(
                 requireContext(),
