@@ -427,18 +427,23 @@
                 <EditText
                     android:id="@+id/etNotes"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/bg_input_team"
+                    android:ellipsize="end"
                     android:fontFamily="@font/poppins_regular"
-                    android:gravity="center_vertical"
+                    android:gravity="start|top"
                     android:hint="Enter your notes"
-                    android:maxLines="1"
+                    android:inputType="textMultiLine"
+                    android:minHeight="65dp"
+                    android:maxHeight="200dp"
                     android:paddingHorizontal="16dp"
-                    android:paddingVertical="12dp"
+                    android:paddingVertical="16dp"
+                    android:scrollbars="vertical"
+                    android:scrollHorizontally="false"
                     android:textColor="@android:color/white"
                     android:textColorHint="#72FFFFFF"
                     android:textSize="16sp" />
+
 
                 <LinearLayout
                     android:id="@+id/linearLayout"

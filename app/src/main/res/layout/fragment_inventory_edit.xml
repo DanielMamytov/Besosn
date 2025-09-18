@@ -1,58 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_teams_dark"
+    android:paddingTop="20dp"
     tools:context=".presentation.ui.inventory.InventoryEditFragment">
 
 
-    <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView2"
-        android:layout_width="130dp"
-        android:layout_height="130dp"
-        android:layout_gravity="center_horizontal"
-        android:scaleType="centerCrop"
-        android:elevation="1dp"
-        android:src="@drawable/ball"
-        android:layout_marginTop="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:shapeAppearanceOverlay="@style/RoundedImage18"/>
+
+
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/back"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp"/>
-
-
+        android:layout_marginTop="25dp"
+        android:src="@drawable/back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:layout_gravity="bottom"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/rounded_top_bg"
-            android:elevation="1dp"
-            android:clipToOutline="true">
-
+            android:clipToOutline="true"
+            android:elevation="1dp">
 
 
             <ImageView
@@ -60,13 +46,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/image3"/>
+                android:src="@drawable/image3" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/bg_bottom_fade"/>
+                android:background="@drawable/bg_bottom_fade" />
 
 
             <!-- Контент поверх -->
@@ -75,8 +61,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:paddingHorizontal="20dp"
-                android:paddingTop="100dp">
+                android:paddingHorizontal="20dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:elevation="1dp"
+                    android:layout_gravity="center"
+                    android:translationY="-80dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ball"
+                    app:shapeAppearanceOverlay="@style/RoundedImage18" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -99,11 +95,11 @@
                         android:layout_height="60dp"
                         android:background="@drawable/bg_input_team"
                         android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
                         android:hint="Enter name inventory"
+                        android:maxLines="1"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="12dp"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
                         android:textColor="@android:color/white"
                         android:textColorHint="#72FFFFFF"
                         android:textSize="16sp" />
@@ -130,12 +126,12 @@
                         android:layout_height="60dp"
                         android:background="@drawable/bg_input_team"
                         android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
                         android:hint="0"
                         android:inputType="number"
+                        android:maxLines="1"
                         android:paddingHorizontal="16dp"
                         android:paddingVertical="12dp"
-                        android:gravity="center_vertical"
-                        android:maxLines="1"
                         android:textColor="@android:color/white"
                         android:textColorHint="#72FFFFFF"
                         android:textSize="16sp" />
@@ -226,6 +222,7 @@
 
 
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
@@ -248,18 +245,24 @@
                 <EditText
                     android:id="@+id/etNotes"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:layout_marginTop="5dp"
+                    android:layout_height="wrap_content"
                     android:background="@drawable/bg_input_team"
+                    android:ellipsize="end"
                     android:fontFamily="@font/poppins_regular"
+                    android:gravity="start|top"
                     android:hint="Enter your notes"
+                    android:inputType="textMultiLine"
+                    android:minHeight="65dp"
+                    android:maxHeight="200dp"
                     android:paddingHorizontal="16dp"
-                    android:paddingVertical="12dp"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
+                    android:paddingVertical="16dp"
+                    android:scrollbars="vertical"
+                    android:scrollHorizontally="false"
                     android:textColor="@android:color/white"
                     android:textColorHint="#72FFFFFF"
                     android:textSize="16sp" />
+
+
                 <LinearLayout
                     android:id="@+id/linearLayout"
                     android:layout_width="match_parent"
@@ -294,9 +297,9 @@
                         android:layout_height="56dp"
 
                         android:background="@drawable/btn_delete_gradient"
-                        android:src="@drawable/trash_icon"
+                        android:contentDescription="Delete"
                         android:scaleType="centerInside"
-                        android:contentDescription="Delete"/>
+                        android:src="@drawable/trash_icon" />
                 </LinearLayout>
             </LinearLayout>
 
