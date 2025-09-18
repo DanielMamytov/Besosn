@@ -1,47 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_teams_dark"
+    android:paddingTop="20dp"
     tools:context=".presentation.ui.matches.MatchEditFragment">
-
 
 
     <ImageView
         android:id="@+id/btnBack"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/back"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp"/>
-
-
+        android:layout_marginTop="25dp"
+        android:src="@drawable/back"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:layout_gravity="bottom"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
 
-        <FrameLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/rounded_top_bg"
             android:elevation="1dp"
-            android:clipToOutline="true">
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="34dp"
 
-<!--            android:id="@+id/bgImage"-->
+            app:strokeColor="@color/black">
+
 
 
             <ImageView
@@ -49,13 +47,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/image3"/>
+                android:src="@drawable/image3" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/bg_bottom_fade"/>
+                android:background="@drawable/bg_bottom_fade" />
 
 
             <!-- Контент поверх -->
@@ -69,8 +67,8 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                     <FrameLayout
                         android:layout_width="88dp"
@@ -79,7 +77,7 @@
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/bg_avatar_circle">
 
-                        <ImageView
+                        <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/ivAddPhoto"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -87,62 +85,63 @@
                             android:background="@drawable/rounded_circle"
                             android:clipToOutline="true"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/ic_plus"/>
+                            android:src="@drawable/ic_plus"
+                            app:shapeAppearanceOverlay="@style/circle" />
 
                     </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:fontFamily="@font/poppins_regular"
+                            android:text="Home team"
+                            android:textColor="@android:color/white"
+                            android:textSize="16sp" />
+
+                        <FrameLayout
+                            android:id="@+id/ddTeam"
+                            android:layout_width="match_parent"
+                            android:layout_height="56dp"
+                            android:background="@drawable/bg_dropdown_field"
+                            android:paddingStart="16dp"
+                            android:paddingEnd="16dp">
+
+                            <TextView
+                                android:id="@+id/tvTeam"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:ellipsize="end"
+                                android:gravity="center_vertical"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="@string/match_edit_choose_team"
+                                android:textColor="#B3FFFFFF"
+                                android:textSize="16sp" />
+
+                            <ImageView
+                                android:id="@+id/ivCategoryArrow"
+                                android:layout_width="24dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="end|center_vertical"
+                                android:src="@drawable/arrow_down" />
+                        </FrameLayout>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:fontFamily="@font/poppins_regular"
-                        android:text="Home team"
-                        android:textColor="@android:color/white"
-                        android:textSize="16sp" />
-
-                    <FrameLayout
-                        android:id="@+id/ddTeam"
-                        android:layout_width="match_parent"
-                        android:layout_height="56dp"
-                        android:background="@drawable/bg_dropdown_field"
-                        android:paddingStart="16dp"
-                        android:paddingEnd="16dp">
-
-                        <TextView
-                            android:id="@+id/tvTeam"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="@string/match_edit_choose_team"
-                            android:textColor="#B3FFFFFF"
-                            android:textSize="16sp"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:singleLine="true" />
-
-                        <ImageView
-                            android:id="@+id/ivCategoryArrow"
-                            android:layout_width="24dp"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="end|center_vertical"
-                            android:src="@drawable/arrow_down" />
-                    </FrameLayout>
-
-
-                </LinearLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
                     android:layout_marginTop="15dp"
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content">
+                    android:orientation="horizontal">
 
                     <FrameLayout
                         android:layout_width="88dp"
@@ -151,7 +150,7 @@
                         android:layout_marginEnd="10dp"
                         android:background="@drawable/bg_avatar_circle">
 
-                        <ImageView
+                        <com.google.android.material.imageview.ShapeableImageView
                             android:id="@+id/ivAddPhotoAwayt"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -159,7 +158,8 @@
                             android:background="@drawable/rounded_circle"
                             android:clipToOutline="true"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/ic_plus"/>
+                            android:src="@drawable/ic_plus"
+                            app:shapeAppearanceOverlay="@style/circle" />
                     </FrameLayout>
 
                     <LinearLayout
@@ -184,17 +184,17 @@
                             android:paddingStart="16dp"
                             android:paddingEnd="16dp">
 
-                        <TextView
-                            android:id="@+id/tvTeam2"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center_vertical"
-                            android:text="@string/match_edit_choose_team"
-                            android:textColor="#B3FFFFFF"
-                            android:textSize="16sp"
-                            android:maxLines="1"
-                            android:ellipsize="end"
-                            android:singleLine="true" />
+                            <TextView
+                                android:id="@+id/tvTeam2"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:ellipsize="end"
+                                android:gravity="center_vertical"
+                                android:maxLines="1"
+                                android:singleLine="true"
+                                android:text="@string/match_edit_choose_team"
+                                android:textColor="#B3FFFFFF"
+                                android:textSize="16sp" />
 
                             <ImageView
                                 android:id="@+id/ivTeamAwayArrow"
@@ -218,8 +218,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:layout_weight="1"
                         android:layout_marginEnd="5dp"
+                        android:layout_weight="1"
                         android:orientation="vertical">
 
                         <TextView
@@ -237,12 +237,12 @@
                             android:layout_height="60dp"
                             android:background="@drawable/bg_input_team"
                             android:fontFamily="@font/poppins_regular"
+                            android:gravity="center_vertical"
                             android:hint="0"
                             android:inputType="number"
+                            android:maxLines="1"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="12dp"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
                             android:textColor="@android:color/white"
                             android:textColorHint="#72FFFFFF"
                             android:textSize="16sp" />
@@ -251,9 +251,9 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:layout_marginTop="16dp"
                         android:layout_weight="1"
-                        android:layout_marginStart="5dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -271,12 +271,12 @@
                             android:layout_height="60dp"
                             android:background="@drawable/bg_input_team"
                             android:fontFamily="@font/poppins_regular"
+                            android:gravity="center_vertical"
                             android:hint="0"
                             android:inputType="number"
+                            android:maxLines="1"
                             android:paddingHorizontal="16dp"
                             android:paddingVertical="12dp"
-                            android:gravity="center_vertical"
-                            android:maxLines="1"
                             android:textColor="@android:color/white"
                             android:textColorHint="#72FFFFFF"
                             android:textSize="16sp" />
@@ -287,133 +287,132 @@
 
                 <androidx.fragment.app.FragmentContainerView
                     android:id="@+id/calendarHost"
+                    android:name="com.besosn.app.presentation.ui.calendar.CalendarFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:clipToPadding="false"
-                    android:name="com.besosn.app.presentation.ui.calendar.CalendarFragment"
-                    app:layout_constraintTop_toBottomOf="@id/tvDateTitle"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintTop_toBottomOf="@id/tvDateTitle" />
 
-            <!-- Time picker -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="@string/match_edit_time_label"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-                <!-- layout/timer_picker_view.xml -->
+                <!-- Time picker -->
                 <LinearLayout
-                    android:id="@+id/timePickerContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@drawable/bg_input_team"
-                    android:orientation="horizontal"
-                    android:paddingVertical="5dp"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/tvHour"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="00"
-                        android:fontFamily="@font/outfit_regular"
-                        android:textSize="36sp"
-                        android:textColor="#73FFFFFF"
-                        android:padding="8dp"/>
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=":"
-                        android:fontFamily="@font/inter_regular"
-                        android:textSize="20sp"
-                        android:textColor="#FFFFFF"
-                        android:padding="8dp"/>
-
-                    <TextView
-                        android:id="@+id/tvMinute"
-                        android:layout_width="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="@string/match_edit_time_label"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+                    <!-- layout/timer_picker_view.xml -->
+                    <LinearLayout
+                        android:id="@+id/timePickerContainer"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="00"
-                        android:fontFamily="@font/outfit_regular"
-                        android:textSize="36sp"
-                        android:textColor="#73FFFFFF"
-                        android:padding="8dp"/>
+                        android:background="@drawable/bg_input_team"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        android:paddingVertical="5dp">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=":"
-                        android:fontFamily="@font/inter_regular"
-                        android:textSize="20sp"
-                        android:textColor="#FFFFFF"
-                        android:padding="8dp"/>
+                        <TextView
+                            android:id="@+id/tvHour"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/outfit_regular"
+                            android:padding="8dp"
+                            android:text="00"
+                            android:textColor="#73FFFFFF"
+                            android:textSize="36sp" />
 
-                    <TextView
-                        android:id="@+id/tvAmPm"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PM"
-                        android:fontFamily="@font/outfit_regular"
-                        android:textSize="36sp"
-                        android:textColor="#FFFFFF"
-                        android:padding="8dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_regular"
+                            android:padding="8dp"
+                            android:text=":"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvMinute"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/outfit_regular"
+                            android:padding="8dp"
+                            android:text="00"
+                            android:textColor="#73FFFFFF"
+                            android:textSize="36sp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/inter_regular"
+                            android:padding="8dp"
+                            android:text=":"
+                            android:textColor="#FFFFFF"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvAmPm"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/outfit_regular"
+                            android:padding="8dp"
+                            android:text="PM"
+                            android:textColor="#FFFFFF"
+                            android:textSize="36sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <!-- City input -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/poppins_regular"
-                    android:text="City"
-                    android:textColor="@android:color/white"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/etCity"
+                <!-- City input -->
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:background="@drawable/bg_input_team"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="Enter city"
-                    android:paddingHorizontal="16dp"
-                    android:paddingVertical="12dp"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
-                    android:textColor="@android:color/white"
-                    android:textColorHint="#72FFFFFF"
-                    android:textSize="16sp" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/poppins_regular"
+                        android:text="City"
+                        android:textColor="@android:color/white"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/etCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_input_team"
+                        android:fontFamily="@font/poppins_regular"
+                        android:gravity="center_vertical"
+                        android:hint="Enter city"
+                        android:maxLines="1"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="12dp"
+                        android:textColor="@android:color/white"
+                        android:textColorHint="#72FFFFFF"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
 
-
-<!--                <View-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="2dp"-->
-<!--                    android:layout_marginTop="15dp"-->
-<!--                    android:background="#2FFFFFFF"-->
-<!--                    android:paddingHorizontal="20dp" />-->
+                <!--                <View-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="2dp"-->
+                <!--                    android:layout_marginTop="15dp"-->
+                <!--                    android:background="#2FFFFFFF"-->
+                <!--                    android:paddingHorizontal="20dp" />-->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -432,11 +431,11 @@
                     android:layout_marginTop="5dp"
                     android:background="@drawable/bg_input_team"
                     android:fontFamily="@font/poppins_regular"
+                    android:gravity="center_vertical"
                     android:hint="Enter your notes"
+                    android:maxLines="1"
                     android:paddingHorizontal="16dp"
                     android:paddingVertical="12dp"
-                    android:gravity="center_vertical"
-                    android:maxLines="1"
                     android:textColor="@android:color/white"
                     android:textColorHint="#72FFFFFF"
                     android:textSize="16sp" />
@@ -483,7 +482,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-        </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.core.widget.NestedScrollView>
 

@@ -28,7 +28,7 @@
         android:ellipsize="end"
         android:fontFamily="@font/unbounded"
         android:gravity="center"
-        android:maxLines="2"
+        android:maxLines="1"
         android:text="ALEX\nFINCH"
         android:textAllCaps="true"
         android:textColor="#FEA613"
@@ -37,7 +37,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imgPlayer" />
-
 
     <!-- Meta row: position • number -->
     <LinearLayout

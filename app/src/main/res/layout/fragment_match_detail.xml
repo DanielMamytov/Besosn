@@ -1,34 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="20dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_teams_dark"
+    android:paddingTop="20dp"
     tools:context=".presentation.ui.matches.MatchEditFragment">
 
 
-
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/btnBack"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="25dp"
+        android:src="@drawable/back"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/back"
-
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="25dp"/>
+        app:shapeAppearanceOverlay="@style/imageRounded" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
+        android:layout_marginHorizontal="20dp"
         android:layout_marginVertical="16dp"
         android:elevation="1dp"
-        android:layout_marginHorizontal="20dp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -63,25 +62,23 @@
     </LinearLayout>
 
 
-
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginTop="20dp"
         android:layout_gravity="bottom"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnBack"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btnBack">
 
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/rounded_top_bg"
-            android:elevation="1dp"
-            android:clipToOutline="true">
-
+            android:clipToOutline="true"
+            android:elevation="1dp">
 
 
             <ImageView
@@ -89,13 +86,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
-                android:src="@drawable/image3"/>
+                android:src="@drawable/image3" />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_gravity="bottom"
-                android:background="@drawable/bg_bottom_fade"/>
+                android:background="@drawable/bg_bottom_fade" />
 
 
             <!-- Контент поверх -->
@@ -116,115 +113,119 @@
                         android:id="@+id/firstTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="BARCELONA"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:maxLines="1"
-                        android:fontFamily="@font/unbounded"
-                        android:textSize="20sp"
+                        android:layout_marginEnd="20dp"
                         android:layout_weight="1"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/unbounded"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="BARCELONA"
                         android:textColor="#FF8B5C"
-                        android:layout_marginEnd="20dp"/>
+                        android:textSize="20sp" />
 
                     <TextView
                         android:id="@+id/secondTeam"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="REAL MADRID"
-                        android:textSize="20sp"
-                        android:gravity="end"
-                        android:ellipsize="end"
-                        android:singleLine="true"
-                        android:maxLines="1"
                         android:layout_weight="1"
+                        android:ellipsize="end"
                         android:fontFamily="@font/unbounded"
-                        android:textColor="#FF8B5C"/>
+                        android:gravity="end"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:text="REAL MADRID"
+                        android:textColor="#FF8B5C"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
                 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
+                    android:layout_marginTop="20dp"
                     android:gravity="center_horizontal"
-                    android:paddingVertical="10dp"
-                    android:layout_marginTop="20dp">
+                    android:orientation="horizontal"
+                    android:paddingVertical="10dp">
 
                     <!-- Левая команда -->
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/team1Logo"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="start"
                         android:layout_marginEnd="16dp"
-                        android:src="@drawable/ic_launcher_background"
-                    android:background="@drawable/rounded_bg_white"
-                    android:clipToOutline="true"
-                    android:scaleType="centerCrop"
-                    android:layout_gravity="start"
-                    android:contentDescription="FC Barcelona Logo"/>
+                        android:background="@drawable/rounded_bg_white"
+                        android:clipToOutline="true"
+                        app:shapeAppearanceOverlay="@style/imageRounded"
+
+                        android:contentDescription="FC Barcelona Logo"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_launcher_background" />
 
 
                     <LinearLayout
                         android:layout_width="wrap_content"
-                        android:layout_gravity="center_horizontal"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
                         android:orientation="horizontal">
 
-                    <!-- Счёт - Левая цифра -->
-                    <TextView
-                        android:id="@+id/team1Score"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="3"
-                        android:textColor="#FC4F08"
-                        android:textSize="50sp"
-                        android:fontFamily="@font/unbounded"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"/>
+                        <!-- Счёт - Левая цифра -->
+                        <TextView
+                            android:id="@+id/team1Score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/unbounded"
+                            android:text="3"
+                            android:textColor="#FC4F08"
+                            android:textSize="50sp"
+                            android:textStyle="bold" />
 
-                    <!-- Разделитель двоеточие -->
-                    <TextView
-                        android:id="@+id/colon"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=":"
-                        android:textColor="#FC4F08"
-                        android:textSize="50sp"
-                        android:fontFamily="@font/unbounded"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="4dp"/>
+                        <!-- Разделитель двоеточие -->
+                        <TextView
+                            android:id="@+id/colon"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="4dp"
+                            android:fontFamily="@font/unbounded"
+                            android:text=":"
+                            android:textColor="#FC4F08"
+                            android:textSize="50sp"
+                            android:textStyle="bold" />
 
-                    <!-- Счёт - Правая цифра -->
-                    <TextView
-                        android:id="@+id/team2Score"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="0"
-                        android:textColor="#FC4F08"
-                        android:textSize="50sp"
-                        android:fontFamily="@font/unbounded"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginStart="8dp"
-                        android:layout_marginEnd="8dp"/>
+                        <!-- Счёт - Правая цифра -->
+                        <TextView
+                            android:id="@+id/team2Score"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="8dp"
+                            android:layout_marginEnd="8dp"
+                            android:fontFamily="@font/unbounded"
+                            android:text="0"
+                            android:textColor="#FC4F08"
+                            android:textSize="50sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
 
                     <!-- Правая команда -->
-                    <ImageView
+                    <com.google.android.material.imageview.ShapeableImageView
                         android:id="@+id/team2Logo"
                         android:layout_width="60dp"
                         android:layout_height="60dp"
+                        android:layout_gravity="end"
                         android:layout_marginEnd="16dp"
-                        android:src="@drawable/ic_launcher_background"
+                        app:shapeAppearanceOverlay="@style/imageRounded"
+
                         android:background="@drawable/rounded_bg_white"
                         android:clipToOutline="true"
+                        android:contentDescription="FC Barcelona Logo"
                         android:scaleType="centerCrop"
-                        android:layout_gravity="end"
-                        android:contentDescription="FC Barcelona Logo"/>
+                        android:src="@drawable/ic_launcher_background" />
                 </FrameLayout>
 
 
@@ -232,10 +233,9 @@
                     android:id="@+id/teamInfoRow"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:baselineAligned="false"
-                    android:paddingTop="8dp"
-                    >
+                    android:orientation="horizontal"
+                    android:paddingTop="8dp">
 
                     <!-- Column 1 -->
                     <LinearLayout
@@ -248,24 +248,24 @@
                             android:id="@+id/tvCityValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Barcelona"
+                            android:ellipsize="end"
 
-                            android:textColor="#FEA613"
-                            android:textSize="20sp"
-                            android:textFontWeight="700"
-                            android:textStyle="bold"
                             android:fontFamily="@font/prompt_regular"
                             android:maxLines="1"
-                            android:ellipsize="end"/>
+                            android:text="Barcelona"
+                            android:textColor="#FEA613"
+                            android:textFontWeight="700"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvCityLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/prompt_regular"
                             android:text="City"
                             android:textColor="#CCFFFFFF"
-                            android:textSize="18sp"
-                            android:fontFamily="@font/prompt_regular"/>
+                            android:textSize="18sp" />
                     </LinearLayout>
 
                     <!-- Column 2 -->
@@ -274,37 +274,35 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
 
-                        android:orientation="vertical"
-                        android:gravity="end">
+                        android:gravity="end"
+                        android:orientation="vertical">
 
                         <TextView
                             android:id="@+id/tvFoundedValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1908"
                             android:ellipsize="end"
-                            android:singleLine="true"
+                            android:fontFamily="@font/prompt_regular"
                             android:maxLines="1"
+                            android:singleLine="true"
+                            android:text="1908"
                             android:textColor="#FEA613"
                             android:textSize="20sp"
-                            android:textStyle="bold"
-                            android:fontFamily="@font/prompt_regular"/>
+                            android:textStyle="bold" />
 
                         <TextView
                             android:id="@+id/tvFoundedLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/prompt_regular"
                             android:text="Founded"
                             android:textColor="#CCFFFFFF"
-                            android:textSize="18sp"
-                            android:fontFamily="@font/prompt_regular"/>
+                            android:textSize="18sp" />
                     </LinearLayout>
 
 
-
-
-
                 </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
@@ -316,13 +314,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="About ball"
-                    android:textColor="#FC4F08"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/unbounded"
-                    android:textStyle="bold"
+                    android:text="About ball"
+                    android:textAllCaps="true"
+                    android:textColor="#FC4F08"
                     android:textSize="25sp"
-                    android:textAllCaps="true"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvNotes"
@@ -332,18 +330,6 @@
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
                     android:textColor="#A2FFFFFF"
                     android:textSize="16sp" />
-
-
-
-
-
-
-
-
-
-
-
-
 
 
             </LinearLayout>
