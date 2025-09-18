@@ -11,8 +11,9 @@ import com.besosn.app.domain.model.InventoryItem
 
 class InventoryAdapter(
     private val items: MutableList<InventoryItem>,
+    private val onItemClick: (InventoryItem) -> Unit,
     private val onEdit: (InventoryItem) -> Unit,
-    private val onDelete: (InventoryItem) -> Unit
+    private val onDelete: (InventoryItem) -> Unit,
 ) : RecyclerView.Adapter<InventoryAdapter.InventoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InventoryViewHolder {
@@ -47,6 +48,7 @@ class InventoryAdapter(
                 }
             }
 
+            binding.root.setOnClickListener { onItemClick(item) }
             binding.btnNext.setOnClickListener { onEdit(item) }
 
 //            binding.btnDelete.setOnClickListener { onDelete(item) }

@@ -60,4 +60,12 @@
 
     </plurals>
 
+    <string name="inventory_detail_item_name_placeholder">Item</string>
+    <string name="inventory_detail_category_label">Category</string>
+    <string name="inventory_detail_quantity_label">Quantity</string>
+    <string name="inventory_detail_status_label">Status</string>
+    <string name="inventory_detail_about_title">About %1$s</string>
+    <string name="inventory_detail_about_default">About item</string>
+    <string name="inventory_detail_no_notes">No notes provided.</string>
+
 </resources>

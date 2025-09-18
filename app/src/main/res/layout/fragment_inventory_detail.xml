@@ -102,9 +102,10 @@
                 android:paddingTop="100dp">
 
                 <TextView
+                    android:id="@+id/tvItemName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="BALL"
+                    android:text="@string/inventory_detail_item_name_placeholder"
                     android:textSize="48sp"
                     android:textColor="#FC4F08"
                     android:textStyle="bold"
@@ -131,7 +132,7 @@
                             android:id="@+id/tvCityValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Barcelona"
+                            android:text="-"
                             android:textColor="#FEA613"
                             android:textSize="20sp"
                             android:textFontWeight="700"
@@ -144,7 +145,7 @@
                             android:id="@+id/tvCityLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="City"
+                            android:text="@string/inventory_detail_category_label"
                             android:textColor="#CCFFFFFF"
                             android:textSize="18sp"
                             android:fontFamily="@font/prompt_regular"/>
@@ -162,7 +163,7 @@
                             android:id="@+id/tvFoundedValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1908"
+                            android:text="0"
                             android:textColor="#FEA613"
                             android:textSize="20sp"
                             android:textStyle="bold"
@@ -172,7 +173,7 @@
                             android:id="@+id/tvFoundedLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Founded"
+                            android:text="@string/inventory_detail_quantity_label"
                             android:textColor="#CCFFFFFF"
                             android:textSize="18sp"
                             android:fontFamily="@font/prompt_regular"/>
@@ -190,7 +191,7 @@
                             android:id="@+id/tvPlayersValue"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="23"
+                            android:text="-"
                             android:textColor="#FEA613"
                             android:textSize="20sp"
                             android:textStyle="bold"
@@ -200,7 +201,7 @@
                             android:id="@+id/tvPlayersLabel"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Players"
+                            android:text="@string/inventory_detail_status_label"
                             android:textColor="#CCFFFFFF"
                             android:textSize="18sp"
                             android:fontFamily="@font/prompt_regular"/>
@@ -216,9 +217,10 @@
                     android:layout_marginTop="10dp"/>
 
                 <TextView
+                    android:id="@+id/tvAboutTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="About ball"
+                    android:text="@string/inventory_detail_about_default"
                     android:textColor="#FC4F08"
                     android:layout_marginTop="10dp"
                     android:fontFamily="@font/unbounded"
@@ -227,12 +229,13 @@
                     android:textAllCaps="true"/>
 
                 <TextView
+                    android:id="@+id/tvNotes"
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/inventory_detail_no_notes"
                     android:textSize="16sp"
                     android:fontFamily="@font/poppins_regular"
-                    android:textColor="#A2FFFFFF"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                    android:layout_height="wrap_content"/>
+                    android:textColor="#A2FFFFFF"/>
             </LinearLayout>
 
         </FrameLayout>

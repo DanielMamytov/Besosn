@@ -28,7 +28,7 @@ class InventoryFragment : Fragment(R.layout.fragment_inventory) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentInventoryBinding.bind(view)
 
-        adapter = InventoryAdapter(mutableListOf(), ::onEditItem, ::onDeleteItem)
+        adapter = InventoryAdapter(mutableListOf(), ::onItemClick, ::onEditItem, ::onDeleteItem)
         binding.rvInventory.layoutManager = LinearLayoutManager(requireContext())
         binding.rvInventory.adapter = adapter
 
@@ -47,6 +47,14 @@ class InventoryFragment : Fragment(R.layout.fragment_inventory) {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
         }
+    }
+
+    private fun onItemClick(item: InventoryItem) {
+        val bundle = Bundle().apply { putSerializable("item", item) }
+        findNavController().navigate(
+            R.id.action_inventoryFragment_to_inventoryDetailFragment,
+            bundle,
+        )
     }
 
     private fun onEditItem(item: InventoryItem) {
