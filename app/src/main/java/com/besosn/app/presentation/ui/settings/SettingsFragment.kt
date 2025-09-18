@@ -16,6 +16,7 @@ import androidx.room.Room
 import com.besosn.app.R
 import com.besosn.app.data.local.db.AppDatabase
 import com.besosn.app.databinding.FragmentSettingsBinding
+import com.besosn.app.presentation.ui.teams.TeamsLocalDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -95,7 +96,7 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
         viewLifecycleOwner.lifecycleScope.launch {
             val context = requireContext().applicationContext
             val success = withContext(Dispatchers.IO) {
-                runCatching {
+                try {
                     val db = Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME)
                         .fallbackToDestructiveMigration()
                         .build()
@@ -113,7 +114,12 @@ class SettingsFragment : Fragment(R.layout.fragment_settings) {
                         .edit()
                         .remove(PREFS_KEY_MATCHES)
                         .apply()
-                }.isSuccess
+
+                    TeamsLocalDataSource.seedDefaultTeamsIfNeeded(context)
+                    true
+                } catch (_: Exception) {
+                    false
+                }
             }
 
             if (!isAdded) return@launch

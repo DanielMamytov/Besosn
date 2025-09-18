@@ -40,6 +40,10 @@ object TeamsLocalDataSource {
         db.teamDao().getTeams().size
     }
 
+    suspend fun seedDefaultTeamsIfNeeded(context: Context) = withContext(Dispatchers.IO) {
+        ensureDefaultTeams(DatabaseProvider.get(context))
+    }
+
     private suspend fun ensureDefaultTeams(db: AppDatabase) {
         seedMutex.withLock {
             val teamDao = db.teamDao()
