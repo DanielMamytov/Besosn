@@ -38,6 +38,10 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener {
             val currentTeam = team ?: return@setOnClickListener
+            if (currentTeam.isDefault) {
+                showImmutableTeamTooltip()
+                return@setOnClickListener
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 if (shouldBlockTeamModification()) {
                     showMinimumTeamsToast()
@@ -89,15 +93,10 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
         binding.rvPlayers.adapter = PlayersAdapter(team.players)
 
 
-        if (team.isDefault) {
-            binding.btnEdit.isEnabled = false
-            binding.btnDelete.isEnabled = false
-            binding.btnDelete.visibility = View.GONE
-        } else {
-            binding.btnEdit.isEnabled = true
-            binding.btnDelete.isEnabled = true
-            binding.btnDelete.visibility = View.VISIBLE
-        }
+        binding.btnEdit.isEnabled = true
+        binding.btnEdit.alpha = if (team.isDefault) 0.6f else 1f
+        binding.btnDelete.isEnabled = !team.isDefault
+        binding.btnDelete.visibility = if (team.isDefault) View.GONE else View.VISIBLE
     }
 
     private suspend fun shouldBlockTeamModification(): Boolean {
@@ -109,6 +108,14 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
         Toast.makeText(
             requireContext(),
             R.string.teams_minimum_edit_delete_warning,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun showImmutableTeamTooltip() {
+        Toast.makeText(
+            requireContext(),
+            R.string.teams_default_edit_tooltip,
             Toast.LENGTH_SHORT
         ).show()
     }

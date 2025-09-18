@@ -19,6 +19,7 @@ data class MatchModel(
     val awayScore: Int? = null,
     val city: String? = null,
     val notes: String? = null,
+    val isImmutable: Boolean = false,
 ) : Serializable {
     val isFinished: Boolean get() = homeScore != null && awayScore != null
 }

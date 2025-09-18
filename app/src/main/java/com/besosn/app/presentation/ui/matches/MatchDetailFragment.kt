@@ -3,6 +3,7 @@ package com.besosn.app.presentation.ui.matches
 import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -37,13 +38,20 @@ class MatchDetailFragment : Fragment(R.layout.fragment_match_detail) {
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener {
-            match?.let {
-                val args = bundleOf(MatchEditFragment.ARG_MATCH_TO_EDIT to it)
-                findNavController().navigate(
-                    R.id.action_matchDetailFragment_to_matchEditFragment,
-                    args,
-                )
+            val matchToEdit = match ?: return@setOnClickListener
+            if (matchToEdit.isImmutable) {
+                Toast.makeText(
+                    requireContext(),
+                    R.string.match_default_edit_toast,
+                    Toast.LENGTH_SHORT,
+                ).show()
+                return@setOnClickListener
             }
+            val args = bundleOf(MatchEditFragment.ARG_MATCH_TO_EDIT to matchToEdit)
+            findNavController().navigate(
+                R.id.action_matchDetailFragment_to_matchEditFragment,
+                args,
+            )
         }
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             findNavController().popBackStack()
