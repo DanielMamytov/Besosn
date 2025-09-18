@@ -68,7 +68,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         statsJob?.cancel()
         statsJob = viewLifecycleOwner.lifecycleScope.launch {
             val matchesDeferred = async(Dispatchers.IO) {
-                MatchesLocalDataSource.loadMatches(ctx).size
+                MatchesLocalDataSource.countMatches(ctx)
             }
             val teamsDeferred = async(Dispatchers.IO) {
                 TeamsLocalDataSource.countTeams(ctx)
