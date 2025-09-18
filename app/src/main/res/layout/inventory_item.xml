@@ -7,14 +7,14 @@
     android:padding="12dp">
 
     <!-- Item Icon -->
-    <ImageView
+    <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imgItemIcon"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ball"
         android:background="@drawable/bg_circle"
-        android:clipToOutline="true"
+        app:shapeAppearanceOverlay="@style/imageRounded"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"/>
