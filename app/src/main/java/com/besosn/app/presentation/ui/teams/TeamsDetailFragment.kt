@@ -3,6 +3,7 @@ package com.besosn.app.presentation.ui.teams
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResult
@@ -36,15 +37,29 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
 
         binding.btnBack.setOnClickListener { findNavController().popBackStack() }
         binding.btnEdit.setOnClickListener {
-            team?.let {
-                val bundle = Bundle().apply { putSerializable("team", it) }
-                findNavController().navigate(
-                    R.id.action_teamsDetailFragment_to_teamsEditFragment,
-                    bundle
-                )
+            val currentTeam = team ?: return@setOnClickListener
+            viewLifecycleOwner.lifecycleScope.launch {
+                if (shouldBlockTeamModification()) {
+                    showMinimumTeamsToast()
+                } else {
+                    val bundle = Bundle().apply { putSerializable("team", currentTeam) }
+                    findNavController().navigate(
+                        R.id.action_teamsDetailFragment_to_teamsEditFragment,
+                        bundle
+                    )
+                }
             }
         }
-        binding.btnDelete.setOnClickListener { confirmDelete() }
+        binding.btnDelete.setOnClickListener {
+            val currentTeam = team ?: return@setOnClickListener
+            viewLifecycleOwner.lifecycleScope.launch {
+                if (shouldBlockTeamModification()) {
+                    showMinimumTeamsToast()
+                } else {
+                    confirmDelete(currentTeam)
+                }
+            }
+        }
 
         setFragmentResultListener("team_updated") { _, bundle ->
             val updated = bundle.getSerializable("team") as? TeamModel
@@ -85,11 +100,24 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
         }
     }
 
-    private fun confirmDelete() {
+    private suspend fun shouldBlockTeamModification(): Boolean {
+        val teamsCount = TeamsLocalDataSource.countTeams(requireContext())
+        return teamsCount <= MIN_TEAMS_COUNT
+    }
+
+    private fun showMinimumTeamsToast() {
+        Toast.makeText(
+            requireContext(),
+            R.string.teams_minimum_edit_delete_warning,
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun confirmDelete(team: TeamModel) {
         AlertDialog.Builder(requireContext())
             .setMessage("Please confirm delete action before continuing")
             .setNegativeButton("Cancel", null)
-            .setPositiveButton("Confirm") { _, _ -> team?.let { deleteTeam(it) } }
+            .setPositiveButton("Confirm") { _, _ -> deleteTeam(team) }
             .show()
     }
 
@@ -110,6 +138,9 @@ class TeamsDetailFragment : Fragment(R.layout.fragment_teams_detail) {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+    companion object {
+        private const val MIN_TEAMS_COUNT = 2
     }
 }
 
